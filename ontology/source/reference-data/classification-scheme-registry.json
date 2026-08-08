@@ -1,0 +1,17 @@
+{
+  "id": "classification-scheme-registry",
+  "label": "Classification Scheme Registry",
+  "description": "Which classification scheme a Classification Assignment draws its classificationConceptCode from. This registry entry is what's SHACL-validated; the code itself is a plain string naming a value within that scheme, not independently validated against it -- see docs/06-properties-and-rules.md for why. Candid PCS Organization Types, Transaction Types, and Support Strategies are registered here as valid facets but not yet populated as their own reference-data files -- add them when real data needs them, following candid-pcs-subjects.json/candid-pcs-populations.json as the template.",
+  "domain": "classification",
+  "authorityType": "internal",
+  "version": "1.0.0",
+  "publicationStatus": "published",
+  "values": [
+    { "id": "classification-scheme-registry-candid-pcs-subjects", "code": "candid-pcs-subjects", "label": "Candid PCS Subjects", "definition": "Candid's Philanthropy Classification System subject facet -- what issue or subject a resource addresses or supports.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "classification-scheme-registry-candid-pcs-populations", "code": "candid-pcs-populations", "label": "Candid PCS Populations", "definition": "Candid's Philanthropy Classification System population facet -- what population(s) a resource serves or describes.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "classification-scheme-registry-candid-pcs-organization-types", "code": "candid-pcs-organization-types", "label": "Candid PCS Organization Types", "definition": "Candid's Philanthropy Classification System organization-type facet. Registered but not yet populated as its own reference-data file.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "classification-scheme-registry-candid-pcs-transaction-types", "code": "candid-pcs-transaction-types", "label": "Candid PCS Transaction Types", "definition": "Candid's Philanthropy Classification System transaction-type facet -- the form through which support is provided or received. Registered but not yet populated as its own reference-data file.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "classification-scheme-registry-candid-pcs-support-strategies", "code": "candid-pcs-support-strategies", "label": "Candid PCS Support Strategies", "definition": "Candid's Philanthropy Classification System support-strategy facet. Registered but not yet populated as its own reference-data file.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "classification-scheme-registry-commongood-issue-areas", "code": "commongood-issue-areas", "label": "CommonGood Issue Areas", "definition": "This ontology's own Issue Area scheme (see issue-area.json), usable as a classification scheme in its own right alongside external taxonomies.", "deprecated": false, "broader": null, "mappings": [] }
+  ]
+}

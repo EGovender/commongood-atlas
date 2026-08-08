@@ -1,0 +1,14 @@
+{
+  "id": "candid-pcs-populations",
+  "label": "Candid PCS Populations",
+  "description": "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Populations facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. Multiple population classifications on the same Population resource are valid, since a population may have several characteristics at once.",
+  "domain": "classification",
+  "authorityType": "external",
+  "version": "illustrative-subset",
+  "publicationStatus": "draft",
+  "values": [
+    { "id": "candid-pcs-populations-young-adults", "code": "young-adults", "label": "Young Adults", "definition": "Illustrative placeholder for Candid PCS's Young Adults population.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "candid-pcs-populations-economically-disadvantaged-people", "code": "economically-disadvantaged-people", "label": "Economically Disadvantaged People", "definition": "Illustrative placeholder for Candid PCS's Economically Disadvantaged People population.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "candid-pcs-populations-people-of-color", "code": "people-of-color", "label": "People of Color", "definition": "Illustrative placeholder for Candid PCS's People of Color population.", "deprecated": false, "broader": null, "mappings": [] }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "candid-pcs-subjects",
+  "label": "Candid PCS Subjects",
+  "description": "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Subjects facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes, hierarchy, and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. affordable-housing's mapping to CommonGood's own issue-area-housing uses broadMatch, not exactMatch, since Affordable Housing is more specific than the CommonGood Housing issue area.",
+  "domain": "classification",
+  "authorityType": "external",
+  "version": "illustrative-subset",
+  "publicationStatus": "draft",
+  "values": [
+    { "id": "candid-pcs-subjects-housing", "code": "housing", "label": "Housing", "definition": "Illustrative placeholder for Candid PCS's Housing subject.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "candid-pcs-subjects-housing-development", "code": "housing-development", "label": "Housing Development", "definition": "Illustrative placeholder for Candid PCS's Housing Development subject.", "deprecated": false, "broader": "candid-pcs-subjects-housing", "mappings": [] },
+    { "id": "candid-pcs-subjects-affordable-housing", "code": "affordable-housing", "label": "Affordable Housing", "definition": "Illustrative placeholder for Candid PCS's Affordable Housing subject.", "deprecated": false, "broader": "candid-pcs-subjects-housing-development", "mappings": [{ "relation": "broadMatch", "uri": "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-housing" }] },
+    { "id": "candid-pcs-subjects-economic-development", "code": "economic-development", "label": "Economic Development", "definition": "Illustrative placeholder for Candid PCS's Economic Development subject.", "deprecated": false, "broader": null, "mappings": [{ "relation": "broadMatch", "uri": "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-economic-development" }] },
+    { "id": "candid-pcs-subjects-education", "code": "education", "label": "Education", "definition": "Illustrative placeholder for Candid PCS's Education subject.", "deprecated": false, "broader": null, "mappings": [{ "relation": "broadMatch", "uri": "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-education" }] },
+    { "id": "candid-pcs-subjects-environment", "code": "environment", "label": "Environment", "definition": "Illustrative placeholder for Candid PCS's Environment subject.", "deprecated": false, "broader": null, "mappings": [{ "relation": "broadMatch", "uri": "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-environment" }] }
+  ]
+}

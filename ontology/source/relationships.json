@@ -893,5 +893,23 @@
     "label": "is fulfilled by",
     "description": "A Reporting Requirement is fulfilled by a submitted Report. Requirement is what must be supplied; Report is the artifact that was actually supplied.",
     "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-award-has-classification",
+    "subject": "award",
+    "predicate": "awardHasClassification",
+    "object": "classification-assignment",
+    "label": "has classification",
+    "description": "An Award has one or more Classification Assignments (e.g. Candid PCS Subjects) drawn from an external or internal classification scheme. The scheme classifies the Award; it does not redefine it.",
+    "docRef": "docs/03-relationships.md#classification"
+  },
+  {
+    "id": "rel-population-has-classification",
+    "subject": "population",
+    "predicate": "populationHasClassification",
+    "object": "classification-assignment",
+    "label": "has classification",
+    "description": "A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms.",
+    "docRef": "docs/03-relationships.md#classification"
   }
 ]
