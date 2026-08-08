@@ -1,0 +1,26 @@
+{
+  "id": "condition-barrier-type",
+  "label": "Condition Barrier Type",
+  "description": "What kind of barrier, milestone, or event a Grant Condition's entitlement, payment, continuation, release, or retention depends on.",
+  "domain": "award-and-agreement",
+  "authorityType": "internal",
+  "version": "1.0.0",
+  "publicationStatus": "published",
+  "values": [
+    { "id": "condition-barrier-type-matching-requirement", "code": "matching-requirement", "label": "Matching Requirement", "definition": "Contingent on raising or contributing matching funds.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-cost-sharing-requirement", "code": "cost-sharing-requirement", "label": "Cost-Sharing Requirement", "definition": "Contingent on sharing costs alongside the award.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-output-threshold", "code": "output-threshold", "label": "Output Threshold", "definition": "Contingent on reaching a specified output count.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-service-level-threshold", "code": "service-level-threshold", "label": "Service-Level Threshold", "definition": "Contingent on reaching a specified service level.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-outcome-threshold", "code": "outcome-threshold", "label": "Outcome Threshold", "definition": "Contingent on reaching a specified outcome level.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-performance-milestone", "code": "performance-milestone", "label": "Performance Milestone", "definition": "Contingent on reaching a defined performance milestone.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-qualifying-expenses", "code": "qualifying-expenses", "label": "Qualifying Expenses", "definition": "Contingent on incurring qualifying expenses.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-specified-event", "code": "specified-event", "label": "Specified Event", "definition": "Contingent on a specified event occurring.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-specified-protocol", "code": "specified-protocol", "label": "Specified Protocol", "definition": "Contingent on following a specified protocol.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-specified-method", "code": "specified-method", "label": "Specified Method", "definition": "Contingent on using a specified method.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-specified-personnel", "code": "specified-personnel", "label": "Specified Personnel", "definition": "Contingent on specified personnel being engaged.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-regulatory-approval", "code": "regulatory-approval", "label": "Regulatory Approval", "definition": "Contingent on obtaining regulatory approval.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-fundraising-target", "code": "fundraising-target", "label": "Fundraising Target", "definition": "Contingent on reaching a fundraising target.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-other-measurable-barrier", "code": "other-measurable-barrier", "label": "Other Measurable Barrier", "definition": "Contingent on another measurable barrier not otherwise listed.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "condition-barrier-type-other", "code": "other", "label": "Other", "definition": "A condition barrier not captured by another value in this scheme.", "deprecated": false, "broader": null, "mappings": [] }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "use-restriction-type",
+  "label": "Use Restriction Type",
+  "description": "The nature of what a Use Restriction limits grant funds to (or from) -- distinct from Fund's own restriction-type scheme, which describes a Fund's accounting restriction status rather than the specific nature of a grant term's use restriction. Values do not all carry identical legal significance.",
+  "domain": "award-and-agreement",
+  "authorityType": "internal",
+  "version": "1.0.0",
+  "publicationStatus": "published",
+  "values": [
+    { "id": "use-restriction-type-general-purpose", "code": "general-purpose", "label": "General Purpose", "definition": "Not restricted beyond the grantee's general mission.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-project", "code": "specific-project", "label": "Specific Project", "definition": "Restricted to a named project.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-program", "code": "specific-program", "label": "Specific Program", "definition": "Restricted to a named program.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-activity", "code": "specific-activity", "label": "Specific Activity", "definition": "Restricted to a named activity.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-population", "code": "specific-population", "label": "Specific Population", "definition": "Restricted to serving a named population.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-geography", "code": "specific-geography", "label": "Specific Geography", "definition": "Restricted to a named geographic area.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-time-period", "code": "specific-time-period", "label": "Specific Time Period", "definition": "Restricted to use within a defined time period.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-budget", "code": "specific-budget", "label": "Specific Budget", "definition": "Restricted to a specific approved budget.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-specific-cost-category", "code": "specific-cost-category", "label": "Specific Cost Category", "definition": "Restricted to a specific cost category (e.g. personnel, equipment).", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-capital-only", "code": "capital-only", "label": "Capital Only", "definition": "Restricted to capital expenditures.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-equipment-only", "code": "equipment-only", "label": "Equipment Only", "definition": "Restricted to equipment purchases.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-endowment", "code": "endowment", "label": "Endowment", "definition": "Restricted to an endowment fund.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-scholarship", "code": "scholarship", "label": "Scholarship", "definition": "Restricted to scholarship purposes.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-regranting", "code": "regranting", "label": "Regranting", "definition": "Restricted to redistribution as regrants.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-subgranting", "code": "subgranting", "label": "Subgranting", "definition": "Restricted to redistribution as subgrants.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-lobbying", "code": "lobbying", "label": "Lobbying", "definition": "Concerns lobbying activity, typically as a prohibited use.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-political-campaign-activity", "code": "political-campaign-activity", "label": "Political Campaign Activity", "definition": "Concerns political campaign activity, typically as a prohibited use.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-voter-registration", "code": "voter-registration", "label": "Voter Registration", "definition": "Concerns voter registration activity.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-noncharitable-purpose", "code": "noncharitable-purpose", "label": "Noncharitable Purpose", "definition": "Concerns use for a noncharitable purpose, typically as a prohibited use.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-individual-benefit", "code": "individual-benefit", "label": "Individual Benefit", "definition": "Concerns benefit to a specific individual, typically as a prohibited use.", "deprecated": false, "broader": null, "mappings": [] },
+    { "id": "use-restriction-type-other", "code": "other", "label": "Other", "definition": "A use restriction not captured by another value in this scheme.", "deprecated": false, "broader": null, "mappings": [] }
+  ]
+}
