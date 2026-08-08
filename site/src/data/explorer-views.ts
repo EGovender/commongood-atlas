@@ -122,6 +122,28 @@ export const EXPLORER_VIEWS: ExplorerView[] = [
       'report',
     ],
   },
+  {
+    id: 'grant-terms-classification',
+    label: 'Grant Terms & Classification',
+    description:
+      'The normalized model behind a grant agreement\'s restrictions and conditions -- Grant Term and its subtypes -- plus the generic Classification Assignment layer for external taxonomies like Candid\'s Philanthropy Classification System.',
+    conceptIds: [
+      'grant-term',
+      'use-restriction',
+      'grant-condition',
+      'approval-requirement',
+      'reporting-requirement',
+      'compliance-requirement',
+      'reporting-schedule',
+      'matching-requirement',
+      'payment-condition',
+      'classification-assignment',
+      'award',
+      'grant-agreement',
+      'agent',
+      'population',
+    ],
+  },
 ];
 
 // "Grant Lifecycle" is everything the original ~48-concept ontology had --

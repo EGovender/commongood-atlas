@@ -36,6 +36,7 @@ export const DESIGN_SECTIONS: DesignSection[] = [
   { id: 'awards-payments', label: 'Awards & payments' },
   { id: 'compliance-outcomes', label: 'Compliance, reporting & outcomes' },
   { id: 'programs-results', label: 'Programs, results & evidence' },
+  { id: 'grant-terms-classification', label: 'Grant terms & classification' },
 ];
 
 export interface BooleanQuestion {
@@ -317,6 +318,44 @@ export const DESIGN_QUESTIONS: DesignQuestion[] = [
     text: 'When you evaluate results, do you need to record how strong the evidence is and whether it shows association, contribution, attribution, or causation?',
     help: "This is where CommonGood Atlas keeps a specific causal interpretation an explicit, sourced, gradable claim rather than a plain graph fact.",
     yes: ['evidence', 'evidence-claim'],
+    no: [],
+  },
+
+  // --- Grant terms & classification -------------------------------------------
+  {
+    id: 'use-restrictions',
+    type: 'boolean',
+    section: 'grant-terms-classification',
+    text: 'Do grant agreements restrict how, where, or for what purpose funds may be used -- e.g., tied to a specific project, or barred from certain uses like lobbying?',
+    help: 'Modeled as a Grant Term whose original clause text is preserved alongside structured fields -- this normalizes, but never discards, the source language.',
+    yes: ['grant-term', 'use-restriction'],
+    no: [],
+  },
+  {
+    id: 'grant-conditions',
+    type: 'boolean',
+    section: 'grant-terms-classification',
+    text: 'Do awards carry conditions tied to a measurable barrier the grantee must clear -- like a matching-funds target or a performance threshold -- with a defined consequence if it isn\'t met?',
+    help: 'Matching Requirement and Payment Condition are both concrete kinds of Grant Condition already in the ontology.',
+    yes: ['grant-condition'],
+    no: [],
+  },
+  {
+    id: 'approval-requirements',
+    type: 'boolean',
+    section: 'grant-terms-classification',
+    text: 'Must grantees get your prior approval before taking certain actions -- like reallocating a large share of the budget, changing key personnel, or extending the timeline?',
+    help: 'Approval sought before the action, distinct from a report describing it afterward.',
+    yes: ['approval-requirement'],
+    no: [],
+  },
+  {
+    id: 'external-classification',
+    type: 'boolean',
+    section: 'grant-terms-classification',
+    text: "Do you classify awards, populations, or other resources using an external taxonomy -- such as Candid's Philanthropy Classification System -- alongside your own concepts?",
+    help: 'A Classification Assignment records what an external taxonomy says about a resource without making that taxonomy part of the core ontology, or treating its terms as a substitute for your own Need/Population/Issue Area.',
+    yes: ['classification-assignment'],
     no: [],
   },
 ];
