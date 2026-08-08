@@ -63,6 +63,16 @@ Each relationship is:
 | `deprecated` | Optional boolean. Marks a predicate as superseded without deleting it or migrating existing data off it — see `playsRole`/`personPlaysRole`, superseded by `agentPlaysRole`, for the first use. Emitted as `owl:deprecated`. |
 | `replacedBy` | Optional. The `id` of the relationship that supersedes this one. Required alongside `deprecated: true`; the generator asserts both hold together. Emitted as `dcterms:isReplacedBy`. |
 
+## Numeric range constraints
+
+As of the Structured Grant Terms and Candid PCS Classification enhancement, a `datatype: "decimal"` property in `ontology/source/properties.json` may additionally carry optional `minValue`/`maxValue` fields (e.g. `classification-assignment-allocation-percentage` sets `"minValue": 0, "maxValue": 100`). The generator asserts these are only ever set alongside `datatype: "decimal"`, and translates them into `sh:minInclusive`/`sh:maxInclusive` constraints in `commongood-atlas.property-shapes.ttl` — real, checked validation, the same division of labor as `allowedValues` → `sh:in` above.
+
+## Known limitation: a reference-typed property's scheme is fixed, not per-instance
+
+Every `datatype: "reference"` property (see [Properties & Rules](06-properties-and-rules.md#phase-37-milestone-3-reference-backed-properties-and-controlled-vocabularies)) names exactly one `referenceScheme`, declared once on the property, not per-instance — `role.status` is always validated against `role-status`, never against a scheme chosen at write time. `classification-assignment` needs to vary *which* scheme applies per instance (Candid PCS Subjects for one assignment, Candid PCS Populations for another), which this mechanism can't express directly.
+
+The workaround, used nowhere else in the ontology: `classification-assignment` splits the concern into two properties. `classificationScheme` is a real `reference`-typed property (scheme: `classification-scheme-registry`) — *which* scheme is in play is SHACL-validated. `classificationConceptCode` is a plain `string` — the code within that scheme, checked for presence (it's `required: true`) but **not** validated against the specific scheme's actual values, since no mechanism here can point a property's validation at a scheme chosen dynamically by a sibling property on the same instance. A `classification-scheme-registry` value naming a scheme that doesn't exist, or a `classificationConceptCode` that isn't a real code in the named scheme, will not be caught by `tools/validate_ontology.py` today. This is a documented, accepted gap, not an oversight — closing it would require either a generator feature with no other current use case, or an application-layer check outside the ontology itself.
+
 ## Namespace
 
 Concepts and relationships are minted under:

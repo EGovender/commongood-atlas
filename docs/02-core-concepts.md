@@ -1,6 +1,6 @@
 # Core Concepts (v0.2)
 
-This is the working set of core grantmaking and nonprofit-knowledge-model concepts — roughly 85, grouped by where they sit in the grant lifecycle or the organizational model. Each entry is a working definition, not a final one; see [CONTRIBUTING.md](../CONTRIBUTING.md) for how to propose changes.
+This is the working set of core grantmaking and nonprofit-knowledge-model concepts — roughly 90, grouped by where they sit in the grant lifecycle or the organizational model. Each entry is a working definition, not a final one; see [CONTRIBUTING.md](../CONTRIBUTING.md) for how to propose changes.
 
 Definitions are intentionally implementation-agnostic: no field names, no database types. See [Relationships](03-relationships.md) for how these concepts connect, and the [Roadmap](04-roadmap.md) for when machine-readable versions of these will exist.
 
@@ -63,58 +63,68 @@ As of Phase 3.7 Milestone 1, this section distinguishes four related-but-differe
 
 ## Award and agreement
 
+As of the Structured Grant Terms enhancement, this section also covers **Grant Term** and its four concrete subtypes (Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement) — a normalized model for what a Grant Agreement's free-text restrictions and conditions actually say, alongside (not replacing) the original clause text. Two concepts that already existed here or elsewhere — **Compliance Requirement** and **Reporting Schedule** — are re-parented under Grant Term rather than duplicated, since each already covered close to what the enhancement asked for; **Matching Requirement** and **Payment Condition** (below, under Disbursement) are similarly re-parented under Grant Condition, since they're the enhancement's own canonical examples of one. See [Relationships](03-relationships.md#grant-terms) for how the family connects to Award and Grant Agreement, and [Properties & Rules](06-properties-and-rules.md) for the reference-data vocabularies behind Use Restriction and Grant Condition.
+
 42. **Award** — A funder's formal commitment to provide a specific amount of funding to a grantee, following an approved application or decision.
 43. **Grant Agreement** — The legal document, signed by both funder and grantee, that formalizes an award's terms, conditions, and obligations.
-44. **Terms and Conditions** — The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements).
+44. **Terms and Conditions** — The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements). Its own `restrictionType` property is a coarse restricted/unrestricted flag, superseded for new data by the structured Use Restriction model below — retained for backward compatibility.
 45. **Restricted Funding** *(deprecated)* — Funding that must be used for a specific purpose, project, or time period defined in the grant agreement. Superseded for new data by Fund's `restrictionType` property, backed by the [restriction-type reference scheme](06-properties-and-rules.md#phase-37-milestone-3-reference-backed-properties-and-controlled-vocabularies) — kept for backward compatibility, not deleted.
 46. **Unrestricted Funding** *(deprecated)* — Funding a grantee may use at its discretion in support of its general mission. Superseded the same way as Restricted Funding, above.
-47. **Matching Requirement** — A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match).
+47. **Matching Requirement** — A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match). As of the Structured Grant Terms enhancement, a subtype of Grant Condition — a matching requirement is exactly the kind of measurable barrier a Grant Condition models.
 48. **Amendment** — A formally agreed change to an existing grant agreement's terms, budget, timeline, or amount, made after the original agreement was signed.
+49. **Grant Term** — A normalized representation of a single restriction, condition, obligation, or requirement attached to a Grant Agreement, distinguished from Terms and Conditions' free text by preserving the *original* clause text (`originalTermText`) alongside structured, queryable fields. The abstract parent of Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement, and (re-parented) Compliance Requirement and Reporting Schedule. Every real Grant Term is an instance of one of these concrete subtypes — never the bare abstract concept — so "what kind of term is this" is answered by the instance's own type, not a separate category field.
+50. **Use Restriction** — A Grant Term specifying how, where, when, or for what purpose award funds may or may not be used (e.g., restricted to a specific project, prohibited from lobbying). Its `restrictionMode` (required-use / permitted-use / prohibited-use) distinguishes a purpose restriction from a prohibition — a fund earmarked for a project and a fund barred from lobbying are both Use Restrictions, recorded as separate instances with different modes, never conflated into one.
+51. **Grant Condition** — A Grant Term that ties a consequence (continued funding, release of a payment, right of return) to a measurable barrier the grantee must clear — a threshold, a milestone, a specified event or protocol — distinct from a Use Restriction, which constrains *how* funds already flowing may be used rather than *whether* they keep flowing. Matching Requirement and Payment Condition (below) are concrete examples already modeled elsewhere in the ontology.
+52. **Approval Requirement** — A Grant Term specifying that the grantee must obtain the funder's prior approval before taking a defined action (e.g., reallocating more than a threshold share of the budget, changing key personnel, extending the timeline) — approval sought *before* the action, not merely reported afterward.
+53. **Reporting Requirement** — A Grant Term specifying a particular report the grantee must submit (e.g., a quarterly financial report), distinct from the broader Reporting Schedule (below), which sets the overall cadence. One Reporting Schedule can obligate several distinct Reporting Requirements, and a single submitted Report can, in turn, fulfill more than one Reporting Requirement at once.
 
 ## Disbursement
 
-49. **Payment Schedule** — The agreed timing and amounts by which award funds will be disbursed to the grantee.
-50. **Installment** — A single scheduled portion of an award's total funds, to be disbursed at a defined point or upon meeting a condition.
-51. **Payment** — An actual transfer of funds from funder to grantee against an award, corresponding to one or more installments.
-52. **Payment Condition** — A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released.
-53. **Budget Modification** — A grantee-requested, funder-approved change to how awarded funds are allocated across budget categories, without changing the total award amount.
+54. **Payment Schedule** — The agreed timing and amounts by which award funds will be disbursed to the grantee.
+55. **Installment** — A single scheduled portion of an award's total funds, to be disbursed at a defined point or upon meeting a condition.
+56. **Payment** — An actual transfer of funds from funder to grantee against an award, corresponding to one or more installments.
+57. **Payment Condition** — A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released. As of the Structured Grant Terms enhancement, a subtype of Grant Condition, for the same reason as Matching Requirement above.
+58. **Budget Modification** — A grantee-requested, funder-approved change to how awarded funds are allocated across budget categories, without changing the total award amount.
 
 ## Compliance and reporting
 
-54. **Compliance Requirement** — An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance).
-55. **Reporting Schedule** — The agreed cadence and due dates for narrative and financial reports over the life of an award.
-56. **Report** — A grantee's submission to the funder describing progress, outcomes, and/or use of funds, per the reporting schedule. Narrative and financial reports are common subtypes.
-57. **Audit** — A formal, independent examination of a grantee's financial records, either as a general organizational requirement or specific to a grant.
-58. **Indirect Cost Rate** — The negotiated or de minimis rate at which a grantee may charge overhead/administrative costs against an award.
+59. **Compliance Requirement** — An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance). As of the Structured Grant Terms enhancement, a subtype of Grant Term — its own `requirementType` vocabulary was additively expanded rather than replaced, so it keeps functioning as a normal Grant Term while remaining backward compatible with existing data.
+60. **Reporting Schedule** — The agreed cadence and due dates for narrative and financial reports over the life of an award. As of the Structured Grant Terms enhancement, also a subtype of Grant Term, distinct from the more granular Reporting Requirement above.
+61. **Report** — A grantee's submission to the funder describing progress, outcomes, and/or use of funds, per the reporting schedule. Narrative and financial reports are common subtypes.
+62. **Audit** — A formal, independent examination of a grantee's financial records, either as a general organizational requirement or specific to a grant.
+63. **Indirect Cost Rate** — The negotiated or de minimis rate at which a grantee may charge overhead/administrative costs against an award.
 
 ## Outcomes and closeout
 
 As of the Programs, Results & Evidence enhancement, this section also covers the full Input → Activity → Output → Outcome → Impact logic-model chain, its measurement (Indicator/Target/Measurement), and the evidence supporting any claim about it — see [Relationships](03-relationships.md#programs-results-and-evidence) for how these connect to a Project and to each other, and [Organizations, Roles & Arrangements](08-organizations-roles-and-arrangements.md) for why this doesn't need its own top-level category (a 9th color would exceed the site's validated categorical palette).
 
-59. **Theory of Change** — A grantee's or funder's articulated model of how specific activities are expected to lead to desired long-term change.
-60. **Logic Model** — A structured diagram connecting a project's inputs, activities, outputs, and outcomes, used to plan and evaluate a grant-funded project.
-61. **Result** — A planned or observed state, product, change, or effect associated with an intervention. The shared parent of Output, Outcome, and Impact, distinguished from each other by directness and time horizon.
-62. **Output** — A direct product, service, deliverable, or immediate consequence of Activities carried out by a Project (e.g., number of workshops held, people served). Does not itself imply any broader behavioral or social change. A subtype of Result.
-63. **Outcome** — A change in condition, behavior, knowledge, capacity, practice, or status that is intended or observed in association with a Project or Activity, distinct from a direct Output. A subtype of Result. A recorded Outcome does not by itself establish that the Project caused it — see Evidence Claim, below, for how a specific causal or contributory interpretation is represented and evidenced.
-64. **Impact** — A broader or longer-term change to which one or more Outcomes may contribute. A subtype of Result. Recording an Impact relationship does not itself imply the Project has been demonstrated to cause the change.
-65. **Input** — A financial, human, material, informational, or other resource used in carrying out an Activity.
-66. **Activity** — A defined action or body of work performed by a Project to produce Outputs and contribute toward intended Outcomes.
-67. **Indicator** — A defined measure used to assess the state or change of a Result (e.g., percentage of participants employed after six months, graduation rate).
-68. **Target** — A planned value for an Indicator expected to be reached by a defined point in time. Never interchangeable with a Measurement, below — a Target is planned, a Measurement is observed.
-69. **Measurement** — An observed value for an Indicator at a particular time and, where relevant, for a defined Population or Geographic Area.
-70. **Evidence** — Information used to support, weaken, qualify, or contextualize a claim about a Project, Activity, Result, or other entity (e.g., an evaluation report, survey results, administrative data, a case study).
-71. **Evidence Claim** — A sourced assertion about a relationship, condition, result, or causal interpretation whose evidentiary basis can be independently identified. This is where a specific interpretation of a Project's contribution to a Result — association, contribution, attribution, or causation, see [Properties & Rules](06-properties-and-rules.md) — gets represented, kept explicitly separate from the Result itself and from the Evidence supporting the claim. The mechanism that lets this ontology avoid ever asserting "Project caused Outcome" as a plain graph fact.
-72. **Evaluation** — A structured assessment of whether a grant-funded project achieved its intended outputs and outcomes.
-73. **Closeout** — The formal conclusion of a grant award once all funds are disbursed, all reports are submitted and accepted, and all compliance requirements are satisfied.
-74. **Need** — A condition, problem, gap, or opportunity identified as warranting intervention or investment.
-75. **Population** — A group of people defined by demographic, geographic, institutional, experiential, or other characteristics relevant to a Need, Project, Result, or Evaluation.
-76. **Geographic Area** — A geographic entity used to describe where a Need exists, where a Project operates, where a Population is located, or where a Result is observed. Not assumed to be the same as a grant recipient's registered mailing address.
+64. **Theory of Change** — A grantee's or funder's articulated model of how specific activities are expected to lead to desired long-term change.
+65. **Logic Model** — A structured diagram connecting a project's inputs, activities, outputs, and outcomes, used to plan and evaluate a grant-funded project.
+66. **Result** — A planned or observed state, product, change, or effect associated with an intervention. The shared parent of Output, Outcome, and Impact, distinguished from each other by directness and time horizon.
+67. **Output** — A direct product, service, deliverable, or immediate consequence of Activities carried out by a Project (e.g., number of workshops held, people served). Does not itself imply any broader behavioral or social change. A subtype of Result.
+68. **Outcome** — A change in condition, behavior, knowledge, capacity, practice, or status that is intended or observed in association with a Project or Activity, distinct from a direct Output. A subtype of Result. A recorded Outcome does not by itself establish that the Project caused it — see Evidence Claim, below, for how a specific causal or contributory interpretation is represented and evidenced.
+69. **Impact** — A broader or longer-term change to which one or more Outcomes may contribute. A subtype of Result. Recording an Impact relationship does not itself imply the Project has been demonstrated to cause the change.
+70. **Input** — A financial, human, material, informational, or other resource used in carrying out an Activity.
+71. **Activity** — A defined action or body of work performed by a Project to produce Outputs and contribute toward intended Outcomes.
+72. **Indicator** — A defined measure used to assess the state or change of a Result (e.g., percentage of participants employed after six months, graduation rate).
+73. **Target** — A planned value for an Indicator expected to be reached by a defined point in time. Never interchangeable with a Measurement, below — a Target is planned, a Measurement is observed.
+74. **Measurement** — An observed value for an Indicator at a particular time and, where relevant, for a defined Population or Geographic Area.
+75. **Evidence** — Information used to support, weaken, qualify, or contextualize a claim about a Project, Activity, Result, or other entity (e.g., an evaluation report, survey results, administrative data, a case study).
+76. **Evidence Claim** — A sourced assertion about a relationship, condition, result, or causal interpretation whose evidentiary basis can be independently identified. This is where a specific interpretation of a Project's contribution to a Result — association, contribution, attribution, or causation, see [Properties & Rules](06-properties-and-rules.md) — gets represented, kept explicitly separate from the Result itself and from the Evidence supporting the claim. The mechanism that lets this ontology avoid ever asserting "Project caused Outcome" as a plain graph fact.
+77. **Evaluation** — A structured assessment of whether a grant-funded project achieved its intended outputs and outcomes.
+78. **Closeout** — The formal conclusion of a grant award once all funds are disbursed, all reports are submitted and accepted, and all compliance requirements are satisfied.
+79. **Need** — A condition, problem, gap, or opportunity identified as warranting intervention or investment.
+80. **Population** — A group of people defined by demographic, geographic, institutional, experiential, or other characteristics relevant to a Need, Project, Result, or Evaluation.
+81. **Geographic Area** — A geographic entity used to describe where a Need exists, where a Project operates, where a Population is located, or where a Result is observed. Not assumed to be the same as a grant recipient's registered mailing address.
 
 ## Cross-cutting
 
-77. **Grant Lifecycle** — The end-to-end sequence a grant moves through, from funding opportunity through application, review, award, disbursement, reporting, and closeout. See [Relationships](03-relationships.md) for the full sequence.
-78. **Agent** — An entity capable of participating in an activity, relationship, decision, transaction, or role. The shared parent of Person and Organization, added so future relationships can target either without duplicating a predicate per entity type.
-79. **Project** — A defined body of work undertaken over a period of time to address one or more needs or objectives — the work being performed, distinct from the Application requesting funding for it or the Award committing funding to it.
+As of the Candid PCS Classification enhancement, this section also covers **Classification Assignment** — see [Relationships](03-relationships.md#classification) for how it connects to Award and Population, and [Properties & Rules](06-properties-and-rules.md) for the Candid PCS reference-data schemes it can draw from.
+
+82. **Grant Lifecycle** — The end-to-end sequence a grant moves through, from funding opportunity through application, review, award, disbursement, reporting, and closeout. See [Relationships](03-relationships.md) for the full sequence.
+83. **Agent** — An entity capable of participating in an activity, relationship, decision, transaction, or role. The shared parent of Person and Organization, added so future relationships can target either without duplicating a predicate per entity type.
+84. **Project** — A defined body of work undertaken over a period of time to address one or more needs or objectives — the work being performed, distinct from the Application requesting funding for it or the Award committing funding to it.
+85. **Classification Assignment** — A contextual assertion that a resource (e.g. an Award or a Population) is classified by a concept from a specified external or internal classification scheme, such as Candid's Philanthropy Classification System (PCS). External taxonomies classify CommonGood resources; they do not define those resources — Need, Population, and Organization remain the ontology's own entities regardless of which taxonomy terms are assigned to them. Deliberately generic rather than named after Candid specifically, so any external or internal taxonomy can be imported the same way.
 
 ---
 
