@@ -253,12 +253,190 @@
       }
     },
     {
+      "id": "ex:coastal-watch-alliance-org",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:organization"
+      ],
+      "label": "Coastal Watch Alliance",
+      "npoprop:organization-tax-status": {
+        "@value": "tax-exempt-501c3",
+        "@type": "xsd:string"
+      },
+      "npoprop:organization-operating-status": {
+        "@id": "nporef:organization-operating-status-active"
+      },
+      "nporel:playsRole": {
+        "@id": "ex:coastal-watch-alliance"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-budget-reallocation-approval",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:approval-requirement"
+      ],
+      "label": "Approval Required for Budget Reallocation Over 10%",
+      "npoprop:approval-requirement-approval-type": {
+        "@value": "budget-reallocation",
+        "@type": "xsd:string"
+      },
+      "npoprop:approval-requirement-approval-threshold": {
+        "@value": "10",
+        "@type": "xsd:decimal"
+      },
+      "npoprop:approval-requirement-threshold-unit": {
+        "@value": "percent",
+        "@type": "xsd:string"
+      },
+      "npoprop:approval-requirement-approval-status": {
+        "@value": "not-requested",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-original-term-text": {
+        "@value": "Grantee must obtain prior written approval from the Fund before reallocating more than 10% of the approved budget between line items.",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-status": {
+        "@value": "mapped",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "nporel:grantTermAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
+      },
+      "nporel:requiresApprovalFrom": {
+        "@id": "ex:ocean-conservation-fund-org"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-economic-development-classification",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:classification-assignment"
+      ],
+      "label": "Award Also Classified as Economic Development (Candid PCS Subjects)",
+      "npoprop:classification-assignment-classification-scheme": {
+        "@id": "nporef:classification-scheme-registry-candid-pcs-subjects"
+      },
+      "npoprop:classification-assignment-classification-concept-code": {
+        "@value": "economic-development",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-taxonomy-version": {
+        "@value": "illustrative-subset",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-source": {
+        "@value": "program-officer",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assigned-at": {
+        "@value": "2026-04-01",
+        "@type": "xsd:date"
+      },
+      "npoprop:classification-assignment-is-primary": {
+        "@value": false,
+        "@type": "xsd:boolean"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-environment-classification",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:classification-assignment"
+      ],
+      "label": "Award Classified as Environment (Candid PCS Subjects)",
+      "npoprop:classification-assignment-classification-scheme": {
+        "@id": "nporef:classification-scheme-registry-candid-pcs-subjects"
+      },
+      "npoprop:classification-assignment-classification-concept-code": {
+        "@value": "environment",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-taxonomy-version": {
+        "@value": "illustrative-subset",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-source": {
+        "@value": "program-officer",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assigned-at": {
+        "@value": "2026-04-01",
+        "@type": "xsd:date"
+      },
+      "npoprop:classification-assignment-is-primary": {
+        "@value": true,
+        "@type": "xsd:boolean"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-financial-reporting-requirement",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:reporting-requirement"
+      ],
+      "label": "Quarterly Financial Reporting Requirement",
+      "npoprop:reporting-requirement-report-type": {
+        "@value": "financial-report",
+        "@type": "xsd:string"
+      },
+      "npoprop:reporting-requirement-frequency": {
+        "@id": "nporef:frequency-quarterly"
+      },
+      "npoprop:reporting-requirement-due-date": {
+        "@value": "2026-07-15",
+        "@type": "xsd:date"
+      },
+      "npoprop:reporting-requirement-reporting-period-start": {
+        "@value": "2026-04-01",
+        "@type": "xsd:date"
+      },
+      "npoprop:reporting-requirement-reporting-period-end": {
+        "@value": "2026-06-30",
+        "@type": "xsd:date"
+      },
+      "npoprop:grant-term-original-term-text": {
+        "@value": "Grantee shall submit a quarterly financial report itemizing expenditures against the approved budget.",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-status": {
+        "@value": "mapped",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "nporel:fulfilledByReport": {
+        "@id": "ex:coastal-watch-q2-report"
+      },
+      "nporel:grantTermAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
+      }
+    },
+    {
       "id": "ex:coastal-watch-fishing-communities",
       "type": [
         "owl:NamedIndividual",
         "npo:population"
       ],
-      "label": "Half Moon Cove Fishing Communities"
+      "label": "Half Moon Cove Fishing Communities",
+      "nporel:populationHasClassification": {
+        "@id": "ex:coastal-watch-population-classification"
+      }
     },
     {
       "id": "ex:coastal-watch-fy26-application",
@@ -307,6 +485,9 @@
       "npoprop:award-date": {
         "@value": "2026-04-01",
         "@type": "xsd:date"
+      },
+      "nporel:awardHasClassification": {
+        "@id": "ex:coastal-watch-economic-development-classification"
       },
       "nporel:formalizedByGrantAgreement": {
         "@id": "ex:coastal-watch-grant-agreement"
@@ -388,6 +569,9 @@
       },
       "nporel:attachesComplianceRequirement": {
         "@id": "ex:coastal-watch-reporting-requirement"
+      },
+      "nporel:specifiesGrantTerm": {
+        "@id": "ex:coastal-watch-financial-reporting-requirement"
       }
     },
     {
@@ -425,6 +609,89 @@
       }
     },
     {
+      "id": "ex:coastal-watch-lobbying-restriction",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:use-restriction"
+      ],
+      "label": "Prohibition on Lobbying Use",
+      "npoprop:use-restriction-restriction-type": {
+        "@id": "nporef:use-restriction-type-lobbying"
+      },
+      "npoprop:use-restriction-restriction-mode": {
+        "@value": "prohibited-use",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-original-term-text": {
+        "@value": "None of these funds may be used to carry on propaganda, or otherwise to attempt to influence legislation.",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-status": {
+        "@value": "mapped",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "nporel:grantTermAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-matching-condition",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:grant-condition"
+      ],
+      "label": "$50,000 Matching Funds Condition",
+      "npoprop:grant-condition-has-barrier": {
+        "@value": true,
+        "@type": "xsd:boolean"
+      },
+      "npoprop:grant-condition-condition-barrier-type": {
+        "@id": "nporef:condition-barrier-type-matching-requirement"
+      },
+      "npoprop:grant-condition-threshold-value": {
+        "@value": "50000",
+        "@type": "xsd:decimal"
+      },
+      "npoprop:grant-condition-threshold-unit": {
+        "@value": "USD",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-condition-threshold-operator": {
+        "@value": "greater-than-or-equal",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-condition-condition-status": {
+        "@value": "pending",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-condition-failure-consequence": {
+        "@value": "future-payment-withheld",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-original-term-text": {
+        "@value": "Grantee must raise at least $50,000 in matching funds from non-federal sources by the end of the grant period, or subsequent installments will be withheld.",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-status": {
+        "@value": "mapped",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "nporel:grantTermAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
+      },
+      "nporel:hasConditionResponsibleParty": {
+        "@id": "ex:coastal-watch-alliance-org"
+      }
+    },
+    {
       "id": "ex:coastal-watch-payment-schedule",
       "type": [
         "owl:NamedIndividual",
@@ -437,6 +704,75 @@
       },
       "nporel:brokenIntoInstallment": {
         "@id": "ex:coastal-watch-q2-installment"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-population-classification",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:classification-assignment"
+      ],
+      "label": "Fishing Communities Classified as Economically Disadvantaged (Candid PCS Populations)",
+      "npoprop:classification-assignment-classification-scheme": {
+        "@id": "nporef:classification-scheme-registry-candid-pcs-populations"
+      },
+      "npoprop:classification-assignment-classification-concept-code": {
+        "@value": "economically-disadvantaged-people",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-taxonomy-version": {
+        "@value": "illustrative-subset",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-source": {
+        "@value": "program-officer",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assignment-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "npoprop:classification-assignment-assigned-at": {
+        "@value": "2026-04-01",
+        "@type": "xsd:date"
+      },
+      "npoprop:classification-assignment-is-primary": {
+        "@value": true,
+        "@type": "xsd:boolean"
+      }
+    },
+    {
+      "id": "ex:coastal-watch-project-restriction",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:use-restriction"
+      ],
+      "label": "Restriction to Half Moon Cove Restoration Project",
+      "npoprop:use-restriction-restriction-type": {
+        "@id": "nporef:use-restriction-type-specific-project"
+      },
+      "npoprop:use-restriction-restriction-mode": {
+        "@value": "required-use",
+        "@type": "xsd:string"
+      },
+      "npoprop:use-restriction-restricted-to": {
+        "@value": "Half Moon Cove Habitat Restoration Project",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-original-term-text": {
+        "@value": "Grant funds shall be used exclusively for the Half Moon Cove Habitat Restoration Project as described in the grantee's proposal.",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-status": {
+        "@value": "mapped",
+        "@type": "xsd:string"
+      },
+      "npoprop:grant-term-normalization-method": {
+        "@value": "manual",
+        "@type": "xsd:string"
+      },
+      "nporel:grantTermAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
       }
     },
     {
