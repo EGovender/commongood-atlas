@@ -31,12 +31,6 @@ ex:coastal-resilience-grant-to-kelp-forest a owl:NamedIndividual,
     nporel:fundedFrom ex:coastal-resilience-fund ;
     nporel:managedBy ex:tidewater-community-foundation .
 
-ex:coastal-watch-alliance a owl:NamedIndividual,
-        npo:grantee ;
-    rdfs:label "Coastal Watch Alliance" ;
-    npoprop:role-status nporef:role-status-active ;
-    nporel:submitsApplication ex:coastal-watch-fy26-application .
-
 ex:coastal-watch-year1-evaluation a owl:NamedIndividual,
         npo:evaluation ;
     rdfs:label "Year 1 Outcomes Evaluation" ;
@@ -129,6 +123,68 @@ ex:coastal-habitat-health-target-2027 a owl:NamedIndividual,
     npoprop:target-target-date "2027-01-15"^^xsd:date ;
     npoprop:target-value "70% improvement"^^xsd:string .
 
+ex:coastal-watch-alliance a owl:NamedIndividual,
+        npo:grantee ;
+    rdfs:label "Coastal Watch Alliance" ;
+    npoprop:role-status nporef:role-status-active ;
+    nporel:submitsApplication ex:coastal-watch-fy26-application .
+
+ex:coastal-watch-alliance-org a owl:NamedIndividual,
+        npo:organization ;
+    rdfs:label "Coastal Watch Alliance" ;
+    npoprop:organization-operating-status nporef:organization-operating-status-active ;
+    npoprop:organization-tax-status "tax-exempt-501c3"^^xsd:string ;
+    nporel:playsRole ex:coastal-watch-alliance .
+
+ex:coastal-watch-budget-reallocation-approval a owl:NamedIndividual,
+        npo:approval-requirement ;
+    rdfs:label "Approval Required for Budget Reallocation Over 10%" ;
+    npoprop:approval-requirement-approval-status "not-requested"^^xsd:string ;
+    npoprop:approval-requirement-approval-threshold 10.0 ;
+    npoprop:approval-requirement-approval-type "budget-reallocation"^^xsd:string ;
+    npoprop:approval-requirement-threshold-unit "percent"^^xsd:string ;
+    npoprop:grant-term-normalization-method "manual"^^xsd:string ;
+    npoprop:grant-term-normalization-status "mapped"^^xsd:string ;
+    npoprop:grant-term-original-term-text "Grantee must obtain prior written approval from the Fund before reallocating more than 10% of the approved budget between line items."^^xsd:string ;
+    nporel:grantTermAppliesToAward ex:coastal-watch-fy26-award ;
+    nporel:requiresApprovalFrom ex:ocean-conservation-fund-org .
+
+ex:coastal-watch-economic-development-classification a owl:NamedIndividual,
+        npo:classification-assignment ;
+    rdfs:label "Award Also Classified as Economic Development (Candid PCS Subjects)" ;
+    npoprop:classification-assignment-assigned-at "2026-04-01"^^xsd:date ;
+    npoprop:classification-assignment-assignment-method "manual"^^xsd:string ;
+    npoprop:classification-assignment-assignment-source "program-officer"^^xsd:string ;
+    npoprop:classification-assignment-classification-concept-code "economic-development"^^xsd:string ;
+    npoprop:classification-assignment-classification-scheme nporef:classification-scheme-registry-candid-pcs-subjects ;
+    npoprop:classification-assignment-is-primary false ;
+    npoprop:classification-assignment-taxonomy-version "illustrative-subset"^^xsd:string .
+
+ex:coastal-watch-environment-classification a owl:NamedIndividual,
+        npo:classification-assignment ;
+    rdfs:label "Award Classified as Environment (Candid PCS Subjects)" ;
+    npoprop:classification-assignment-assigned-at "2026-04-01"^^xsd:date ;
+    npoprop:classification-assignment-assignment-method "manual"^^xsd:string ;
+    npoprop:classification-assignment-assignment-source "program-officer"^^xsd:string ;
+    npoprop:classification-assignment-classification-concept-code "environment"^^xsd:string ;
+    npoprop:classification-assignment-classification-scheme nporef:classification-scheme-registry-candid-pcs-subjects ;
+    npoprop:classification-assignment-is-primary true ;
+    npoprop:classification-assignment-taxonomy-version "illustrative-subset"^^xsd:string .
+
+ex:coastal-watch-financial-reporting-requirement a owl:NamedIndividual,
+        npo:reporting-requirement ;
+    rdfs:label "Quarterly Financial Reporting Requirement" ;
+    npoprop:grant-term-normalization-method "manual"^^xsd:string ;
+    npoprop:grant-term-normalization-status "mapped"^^xsd:string ;
+    npoprop:grant-term-original-term-text "Grantee shall submit a quarterly financial report itemizing expenditures against the approved budget."^^xsd:string ;
+    npoprop:reporting-requirement-due-date "2026-07-15"^^xsd:date ;
+    npoprop:reporting-requirement-frequency nporef:frequency-quarterly ;
+    npoprop:reporting-requirement-report-type "financial-report"^^xsd:string ;
+    npoprop:reporting-requirement-reporting-period-end "2026-06-30"^^xsd:date ;
+    npoprop:reporting-requirement-reporting-period-start "2026-04-01"^^xsd:date ;
+    nporel:fulfilledByReport ex:coastal-watch-q2-report ;
+    nporel:grantTermAppliesToAward ex:coastal-watch-fy26-award .
+
 ex:coastal-watch-fy26-application a owl:NamedIndividual,
         npo:application ;
     rdfs:label "Coastal Watch Alliance FY26 Application" ;
@@ -137,18 +193,6 @@ ex:coastal-watch-fy26-application a owl:NamedIndividual,
     nporel:proposesProject ex:coastal-watch-restoration-project ;
     nporel:respondsToFundingOpportunity ex:marine-habitat-2026-opportunity ;
     nporel:undergoesReview ex:coastal-watch-fy26-review .
-
-ex:coastal-watch-fy26-award a owl:NamedIndividual,
-        npo:award ;
-    rdfs:label "Award to Coastal Watch Alliance" ;
-    npoprop:award-amount 250000.0 ;
-    npoprop:award-currency "USD"^^xsd:string ;
-    npoprop:award-date "2026-04-01"^^xsd:date ;
-    npoprop:award-status "active"^^xsd:string ;
-    nporel:formalizedByGrantAgreement ex:coastal-watch-grant-agreement ;
-    nporel:fundsProject ex:coastal-watch-restoration-project ;
-    nporel:hasPaymentSchedule ex:coastal-watch-payment-schedule ;
-    nporel:reachesCloseout ex:coastal-watch-fy26-closeout .
 
 ex:coastal-watch-fy26-closeout a owl:NamedIndividual,
         npo:closeout ;
@@ -174,7 +218,12 @@ ex:coastal-watch-grant-agreement a owl:NamedIndividual,
     rdfs:label "Grant Agreement with Coastal Watch Alliance" ;
     npoprop:grant-agreement-effective-date "2026-04-01"^^xsd:date ;
     npoprop:grant-agreement-status "signed"^^xsd:string ;
-    nporel:attachesComplianceRequirement ex:coastal-watch-reporting-requirement .
+    nporel:attachesComplianceRequirement ex:coastal-watch-reporting-requirement ;
+    nporel:specifiesGrantTerm ex:coastal-watch-budget-reallocation-approval,
+        ex:coastal-watch-financial-reporting-requirement,
+        ex:coastal-watch-lobbying-restriction,
+        ex:coastal-watch-matching-condition,
+        ex:coastal-watch-project-restriction .
 
 ex:coastal-watch-habitat-outcome-claim a owl:NamedIndividual,
         npo:evidence-claim ;
@@ -184,11 +233,59 @@ ex:coastal-watch-habitat-outcome-claim a owl:NamedIndividual,
     nporel:aboutResult ex:coastal-watch-habitat-outcome ;
     nporel:supportedByEvidence ex:coastal-watch-year1-field-survey .
 
+ex:coastal-watch-lobbying-restriction a owl:NamedIndividual,
+        npo:use-restriction ;
+    rdfs:label "Prohibition on Lobbying Use" ;
+    npoprop:grant-term-normalization-method "manual"^^xsd:string ;
+    npoprop:grant-term-normalization-status "mapped"^^xsd:string ;
+    npoprop:grant-term-original-term-text "None of these funds may be used to carry on propaganda, or otherwise to attempt to influence legislation."^^xsd:string ;
+    npoprop:use-restriction-restriction-mode "prohibited-use"^^xsd:string ;
+    npoprop:use-restriction-restriction-type nporef:use-restriction-type-lobbying ;
+    nporel:grantTermAppliesToAward ex:coastal-watch-fy26-award .
+
+ex:coastal-watch-matching-condition a owl:NamedIndividual,
+        npo:grant-condition ;
+    rdfs:label "$50,000 Matching Funds Condition" ;
+    npoprop:grant-condition-condition-barrier-type nporef:condition-barrier-type-matching-requirement ;
+    npoprop:grant-condition-condition-status "pending"^^xsd:string ;
+    npoprop:grant-condition-failure-consequence "future-payment-withheld"^^xsd:string ;
+    npoprop:grant-condition-has-barrier true ;
+    npoprop:grant-condition-threshold-operator "greater-than-or-equal"^^xsd:string ;
+    npoprop:grant-condition-threshold-unit "USD"^^xsd:string ;
+    npoprop:grant-condition-threshold-value 50000.0 ;
+    npoprop:grant-term-normalization-method "manual"^^xsd:string ;
+    npoprop:grant-term-normalization-status "mapped"^^xsd:string ;
+    npoprop:grant-term-original-term-text "Grantee must raise at least $50,000 in matching funds from non-federal sources by the end of the grant period, or subsequent installments will be withheld."^^xsd:string ;
+    nporel:grantTermAppliesToAward ex:coastal-watch-fy26-award ;
+    nporel:hasConditionResponsibleParty ex:coastal-watch-alliance-org .
+
 ex:coastal-watch-payment-schedule a owl:NamedIndividual,
         npo:payment-schedule ;
     rdfs:label "Coastal Watch Alliance Payment Schedule" ;
     npoprop:payment-schedule-status "active"^^xsd:string ;
     nporel:brokenIntoInstallment ex:coastal-watch-q2-installment .
+
+ex:coastal-watch-population-classification a owl:NamedIndividual,
+        npo:classification-assignment ;
+    rdfs:label "Fishing Communities Classified as Economically Disadvantaged (Candid PCS Populations)" ;
+    npoprop:classification-assignment-assigned-at "2026-04-01"^^xsd:date ;
+    npoprop:classification-assignment-assignment-method "manual"^^xsd:string ;
+    npoprop:classification-assignment-assignment-source "program-officer"^^xsd:string ;
+    npoprop:classification-assignment-classification-concept-code "economically-disadvantaged-people"^^xsd:string ;
+    npoprop:classification-assignment-classification-scheme nporef:classification-scheme-registry-candid-pcs-populations ;
+    npoprop:classification-assignment-is-primary true ;
+    npoprop:classification-assignment-taxonomy-version "illustrative-subset"^^xsd:string .
+
+ex:coastal-watch-project-restriction a owl:NamedIndividual,
+        npo:use-restriction ;
+    rdfs:label "Restriction to Half Moon Cove Restoration Project" ;
+    npoprop:grant-term-normalization-method "manual"^^xsd:string ;
+    npoprop:grant-term-normalization-status "mapped"^^xsd:string ;
+    npoprop:grant-term-original-term-text "Grant funds shall be used exclusively for the Half Moon Cove Habitat Restoration Project as described in the grantee's proposal."^^xsd:string ;
+    npoprop:use-restriction-restricted-to "Half Moon Cove Habitat Restoration Project"^^xsd:string ;
+    npoprop:use-restriction-restriction-mode "required-use"^^xsd:string ;
+    npoprop:use-restriction-restriction-type nporef:use-restriction-type-specific-project ;
+    nporel:grantTermAppliesToAward ex:coastal-watch-fy26-award .
 
 ex:coastal-watch-q2-installment a owl:NamedIndividual,
         npo:installment ;
@@ -204,14 +301,6 @@ ex:coastal-watch-q2-payment a owl:NamedIndividual,
     npoprop:payment-currency "USD"^^xsd:string ;
     npoprop:payment-date "2026-04-15"^^xsd:date ;
     npoprop:payment-status "sent"^^xsd:string .
-
-ex:coastal-watch-q2-report a owl:NamedIndividual,
-        npo:report ;
-    rdfs:label "Q2 2026 Narrative & Financial Report" ;
-    npoprop:report-due-date "2026-07-15"^^xsd:date ;
-    npoprop:report-report-type "both"^^xsd:string ;
-    npoprop:report-status "accepted"^^xsd:string ;
-    npoprop:report-submitted-date "2026-07-10"^^xsd:date .
 
 ex:coastal-watch-regional-impact a owl:NamedIndividual,
         npo:impact ;
@@ -354,6 +443,14 @@ ex:coastal-resilience-fund a owl:NamedIndividual,
     npoprop:fund-status "active"^^xsd:string ;
     nporel:heldBy ex:tidewater-community-foundation .
 
+ex:coastal-watch-q2-report a owl:NamedIndividual,
+        npo:report ;
+    rdfs:label "Q2 2026 Narrative & Financial Report" ;
+    npoprop:report-due-date "2026-07-15"^^xsd:date ;
+    npoprop:report-report-type "both"^^xsd:string ;
+    npoprop:report-status "accepted"^^xsd:string ;
+    npoprop:report-submitted-date "2026-07-10"^^xsd:date .
+
 ex:coastal-watch-workshops-output a owl:NamedIndividual,
         npo:output ;
     rdfs:label "12 Habitat Restoration Workshops Held" ;
@@ -379,7 +476,8 @@ ex:marine-habitat-2026-opportunity a owl:NamedIndividual,
 
 ex:coastal-watch-fishing-communities a owl:NamedIndividual,
         npo:population ;
-    rdfs:label "Half Moon Cove Fishing Communities" .
+    rdfs:label "Half Moon Cove Fishing Communities" ;
+    nporel:populationHasClassification ex:coastal-watch-population-classification .
 
 ex:coastal-watch-habitat-outcome a owl:NamedIndividual,
         npo:outcome ;
@@ -424,6 +522,20 @@ ex:tidewater-community-foundation a owl:NamedIndividual,
     npoprop:organization-operating-status nporef:organization-operating-status-active ;
     npoprop:organization-tax-status "tax-exempt-501c3"^^xsd:string ;
     nporel:participatesIn ex:coastal-resilience-collaborative .
+
+ex:coastal-watch-fy26-award a owl:NamedIndividual,
+        npo:award ;
+    rdfs:label "Award to Coastal Watch Alliance" ;
+    npoprop:award-amount 250000.0 ;
+    npoprop:award-currency "USD"^^xsd:string ;
+    npoprop:award-date "2026-04-01"^^xsd:date ;
+    npoprop:award-status "active"^^xsd:string ;
+    nporel:awardHasClassification ex:coastal-watch-economic-development-classification,
+        ex:coastal-watch-environment-classification ;
+    nporel:formalizedByGrantAgreement ex:coastal-watch-grant-agreement ;
+    nporel:fundsProject ex:coastal-watch-restoration-project ;
+    nporel:hasPaymentSchedule ex:coastal-watch-payment-schedule ;
+    nporel:reachesCloseout ex:coastal-watch-fy26-closeout .
 
 ex:ocean-conservation-fund-org a owl:NamedIndividual,
         npo:organization ;

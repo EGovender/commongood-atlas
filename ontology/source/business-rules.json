@@ -75,5 +75,33 @@
     "description": "A Role occupancy should specify what it applies within (via appliesWithin), unless its Scope is explicitly organization-wide -- a role with neither a context nor an organization-wide scope is ambiguous about what it actually governs.",
     "concepts": ["role", "person-role", "organization-role"],
     "docRef": "docs/02-core-concepts.md#organizational-entities"
+  },
+  {
+    "id": "rule-grant-term-should-identify-its-award",
+    "label": "A Grant Term should identify which Award it applies to",
+    "description": "A Grant Term should specify the Award it applies to (via Grant Term Applies To Award, or, for a Compliance Requirement, its own existing Applies To Award relationship), unless it is still in draft or unnormalized form -- an Award-less Grant Term that has completed normalization is missing the link that makes it actionable.",
+    "concepts": ["grant-term", "use-restriction", "grant-condition", "approval-requirement", "reporting-requirement", "compliance-requirement", "award"],
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rule-classification-assignment-at-most-one-primary",
+    "label": "At most one primary Classification Assignment per resource and scheme",
+    "description": "For a given classified resource (e.g. an Award or a Population) and a given classification scheme, at most one Classification Assignment should have Is Primary set to true -- multiple simultaneous primaries make Primary-mode reporting ambiguous about which classification the resource is chiefly attributed to.",
+    "concepts": ["classification-assignment", "award", "population"],
+    "docRef": "docs/03-relationships.md#classification"
+  },
+  {
+    "id": "rule-classification-assignment-allocation-should-sum-to-100",
+    "label": "Allocation percentages should sum to 100 when allocation is asserted complete",
+    "description": "When a classified resource's Classification Assignments for a given scheme carry an Allocation Percentage, those percentages should sum to 100 once the allocation is asserted as complete. An incomplete sum is a data-quality signal to surface, not a gap to silently renormalize or complete on the resource's behalf.",
+    "concepts": ["classification-assignment", "award", "population"],
+    "docRef": "docs/03-relationships.md#classification"
+  },
+  {
+    "id": "rule-classification-rolls-up-not-down",
+    "label": "Classification rolls upward through broader terms, never downward",
+    "description": "A Classification Assignment's Classification Concept Code rolls upward through that concept's Broader chain for reporting purposes -- a resource explicitly classified under a narrower term is implicitly also covered by every broader ancestor. The reverse never holds: a resource explicitly classified under a broader term is not implicitly classified under any of its more specific descendants, since the source data made no claim that specific.",
+    "concepts": ["classification-assignment"],
+    "docRef": "docs/03-relationships.md#classification"
   }
 ]

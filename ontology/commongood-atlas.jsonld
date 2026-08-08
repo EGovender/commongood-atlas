@@ -158,6 +158,15 @@
       ]
     },
     {
+      "id": "npo:approval-requirement",
+      "type": "owl:Class",
+      "label": "Approval Requirement",
+      "definition": "A Grant Term requiring authorization from the funder or another specified party before a defined change, expenditure, action, or deviation may occur (e.g., prior written approval for a budget reallocation above a threshold). Not automatically a Grant Condition -- an approval requirement may simply govern administration of the Award.",
+      "category": "award-and-agreement",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
+      "subClassOf": "npo:grant-term"
+    },
+    {
       "id": "npo:audit",
       "type": "owl:Class",
       "label": "Audit",
@@ -211,6 +220,14 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement"
     },
     {
+      "id": "npo:classification-assignment",
+      "type": "owl:Class",
+      "label": "Classification Assignment",
+      "definition": "A contextual assertion that a resource (e.g. an Award or Population) is classified by a concept from a specified external or internal classification scheme, such as Candid's Philanthropy Classification System. External taxonomies classify CommonGood resources; they do not define those resources -- Need, Population, and Organization remain the ontology's own entities regardless of which taxonomy terms are assigned to them.",
+      "category": "cross-cutting",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting"
+    },
+    {
       "id": "npo:closeout",
       "type": "owl:Class",
       "label": "Closeout",
@@ -233,7 +250,8 @@
       "label": "Compliance Requirement",
       "definition": "An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance).",
       "category": "compliance-and-reporting",
-      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting"
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting",
+      "subClassOf": "npo:grant-term"
     },
     {
       "id": "npo:consultant",
@@ -450,6 +468,15 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement"
     },
     {
+      "id": "npo:grant-condition",
+      "type": "owl:Class",
+      "label": "Grant Condition",
+      "definition": "A Grant Term establishing a barrier, milestone, event, requirement, or other criterion that must be satisfied for grant entitlement, payment, continuation, release, or retention. Matching Requirement and Payment Condition are its existing concrete subtypes. A condition's barrier facts (e.g. hasBarrier, threshold) are captured here without the ontology itself making the accounting or legal determination of whether the grant is \"conditional\".",
+      "category": "award-and-agreement",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
+      "subClassOf": "npo:grant-term"
+    },
+    {
       "id": "npo:grant-lifecycle",
       "type": "owl:Class",
       "label": "Grant Lifecycle",
@@ -473,6 +500,14 @@
       "category": "application-and-review",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#application-and-review",
       "legalNote": "A Grant Recommendation's non-binding status is a legal requirement for donor-advised funds under federal tax law, not a design choice -- see Donor-Advised Fund and Donor Advisor."
+    },
+    {
+      "id": "npo:grant-term",
+      "type": "owl:Class",
+      "label": "Grant Term",
+      "definition": "A provision associated with a Grant Agreement or Award that establishes a restriction, condition, obligation, approval requirement, reporting requirement, or other requirement governing the use, administration, performance, or continuation of grant funding. Preserves its original source wording (via originalTermText) alongside its normalized classification -- the classification is an interpretation of the source text, not a replacement for it.",
+      "category": "award-and-agreement",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement"
     },
     {
       "id": "npo:grantee",
@@ -553,7 +588,8 @@
       "label": "Matching Requirement",
       "definition": "A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match).",
       "category": "award-and-agreement",
-      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement"
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
+      "subClassOf": "npo:grant-condition"
     },
     {
       "id": "npo:measurement",
@@ -638,7 +674,8 @@
       "label": "Payment Condition",
       "definition": "A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released.",
       "category": "disbursement",
-      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement"
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement",
+      "subClassOf": "npo:grant-condition"
     },
     {
       "id": "npo:payment-schedule",
@@ -731,12 +768,22 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting"
     },
     {
+      "id": "npo:reporting-requirement",
+      "type": "owl:Class",
+      "label": "Reporting Requirement",
+      "definition": "A Grant Term requiring submission of information concerning grant activities, finances, progress, outputs, outcomes, compliance, or closeout. Finer-grained than a Reporting Schedule (which sets the overall cadence for an award): one clause such as \"quarterly programmatic and financial reports are required\" normalizes into two Reporting Requirements, one per report type, each of which may be fulfilledBy a submitted Report.",
+      "category": "award-and-agreement",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
+      "subClassOf": "npo:grant-term"
+    },
+    {
       "id": "npo:reporting-schedule",
       "type": "owl:Class",
       "label": "Reporting Schedule",
       "definition": "The agreed cadence and due dates for narrative and financial reports over the life of an award.",
       "category": "compliance-and-reporting",
-      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting"
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting",
+      "subClassOf": "npo:grant-term"
     },
     {
       "id": "npo:restricted-funding",
@@ -836,7 +883,7 @@
       "id": "npo:terms-and-conditions",
       "type": "owl:Class",
       "label": "Terms and Conditions",
-      "definition": "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements).",
+      "definition": "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements). Its own restrictionType property is a coarse restricted/unrestricted flag, superseded for new data by the structured Use Restriction model (see Grant Term) -- retained for backward compatibility.",
       "category": "award-and-agreement",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement"
     },
@@ -856,6 +903,15 @@
       "category": "award-and-agreement",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
       "deprecated": true
+    },
+    {
+      "id": "npo:use-restriction",
+      "type": "owl:Class",
+      "label": "Use Restriction",
+      "definition": "A Grant Term limiting the purposes, activities, populations, geographies, time periods, cost categories, or other uses for which grant resources may be applied. Governs permitted use -- distinct from a Grant Condition, which governs whether some entitlement, payment, or continuation becomes effective.",
+      "category": "award-and-agreement",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement",
+      "subClassOf": "npo:grant-term"
     },
     {
       "id": "npo:vendor",
@@ -930,6 +986,15 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end"
     },
     {
+      "id": "nporel:requiresApprovalFrom",
+      "type": "owl:ObjectProperty",
+      "label": "requires approval from",
+      "comment": "An Approval Requirement identifies the Agent whose authorization is required before the governed change, expenditure, action, or deviation may occur -- typically the Funder.",
+      "domain": "npo:approval-requirement",
+      "range": "npo:agent",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms"
+    },
+    {
       "id": "nporel:awardedBy",
       "type": "owl:ObjectProperty",
       "label": "is awarded by",
@@ -982,6 +1047,15 @@
       "domain": "npo:award",
       "range": "npo:project",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#programs-results-and-evidence"
+    },
+    {
+      "id": "nporel:awardHasClassification",
+      "type": "owl:ObjectProperty",
+      "label": "has classification",
+      "comment": "An Award has one or more Classification Assignments (e.g. Candid PCS Subjects) drawn from an external or internal classification scheme. The scheme classifies the Award; it does not redefine it.",
+      "domain": "npo:award",
+      "range": "npo:classification-assignment",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification"
     },
     {
       "id": "nporel:hasPaymentSchedule",
@@ -1254,6 +1328,15 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end"
     },
     {
+      "id": "nporel:specifiesGrantTerm",
+      "type": "owl:ObjectProperty",
+      "label": "specifies",
+      "comment": "A Grant Agreement specifies one or more Grant Terms. Declared against the abstract Grant Term concept rather than each subtype separately, so any Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement, Compliance Requirement, or Reporting Schedule instance satisfies it the same way.",
+      "domain": "npo:grant-agreement",
+      "range": "npo:grant-term",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms"
+    },
+    {
       "id": "nporel:specifiesTermsAndConditions",
       "type": "owl:ObjectProperty",
       "label": "specifies",
@@ -1261,6 +1344,15 @@
       "domain": "npo:grant-agreement",
       "range": "npo:terms-and-conditions",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end"
+    },
+    {
+      "id": "nporel:hasConditionResponsibleParty",
+      "type": "owl:ObjectProperty",
+      "label": "has responsible party",
+      "comment": "A Grant Condition optionally identifies the Agent (Person or Organization) responsible for satisfying it -- e.g. the grantee organization for a matching requirement, or a fiscal sponsor rather than the project itself.",
+      "domain": "npo:grant-condition",
+      "range": "npo:agent",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms"
     },
     {
       "id": "nporel:fundedBy",
@@ -1306,6 +1398,15 @@
       "domain": "npo:grant-recommendation",
       "range": "npo:organization",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md"
+    },
+    {
+      "id": "nporel:grantTermAppliesToAward",
+      "type": "owl:ObjectProperty",
+      "label": "applies to",
+      "comment": "A Grant Term applies to a specific Award. Declared against the abstract Grant Term concept, used by Use Restriction, Grant Condition, Approval Requirement, and Reporting Requirement instances -- Compliance Requirement keeps its own existing, more specific appliesToAward predicate unchanged, and Matching Requirement/Payment Condition/Reporting Schedule are already reachable from Award through their existing relationships, so none of those three need this one too.",
+      "domain": "npo:grant-term",
+      "range": "npo:award",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms"
     },
     {
       "id": "nporel:mayRequestBudgetModification",
@@ -1546,6 +1647,15 @@
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md"
     },
     {
+      "id": "nporel:populationHasClassification",
+      "type": "owl:ObjectProperty",
+      "label": "has classification",
+      "comment": "A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms.",
+      "domain": "npo:population",
+      "range": "npo:classification-assignment",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification"
+    },
+    {
       "id": "nporel:associatedWithGrantProgram",
       "type": "owl:ObjectProperty",
       "label": "is associated with",
@@ -1652,6 +1762,15 @@
       "domain": "npo:report",
       "range": "npo:evidence",
       "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#programs-results-and-evidence"
+    },
+    {
+      "id": "nporel:fulfilledByReport",
+      "type": "owl:ObjectProperty",
+      "label": "is fulfilled by",
+      "comment": "A Reporting Requirement is fulfilled by a submitted Report. Requirement is what must be supplied; Report is the artifact that was actually supplied.",
+      "domain": "npo:reporting-requirement",
+      "range": "npo:report",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms"
     },
     {
       "id": "nporel:obligatesReport",
@@ -1773,6 +1892,85 @@
       "range": "xsd:date"
     },
     {
+      "id": "npoprop:approval-requirement-approval-date",
+      "label": "Approval Date",
+      "comment": "When approval was granted, once it has been.",
+      "domain": "npo:approval-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:approval-requirement-approval-status",
+      "label": "Approval Status",
+      "comment": "Where a specific instance of this approval requirement stands.",
+      "domain": "npo:approval-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "not-requested",
+        "requested",
+        "approved",
+        "denied",
+        "not-applicable"
+      ]
+    },
+    {
+      "id": "npoprop:approval-requirement-approval-threshold",
+      "label": "Approval Threshold",
+      "comment": "The numeric threshold above which prior approval is required, where applicable (e.g. 10 for a 10% budget-reallocation threshold).",
+      "domain": "npo:approval-requirement",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:decimal"
+    },
+    {
+      "id": "npoprop:approval-requirement-approval-type",
+      "label": "Approval Type",
+      "comment": "What kind of change, expenditure, action, or deviation this Approval Requirement governs.",
+      "domain": "npo:approval-requirement",
+      "group": "classification",
+      "required": true,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "budget-reallocation",
+        "scope-change",
+        "project-change",
+        "key-personnel-change",
+        "timeline-extension",
+        "subgrant",
+        "regrant",
+        "contractor",
+        "capital-purchase",
+        "equipment-purchase",
+        "equipment-disposition",
+        "travel",
+        "geographic-change",
+        "population-change",
+        "other"
+      ]
+    },
+    {
+      "id": "npoprop:approval-requirement-threshold-unit",
+      "label": "Threshold Unit",
+      "comment": "The unit the approval threshold is expressed in (e.g. percent, USD).",
+      "domain": "npo:approval-requirement",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
       "id": "npoprop:audit-scheduled-date",
       "label": "Scheduled Date",
       "comment": "When the Audit is scheduled to occur.",
@@ -1889,6 +2087,100 @@
       "range": "xsd:decimal"
     },
     {
+      "id": "npoprop:classification-assignment-allocation-percentage",
+      "label": "Allocation Percentage",
+      "comment": "An actual distribution of the classified resource's value across classifications, only stored when supported by real source information -- never inferred to make reporting additive.",
+      "domain": "npo:classification-assignment",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:decimal"
+    },
+    {
+      "id": "npoprop:classification-assignment-assigned-at",
+      "label": "Assigned At",
+      "comment": "When this classification assignment was created or imported.",
+      "domain": "npo:classification-assignment",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:classification-assignment-assignment-method",
+      "label": "Assignment Method",
+      "comment": "How this classification was assigned. Ancestor classifications reached via the scheme's broader hierarchy are not normally stored as their own assignment with this field -- they're computed from the hierarchy at reporting time instead.",
+      "domain": "npo:classification-assignment",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "source-provided",
+        "imported",
+        "manual"
+      ]
+    },
+    {
+      "id": "npoprop:classification-assignment-assignment-source",
+      "label": "Assignment Source",
+      "comment": "Where this classification originated (e.g. \"Candid import\", \"manual CommonGood assignment\").",
+      "domain": "npo:classification-assignment",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:classification-assignment-classification-concept-code",
+      "label": "Classification Concept Code",
+      "comment": "The code of the term selected from the named classificationScheme (e.g. \"affordable-housing\"). A plain string, not independently validated against that scheme -- a reference-typed property's referenceScheme must be one fixed scheme declared on the property itself, and this field's scheme genuinely varies per instance. See docs/06-properties-and-rules.md for the full explanation of this known limitation.",
+      "domain": "npo:classification-assignment",
+      "group": "classification",
+      "required": true,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:classification-assignment-classification-scheme",
+      "label": "Classification Scheme",
+      "comment": "Which classification scheme classificationConceptCode is drawn from.",
+      "domain": "npo:classification-assignment",
+      "group": "classification",
+      "required": true,
+      "cardinality": "one",
+      "type": "owl:ObjectProperty",
+      "range": "skos:Concept",
+      "referenceScheme": "nporef:classification-scheme-registry"
+    },
+    {
+      "id": "npoprop:classification-assignment-is-primary",
+      "label": "Is Primary",
+      "comment": "Whether this is the exclusive reporting classification for the classified resource within this scheme. At most one Classification Assignment per classified resource + scheme should be primary -- see business rules.",
+      "domain": "npo:classification-assignment",
+      "group": "classification",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:boolean"
+    },
+    {
+      "id": "npoprop:classification-assignment-taxonomy-version",
+      "label": "Taxonomy Version",
+      "comment": "The version or release of the classification scheme used for this assignment, so historical assignments retain the taxonomy version they were made under.",
+      "domain": "npo:classification-assignment",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
       "id": "npoprop:closeout-date",
       "label": "Closeout Date",
       "comment": "When Closeout was completed.",
@@ -1928,7 +2220,21 @@
         "reporting",
         "financial",
         "insurance",
-        "other"
+        "other",
+        "records-retention",
+        "books-and-records-access",
+        "financial-controls",
+        "audit",
+        "certification",
+        "acknowledgement",
+        "notification-of-change",
+        "notification-of-breach",
+        "conflict-disclosure",
+        "legal-compliance",
+        "tax-status-maintenance",
+        "return-unused-funds",
+        "data-protection",
+        "publicity-requirement"
       ]
     },
     {
@@ -2175,6 +2481,147 @@
       ]
     },
     {
+      "id": "npoprop:grant-condition-condition-barrier-type",
+      "label": "Condition Barrier Type",
+      "comment": "What kind of barrier this condition's entitlement, payment, continuation, release, or retention depends on.",
+      "domain": "npo:grant-condition",
+      "group": "classification",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:ObjectProperty",
+      "range": "skos:Concept",
+      "referenceScheme": "nporef:condition-barrier-type"
+    },
+    {
+      "id": "npoprop:grant-condition-condition-status",
+      "label": "Condition Status",
+      "comment": "Whether this condition has been satisfied. Never inferred solely from dates.",
+      "domain": "npo:grant-condition",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "not-yet-assessed",
+        "pending",
+        "satisfied",
+        "partially-satisfied",
+        "not-satisfied",
+        "waived",
+        "expired",
+        "not-applicable"
+      ]
+    },
+    {
+      "id": "npoprop:grant-condition-due-date",
+      "label": "Due Date",
+      "comment": "The date by which this condition must be satisfied, where applicable.",
+      "domain": "npo:grant-condition",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:grant-condition-failure-consequence",
+      "label": "Failure Consequence",
+      "comment": "What happens if this condition is not met.",
+      "domain": "npo:grant-condition",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "none-specified",
+        "funds-withheld",
+        "future-payment-withheld",
+        "right-of-return",
+        "repayment-required",
+        "award-reduced",
+        "award-suspended",
+        "award-terminated",
+        "corrective-action-required",
+        "future-funding-affected",
+        "other"
+      ]
+    },
+    {
+      "id": "npoprop:grant-condition-has-barrier",
+      "label": "Has Barrier",
+      "comment": "Whether this condition has a defined barrier that must be overcome. Captures the fact without the ontology itself concluding that the grant is legally or accountingly \"conditional\" -- that determination may require separate accounting or legal analysis.",
+      "domain": "npo:grant-condition",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:boolean"
+    },
+    {
+      "id": "npoprop:grant-condition-has-right-of-release",
+      "label": "Has Right Of Release",
+      "comment": "Whether satisfying this condition releases funds that were otherwise being withheld.",
+      "domain": "npo:grant-condition",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:boolean"
+    },
+    {
+      "id": "npoprop:grant-condition-has-right-of-return",
+      "label": "Has Right Of Return",
+      "comment": "Whether failing this condition creates a right for the funder to require return of funds already disbursed.",
+      "domain": "npo:grant-condition",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:boolean"
+    },
+    {
+      "id": "npoprop:grant-condition-threshold-operator",
+      "label": "Threshold Operator",
+      "comment": "How the threshold value must be compared against to satisfy the condition.",
+      "domain": "npo:grant-condition",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "greater-than",
+        "greater-than-or-equal",
+        "less-than",
+        "less-than-or-equal",
+        "equal"
+      ]
+    },
+    {
+      "id": "npoprop:grant-condition-threshold-unit",
+      "label": "Threshold Unit",
+      "comment": "The unit the threshold value is expressed in (e.g. USD, percent, participants).",
+      "domain": "npo:grant-condition",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:grant-condition-threshold-value",
+      "label": "Threshold Value",
+      "comment": "The numeric threshold this condition's barrier is measured against (e.g. 250000, or 10 for a percentage), where applicable.",
+      "domain": "npo:grant-condition",
+      "group": "financial",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:decimal"
+    },
+    {
       "id": "npoprop:grant-program-status",
       "label": "Status",
       "comment": "Where the Grant Program currently sits in its own lifecycle.",
@@ -2238,6 +2685,119 @@
         "approved",
         "declined"
       ]
+    },
+    {
+      "id": "npoprop:grant-term-effective-from",
+      "label": "Effective From",
+      "comment": "When this specific term takes effect -- not assumed to equal the whole Grant Agreement's effective date.",
+      "domain": "npo:grant-term",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:grant-term-effective-until",
+      "label": "Effective Until",
+      "comment": "When this specific term stops applying, if it has an end date.",
+      "domain": "npo:grant-term",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:grant-term-normalization-method",
+      "label": "Normalization Method",
+      "comment": "How this term was normalized from its source. Machine-derived normalization is not treated as equivalent to source-provided structured data.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "manual",
+        "rules-based",
+        "imported-structured",
+        "machine-assisted",
+        "reviewed-machine-assisted"
+      ]
+    },
+    {
+      "id": "npoprop:grant-term-normalization-status",
+      "label": "Normalization Status",
+      "comment": "Whether this term's normalization from source text is complete, partial, or still needs review. Preferred over forcing an uncertain clause into an incorrect category.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "mapped",
+        "partially-mapped",
+        "unmapped",
+        "needs-review",
+        "not-applicable"
+      ]
+    },
+    {
+      "id": "npoprop:grant-term-original-term-text",
+      "label": "Original Term Text",
+      "comment": "The term's original source wording, preserved verbatim. Recommended for imported terms; the normalized classification is an interpretation of this text, not a replacement for it.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:grant-term-source-clause-identifier",
+      "label": "Source Clause Identifier",
+      "comment": "An identifier tying this term back to the specific source clause it was segmented from -- lets several Grant Terms normalized from one free-text field retain a shared linkage back to that field.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:grant-term-source-field",
+      "label": "Source Field",
+      "comment": "The source system's field this term was imported from, if any.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:grant-term-source-record-identifier",
+      "label": "Source Record Identifier",
+      "comment": "The identifier of the source record this term was imported from, if any.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:grant-term-source-system",
+      "label": "Source System",
+      "comment": "The system this term was imported from (e.g. Tides), if any.",
+      "domain": "npo:grant-term",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
     },
     {
       "id": "npoprop:indirect-cost-rate-rate",
@@ -2638,6 +3198,86 @@
       "range": "xsd:date"
     },
     {
+      "id": "npoprop:reporting-requirement-due-date",
+      "label": "Due Date",
+      "comment": "When a specific instance of this report is due.",
+      "domain": "npo:reporting-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:reporting-requirement-frequency",
+      "label": "Frequency",
+      "comment": "How often this report is due, reusing the same Frequency scheme Reporting Schedule already uses.",
+      "domain": "npo:reporting-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:ObjectProperty",
+      "range": "skos:Concept",
+      "referenceScheme": "nporef:frequency"
+    },
+    {
+      "id": "npoprop:reporting-requirement-report-type",
+      "label": "Report Type",
+      "comment": "What kind of report this requirement obligates.",
+      "domain": "npo:reporting-requirement",
+      "group": "classification",
+      "required": true,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "programmatic-report",
+        "financial-report",
+        "expenditure-report",
+        "progress-report",
+        "outcome-report",
+        "impact-report",
+        "final-report",
+        "closeout-report",
+        "audit-report",
+        "certification-report",
+        "other"
+      ]
+    },
+    {
+      "id": "npoprop:reporting-requirement-reporting-period-end",
+      "label": "Reporting Period End",
+      "comment": "The end of the period this report covers.",
+      "domain": "npo:reporting-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:reporting-requirement-reporting-period-start",
+      "label": "Reporting Period Start",
+      "comment": "The start of the period this report covers.",
+      "domain": "npo:reporting-requirement",
+      "group": "lifecycle",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:date"
+    },
+    {
+      "id": "npoprop:reporting-requirement-required-format",
+      "label": "Required Format",
+      "comment": "The format the report must be submitted in, where the funder specifies one.",
+      "domain": "npo:reporting-requirement",
+      "group": "governance",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
       "id": "npoprop:reporting-schedule-frequency",
       "label": "Frequency",
       "comment": "How often Reports are due under this Reporting Schedule.",
@@ -2820,7 +3460,7 @@
     {
       "id": "npoprop:terms-and-conditions-restriction-type",
       "label": "Restriction Type",
-      "comment": "Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding.",
+      "comment": "Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding. A coarse flag, superseded for new data by one or more structured Use Restriction Grant Terms (see grant-term), which can express what specifically the funding is restricted to or from -- retained here for backward compatibility.",
       "domain": "npo:terms-and-conditions",
       "group": "governance",
       "required": true,
@@ -2831,6 +3471,45 @@
         "restricted",
         "unrestricted"
       ]
+    },
+    {
+      "id": "npoprop:use-restriction-restricted-to",
+      "label": "Restricted To",
+      "comment": "Free-text naming what the funds are specifically restricted to (e.g. a project or program name), where applicable.",
+      "domain": "npo:use-restriction",
+      "group": "classification",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string"
+    },
+    {
+      "id": "npoprop:use-restriction-restriction-mode",
+      "label": "Restriction Mode",
+      "comment": "Whether this restriction requires a use, merely permits it, or prohibits it. An Award may carry more than one Use Restriction with different modes (e.g. a required-use restriction to a project, and a separate prohibited-use restriction on lobbying).",
+      "domain": "npo:use-restriction",
+      "group": "classification",
+      "required": false,
+      "cardinality": "one",
+      "type": "owl:DatatypeProperty",
+      "range": "xsd:string",
+      "allowedValues": [
+        "required-use",
+        "permitted-use",
+        "prohibited-use"
+      ]
+    },
+    {
+      "id": "npoprop:use-restriction-restriction-type",
+      "label": "Restriction Type",
+      "comment": "The nature of what this Use Restriction limits grant funds to or from.",
+      "domain": "npo:use-restriction",
+      "group": "classification",
+      "required": true,
+      "cardinality": "one",
+      "type": "owl:ObjectProperty",
+      "range": "skos:Concept",
+      "referenceScheme": "nporef:use-restriction-type"
     },
     {
       "id": "nporule:rule-active-role-requires-effective-from",
@@ -2870,6 +3549,40 @@
       ]
     },
     {
+      "id": "nporule:rule-classification-assignment-allocation-should-sum-to-100",
+      "type": "npo:BusinessRule",
+      "label": "Allocation percentages should sum to 100 when allocation is asserted complete",
+      "comment": "When a classified resource's Classification Assignments for a given scheme carry an Allocation Percentage, those percentages should sum to 100 once the allocation is asserted as complete. An incomplete sum is a data-quality signal to surface, not a gap to silently renormalize or complete on the resource's behalf.",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification",
+      "appliesTo": [
+        "npo:classification-assignment",
+        "npo:award",
+        "npo:population"
+      ]
+    },
+    {
+      "id": "nporule:rule-classification-assignment-at-most-one-primary",
+      "type": "npo:BusinessRule",
+      "label": "At most one primary Classification Assignment per resource and scheme",
+      "comment": "For a given classified resource (e.g. an Award or a Population) and a given classification scheme, at most one Classification Assignment should have Is Primary set to true -- multiple simultaneous primaries make Primary-mode reporting ambiguous about which classification the resource is chiefly attributed to.",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification",
+      "appliesTo": [
+        "npo:classification-assignment",
+        "npo:award",
+        "npo:population"
+      ]
+    },
+    {
+      "id": "nporule:rule-classification-rolls-up-not-down",
+      "type": "npo:BusinessRule",
+      "label": "Classification rolls upward through broader terms, never downward",
+      "comment": "A Classification Assignment's Classification Concept Code rolls upward through that concept's Broader chain for reporting purposes -- a resource explicitly classified under a narrower term is implicitly also covered by every broader ancestor. The reverse never holds: a resource explicitly classified under a broader term is not implicitly classified under any of its more specific descendants, since the source data made no claim that specific.",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification",
+      "appliesTo": [
+        "npo:classification-assignment"
+      ]
+    },
+    {
       "id": "nporule:rule-closeout-requires-payments-and-reports",
       "type": "npo:BusinessRule",
       "label": "Closeout requires both financial and reporting conditions",
@@ -2902,6 +3615,22 @@
       "appliesTo": [
         "npo:grant-recommendation",
         "npo:donor-advised-fund",
+        "npo:award"
+      ]
+    },
+    {
+      "id": "nporule:rule-grant-term-should-identify-its-award",
+      "type": "npo:BusinessRule",
+      "label": "A Grant Term should identify which Award it applies to",
+      "comment": "A Grant Term should specify the Award it applies to (via Grant Term Applies To Award, or, for a Compliance Requirement, its own existing Applies To Award relationship), unless it is still in draft or unnormalized form -- an Award-less Grant Term that has completed normalization is missing the link that makes it actionable.",
+      "isDefinedBy": "https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms",
+      "appliesTo": [
+        "npo:grant-term",
+        "npo:use-restriction",
+        "npo:grant-condition",
+        "npo:approval-requirement",
+        "npo:reporting-requirement",
+        "npo:compliance-requirement",
         "npo:award"
       ]
     },
@@ -2968,6 +3697,112 @@
       ]
     },
     {
+      "id": "nporef:candid-pcs-populations",
+      "type": "skos:ConceptScheme",
+      "prefLabel": "Candid PCS Populations",
+      "definition": "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Populations facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. Multiple population classifications on the same Population resource are valid, since a population may have several characteristics at once.",
+      "schemeDomain": "classification",
+      "authorityType": "external",
+      "version": "illustrative-subset",
+      "publicationStatus": "nporef:publication-status-draft"
+    },
+    {
+      "id": "nporef:candid-pcs-populations-economically-disadvantaged-people",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-populations",
+      "notation": "economically-disadvantaged-people",
+      "prefLabel": "Economically Disadvantaged People",
+      "definition": "Illustrative placeholder for Candid PCS's Economically Disadvantaged People population."
+    },
+    {
+      "id": "nporef:candid-pcs-populations-people-of-color",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-populations",
+      "notation": "people-of-color",
+      "prefLabel": "People of Color",
+      "definition": "Illustrative placeholder for Candid PCS's People of Color population."
+    },
+    {
+      "id": "nporef:candid-pcs-populations-young-adults",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-populations",
+      "notation": "young-adults",
+      "prefLabel": "Young Adults",
+      "definition": "Illustrative placeholder for Candid PCS's Young Adults population."
+    },
+    {
+      "id": "nporef:candid-pcs-subjects",
+      "type": "skos:ConceptScheme",
+      "prefLabel": "Candid PCS Subjects",
+      "definition": "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Subjects facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes, hierarchy, and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. affordable-housing's mapping to CommonGood's own issue-area-housing uses broadMatch, not exactMatch, since Affordable Housing is more specific than the CommonGood Housing issue area.",
+      "schemeDomain": "classification",
+      "authorityType": "external",
+      "version": "illustrative-subset",
+      "publicationStatus": "nporef:publication-status-draft"
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-affordable-housing",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "affordable-housing",
+      "prefLabel": "Affordable Housing",
+      "definition": "Illustrative placeholder for Candid PCS's Affordable Housing subject.",
+      "broader": "nporef:candid-pcs-subjects-housing-development",
+      "broadMatch": [
+        "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-housing"
+      ]
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-economic-development",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "economic-development",
+      "prefLabel": "Economic Development",
+      "definition": "Illustrative placeholder for Candid PCS's Economic Development subject.",
+      "broadMatch": [
+        "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-economic-development"
+      ]
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-education",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "education",
+      "prefLabel": "Education",
+      "definition": "Illustrative placeholder for Candid PCS's Education subject.",
+      "broadMatch": [
+        "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-education"
+      ]
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-environment",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "environment",
+      "prefLabel": "Environment",
+      "definition": "Illustrative placeholder for Candid PCS's Environment subject.",
+      "broadMatch": [
+        "https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-environment"
+      ]
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-housing",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "housing",
+      "prefLabel": "Housing",
+      "definition": "Illustrative placeholder for Candid PCS's Housing subject."
+    },
+    {
+      "id": "nporef:candid-pcs-subjects-housing-development",
+      "type": "skos:Concept",
+      "inScheme": "nporef:candid-pcs-subjects",
+      "notation": "housing-development",
+      "prefLabel": "Housing Development",
+      "definition": "Illustrative placeholder for Candid PCS's Housing Development subject.",
+      "broader": "nporef:candid-pcs-subjects-housing"
+    },
+    {
       "id": "nporef:claim-type",
       "type": "skos:ConceptScheme",
       "prefLabel": "Claim Type",
@@ -3008,6 +3843,194 @@
       "notation": "contribution",
       "prefLabel": "Contribution",
       "definition": "There is evidence that the intervention played some role in producing the result, alongside other factors."
+    },
+    {
+      "id": "nporef:classification-scheme-registry",
+      "type": "skos:ConceptScheme",
+      "prefLabel": "Classification Scheme Registry",
+      "definition": "Which classification scheme a Classification Assignment draws its classificationConceptCode from. This registry entry is what's SHACL-validated; the code itself is a plain string naming a value within that scheme, not independently validated against it -- see docs/06-properties-and-rules.md for why. Candid PCS Organization Types, Transaction Types, and Support Strategies are registered here as valid facets but not yet populated as their own reference-data files -- add them when real data needs them, following candid-pcs-subjects.json/candid-pcs-populations.json as the template.",
+      "schemeDomain": "classification",
+      "authorityType": "internal",
+      "version": "1.0.0",
+      "publicationStatus": "nporef:publication-status-published"
+    },
+    {
+      "id": "nporef:classification-scheme-registry-candid-pcs-organization-types",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "candid-pcs-organization-types",
+      "prefLabel": "Candid PCS Organization Types",
+      "definition": "Candid's Philanthropy Classification System organization-type facet. Registered but not yet populated as its own reference-data file."
+    },
+    {
+      "id": "nporef:classification-scheme-registry-candid-pcs-populations",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "candid-pcs-populations",
+      "prefLabel": "Candid PCS Populations",
+      "definition": "Candid's Philanthropy Classification System population facet -- what population(s) a resource serves or describes."
+    },
+    {
+      "id": "nporef:classification-scheme-registry-candid-pcs-subjects",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "candid-pcs-subjects",
+      "prefLabel": "Candid PCS Subjects",
+      "definition": "Candid's Philanthropy Classification System subject facet -- what issue or subject a resource addresses or supports."
+    },
+    {
+      "id": "nporef:classification-scheme-registry-candid-pcs-support-strategies",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "candid-pcs-support-strategies",
+      "prefLabel": "Candid PCS Support Strategies",
+      "definition": "Candid's Philanthropy Classification System support-strategy facet. Registered but not yet populated as its own reference-data file."
+    },
+    {
+      "id": "nporef:classification-scheme-registry-candid-pcs-transaction-types",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "candid-pcs-transaction-types",
+      "prefLabel": "Candid PCS Transaction Types",
+      "definition": "Candid's Philanthropy Classification System transaction-type facet -- the form through which support is provided or received. Registered but not yet populated as its own reference-data file."
+    },
+    {
+      "id": "nporef:classification-scheme-registry-commongood-issue-areas",
+      "type": "skos:Concept",
+      "inScheme": "nporef:classification-scheme-registry",
+      "notation": "commongood-issue-areas",
+      "prefLabel": "CommonGood Issue Areas",
+      "definition": "This ontology's own Issue Area scheme (see issue-area.json), usable as a classification scheme in its own right alongside external taxonomies."
+    },
+    {
+      "id": "nporef:condition-barrier-type",
+      "type": "skos:ConceptScheme",
+      "prefLabel": "Condition Barrier Type",
+      "definition": "What kind of barrier, milestone, or event a Grant Condition's entitlement, payment, continuation, release, or retention depends on.",
+      "schemeDomain": "award-and-agreement",
+      "authorityType": "internal",
+      "version": "1.0.0",
+      "publicationStatus": "nporef:publication-status-published"
+    },
+    {
+      "id": "nporef:condition-barrier-type-cost-sharing-requirement",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "cost-sharing-requirement",
+      "prefLabel": "Cost-Sharing Requirement",
+      "definition": "Contingent on sharing costs alongside the award."
+    },
+    {
+      "id": "nporef:condition-barrier-type-fundraising-target",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "fundraising-target",
+      "prefLabel": "Fundraising Target",
+      "definition": "Contingent on reaching a fundraising target."
+    },
+    {
+      "id": "nporef:condition-barrier-type-matching-requirement",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "matching-requirement",
+      "prefLabel": "Matching Requirement",
+      "definition": "Contingent on raising or contributing matching funds."
+    },
+    {
+      "id": "nporef:condition-barrier-type-other",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "other",
+      "prefLabel": "Other",
+      "definition": "A condition barrier not captured by another value in this scheme."
+    },
+    {
+      "id": "nporef:condition-barrier-type-other-measurable-barrier",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "other-measurable-barrier",
+      "prefLabel": "Other Measurable Barrier",
+      "definition": "Contingent on another measurable barrier not otherwise listed."
+    },
+    {
+      "id": "nporef:condition-barrier-type-outcome-threshold",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "outcome-threshold",
+      "prefLabel": "Outcome Threshold",
+      "definition": "Contingent on reaching a specified outcome level."
+    },
+    {
+      "id": "nporef:condition-barrier-type-output-threshold",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "output-threshold",
+      "prefLabel": "Output Threshold",
+      "definition": "Contingent on reaching a specified output count."
+    },
+    {
+      "id": "nporef:condition-barrier-type-performance-milestone",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "performance-milestone",
+      "prefLabel": "Performance Milestone",
+      "definition": "Contingent on reaching a defined performance milestone."
+    },
+    {
+      "id": "nporef:condition-barrier-type-qualifying-expenses",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "qualifying-expenses",
+      "prefLabel": "Qualifying Expenses",
+      "definition": "Contingent on incurring qualifying expenses."
+    },
+    {
+      "id": "nporef:condition-barrier-type-regulatory-approval",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "regulatory-approval",
+      "prefLabel": "Regulatory Approval",
+      "definition": "Contingent on obtaining regulatory approval."
+    },
+    {
+      "id": "nporef:condition-barrier-type-service-level-threshold",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "service-level-threshold",
+      "prefLabel": "Service-Level Threshold",
+      "definition": "Contingent on reaching a specified service level."
+    },
+    {
+      "id": "nporef:condition-barrier-type-specified-event",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "specified-event",
+      "prefLabel": "Specified Event",
+      "definition": "Contingent on a specified event occurring."
+    },
+    {
+      "id": "nporef:condition-barrier-type-specified-method",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "specified-method",
+      "prefLabel": "Specified Method",
+      "definition": "Contingent on using a specified method."
+    },
+    {
+      "id": "nporef:condition-barrier-type-specified-personnel",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "specified-personnel",
+      "prefLabel": "Specified Personnel",
+      "definition": "Contingent on specified personnel being engaged."
+    },
+    {
+      "id": "nporef:condition-barrier-type-specified-protocol",
+      "type": "skos:Concept",
+      "inScheme": "nporef:condition-barrier-type",
+      "notation": "specified-protocol",
+      "prefLabel": "Specified Protocol",
+      "definition": "Contingent on following a specified protocol."
     },
     {
       "id": "nporef:evidence-strength",
@@ -3344,6 +4367,184 @@
       "notation": "suspended",
       "prefLabel": "Suspended",
       "definition": "The role occupancy is temporarily paused without having formally ended."
+    },
+    {
+      "id": "nporef:use-restriction-type",
+      "type": "skos:ConceptScheme",
+      "prefLabel": "Use Restriction Type",
+      "definition": "The nature of what a Use Restriction limits grant funds to (or from) -- distinct from Fund's own restriction-type scheme, which describes a Fund's accounting restriction status rather than the specific nature of a grant term's use restriction. Values do not all carry identical legal significance.",
+      "schemeDomain": "award-and-agreement",
+      "authorityType": "internal",
+      "version": "1.0.0",
+      "publicationStatus": "nporef:publication-status-published"
+    },
+    {
+      "id": "nporef:use-restriction-type-capital-only",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "capital-only",
+      "prefLabel": "Capital Only",
+      "definition": "Restricted to capital expenditures."
+    },
+    {
+      "id": "nporef:use-restriction-type-endowment",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "endowment",
+      "prefLabel": "Endowment",
+      "definition": "Restricted to an endowment fund."
+    },
+    {
+      "id": "nporef:use-restriction-type-equipment-only",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "equipment-only",
+      "prefLabel": "Equipment Only",
+      "definition": "Restricted to equipment purchases."
+    },
+    {
+      "id": "nporef:use-restriction-type-general-purpose",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "general-purpose",
+      "prefLabel": "General Purpose",
+      "definition": "Not restricted beyond the grantee's general mission."
+    },
+    {
+      "id": "nporef:use-restriction-type-individual-benefit",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "individual-benefit",
+      "prefLabel": "Individual Benefit",
+      "definition": "Concerns benefit to a specific individual, typically as a prohibited use."
+    },
+    {
+      "id": "nporef:use-restriction-type-lobbying",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "lobbying",
+      "prefLabel": "Lobbying",
+      "definition": "Concerns lobbying activity, typically as a prohibited use."
+    },
+    {
+      "id": "nporef:use-restriction-type-noncharitable-purpose",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "noncharitable-purpose",
+      "prefLabel": "Noncharitable Purpose",
+      "definition": "Concerns use for a noncharitable purpose, typically as a prohibited use."
+    },
+    {
+      "id": "nporef:use-restriction-type-other",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "other",
+      "prefLabel": "Other",
+      "definition": "A use restriction not captured by another value in this scheme."
+    },
+    {
+      "id": "nporef:use-restriction-type-political-campaign-activity",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "political-campaign-activity",
+      "prefLabel": "Political Campaign Activity",
+      "definition": "Concerns political campaign activity, typically as a prohibited use."
+    },
+    {
+      "id": "nporef:use-restriction-type-regranting",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "regranting",
+      "prefLabel": "Regranting",
+      "definition": "Restricted to redistribution as regrants."
+    },
+    {
+      "id": "nporef:use-restriction-type-scholarship",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "scholarship",
+      "prefLabel": "Scholarship",
+      "definition": "Restricted to scholarship purposes."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-activity",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-activity",
+      "prefLabel": "Specific Activity",
+      "definition": "Restricted to a named activity."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-budget",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-budget",
+      "prefLabel": "Specific Budget",
+      "definition": "Restricted to a specific approved budget."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-cost-category",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-cost-category",
+      "prefLabel": "Specific Cost Category",
+      "definition": "Restricted to a specific cost category (e.g. personnel, equipment)."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-geography",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-geography",
+      "prefLabel": "Specific Geography",
+      "definition": "Restricted to a named geographic area."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-population",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-population",
+      "prefLabel": "Specific Population",
+      "definition": "Restricted to serving a named population."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-program",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-program",
+      "prefLabel": "Specific Program",
+      "definition": "Restricted to a named program."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-project",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-project",
+      "prefLabel": "Specific Project",
+      "definition": "Restricted to a named project."
+    },
+    {
+      "id": "nporef:use-restriction-type-specific-time-period",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "specific-time-period",
+      "prefLabel": "Specific Time Period",
+      "definition": "Restricted to use within a defined time period."
+    },
+    {
+      "id": "nporef:use-restriction-type-subgranting",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "subgranting",
+      "prefLabel": "Subgranting",
+      "definition": "Restricted to redistribution as subgrants."
+    },
+    {
+      "id": "nporef:use-restriction-type-voter-registration",
+      "type": "skos:Concept",
+      "inScheme": "nporef:use-restriction-type",
+      "notation": "voter-registration",
+      "prefLabel": "Voter Registration",
+      "definition": "Concerns voter registration activity."
     }
   ]
 }

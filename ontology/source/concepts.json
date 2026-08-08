@@ -503,7 +503,7 @@
     "aliases": [],
     "category": "award-and-agreement",
     "kind": "process",
-    "definition": "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements).",
+    "definition": "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements). Its own restrictionType property is a coarse restricted/unrestricted flag, superseded for new data by the structured Use Restriction model (see Grant Term) -- retained for backward compatibility.",
     "subClassOf": null,
     "docRef": "docs/02-core-concepts.md#award-and-agreement"
   },
@@ -536,7 +536,7 @@
     "category": "award-and-agreement",
     "kind": "process",
     "definition": "A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match).",
-    "subClassOf": null,
+    "subClassOf": "grant-condition",
     "docRef": "docs/02-core-concepts.md#award-and-agreement"
   },
   {
@@ -547,6 +547,56 @@
     "kind": "process",
     "definition": "A formally agreed change to an existing grant agreement's terms, budget, timeline, or amount, made after the original agreement was signed.",
     "subClassOf": null,
+    "docRef": "docs/02-core-concepts.md#award-and-agreement"
+  },
+  {
+    "id": "grant-term",
+    "label": "Grant Term",
+    "aliases": [],
+    "category": "award-and-agreement",
+    "kind": "process",
+    "definition": "A provision associated with a Grant Agreement or Award that establishes a restriction, condition, obligation, approval requirement, reporting requirement, or other requirement governing the use, administration, performance, or continuation of grant funding. Preserves its original source wording (via originalTermText) alongside its normalized classification -- the classification is an interpretation of the source text, not a replacement for it.",
+    "subClassOf": null,
+    "docRef": "docs/02-core-concepts.md#award-and-agreement"
+  },
+  {
+    "id": "use-restriction",
+    "label": "Use Restriction",
+    "aliases": [],
+    "category": "award-and-agreement",
+    "kind": "process",
+    "definition": "A Grant Term limiting the purposes, activities, populations, geographies, time periods, cost categories, or other uses for which grant resources may be applied. Governs permitted use -- distinct from a Grant Condition, which governs whether some entitlement, payment, or continuation becomes effective.",
+    "subClassOf": "grant-term",
+    "docRef": "docs/02-core-concepts.md#award-and-agreement"
+  },
+  {
+    "id": "grant-condition",
+    "label": "Grant Condition",
+    "aliases": [],
+    "category": "award-and-agreement",
+    "kind": "process",
+    "definition": "A Grant Term establishing a barrier, milestone, event, requirement, or other criterion that must be satisfied for grant entitlement, payment, continuation, release, or retention. Matching Requirement and Payment Condition are its existing concrete subtypes. A condition's barrier facts (e.g. hasBarrier, threshold) are captured here without the ontology itself making the accounting or legal determination of whether the grant is \"conditional\".",
+    "subClassOf": "grant-term",
+    "docRef": "docs/02-core-concepts.md#award-and-agreement"
+  },
+  {
+    "id": "approval-requirement",
+    "label": "Approval Requirement",
+    "aliases": [],
+    "category": "award-and-agreement",
+    "kind": "process",
+    "definition": "A Grant Term requiring authorization from the funder or another specified party before a defined change, expenditure, action, or deviation may occur (e.g., prior written approval for a budget reallocation above a threshold). Not automatically a Grant Condition -- an approval requirement may simply govern administration of the Award.",
+    "subClassOf": "grant-term",
+    "docRef": "docs/02-core-concepts.md#award-and-agreement"
+  },
+  {
+    "id": "reporting-requirement",
+    "label": "Reporting Requirement",
+    "aliases": [],
+    "category": "award-and-agreement",
+    "kind": "process",
+    "definition": "A Grant Term requiring submission of information concerning grant activities, finances, progress, outputs, outcomes, compliance, or closeout. Finer-grained than a Reporting Schedule (which sets the overall cadence for an award): one clause such as \"quarterly programmatic and financial reports are required\" normalizes into two Reporting Requirements, one per report type, each of which may be fulfilledBy a submitted Report.",
+    "subClassOf": "grant-term",
     "docRef": "docs/02-core-concepts.md#award-and-agreement"
   },
   {
@@ -586,7 +636,7 @@
     "category": "disbursement",
     "kind": "process",
     "definition": "A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released.",
-    "subClassOf": null,
+    "subClassOf": "grant-condition",
     "docRef": "docs/02-core-concepts.md#disbursement"
   },
   {
@@ -606,7 +656,7 @@
     "category": "compliance-and-reporting",
     "kind": "process",
     "definition": "An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance).",
-    "subClassOf": null,
+    "subClassOf": "grant-term",
     "docRef": "docs/02-core-concepts.md#compliance-and-reporting"
   },
   {
@@ -616,7 +666,7 @@
     "category": "compliance-and-reporting",
     "kind": "process",
     "definition": "The agreed cadence and due dates for narrative and financial reports over the life of an award.",
-    "subClassOf": null,
+    "subClassOf": "grant-term",
     "docRef": "docs/02-core-concepts.md#compliance-and-reporting"
   },
   {
@@ -826,6 +876,16 @@
     "category": "cross-cutting",
     "kind": "entity",
     "definition": "A defined body of work undertaken over a period of time to address one or more needs or objectives -- the work being performed, distinct from the Application requesting funding for it or the Award committing funding to it.",
+    "subClassOf": null,
+    "docRef": "docs/02-core-concepts.md#cross-cutting"
+  },
+  {
+    "id": "classification-assignment",
+    "label": "Classification Assignment",
+    "aliases": [],
+    "category": "cross-cutting",
+    "kind": "entity",
+    "definition": "A contextual assertion that a resource (e.g. an Award or Population) is classified by a concept from a specified external or internal classification scheme, such as Candid's Philanthropy Classification System. External taxonomies classify CommonGood resources; they do not define those resources -- Need, Population, and Organization remain the ontology's own entities regardless of which taxonomy terms are assigned to them.",
     "subClassOf": null,
     "docRef": "docs/02-core-concepts.md#cross-cutting"
   },

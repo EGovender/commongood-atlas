@@ -848,5 +848,68 @@
     "label": "plays",
     "description": "An Agent (Person or Organization) plays one or more Roles. The preferred predicate for new data now that Agent exists as a shared superclass, replacing the separate playsRole (Organization) and personPlaysRole (Person) predicates -- both kept and still valid on existing data, not migrated, per this project's policy of never deleting or force-migrating published predicates.",
     "docRef": "docs/08-organizations-roles-and-arrangements.md"
+  },
+  {
+    "id": "rel-grant-agreement-specifies-grant-term",
+    "subject": "grant-agreement",
+    "predicate": "specifiesGrantTerm",
+    "object": "grant-term",
+    "label": "specifies",
+    "description": "A Grant Agreement specifies one or more Grant Terms. Declared against the abstract Grant Term concept rather than each subtype separately, so any Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement, Compliance Requirement, or Reporting Schedule instance satisfies it the same way.",
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-grant-term-applies-to-award",
+    "subject": "grant-term",
+    "predicate": "grantTermAppliesToAward",
+    "object": "award",
+    "label": "applies to",
+    "description": "A Grant Term applies to a specific Award. Declared against the abstract Grant Term concept, used by Use Restriction, Grant Condition, Approval Requirement, and Reporting Requirement instances -- Compliance Requirement keeps its own existing, more specific appliesToAward predicate unchanged, and Matching Requirement/Payment Condition/Reporting Schedule are already reachable from Award through their existing relationships, so none of those three need this one too.",
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-grant-condition-has-responsible-party",
+    "subject": "grant-condition",
+    "predicate": "hasConditionResponsibleParty",
+    "object": "agent",
+    "label": "has responsible party",
+    "description": "A Grant Condition optionally identifies the Agent (Person or Organization) responsible for satisfying it -- e.g. the grantee organization for a matching requirement, or a fiscal sponsor rather than the project itself.",
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-approval-requirement-requires-approval-from",
+    "subject": "approval-requirement",
+    "predicate": "requiresApprovalFrom",
+    "object": "agent",
+    "label": "requires approval from",
+    "description": "An Approval Requirement identifies the Agent whose authorization is required before the governed change, expenditure, action, or deviation may occur -- typically the Funder.",
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-reporting-requirement-fulfilled-by-report",
+    "subject": "reporting-requirement",
+    "predicate": "fulfilledByReport",
+    "object": "report",
+    "label": "is fulfilled by",
+    "description": "A Reporting Requirement is fulfilled by a submitted Report. Requirement is what must be supplied; Report is the artifact that was actually supplied.",
+    "docRef": "docs/03-relationships.md#grant-terms"
+  },
+  {
+    "id": "rel-award-has-classification",
+    "subject": "award",
+    "predicate": "awardHasClassification",
+    "object": "classification-assignment",
+    "label": "has classification",
+    "description": "An Award has one or more Classification Assignments (e.g. Candid PCS Subjects) drawn from an external or internal classification scheme. The scheme classifies the Award; it does not redefine it.",
+    "docRef": "docs/03-relationships.md#classification"
+  },
+  {
+    "id": "rel-population-has-classification",
+    "subject": "population",
+    "predicate": "populationHasClassification",
+    "object": "classification-assignment",
+    "label": "has classification",
+    "description": "A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms.",
+    "docRef": "docs/03-relationships.md#classification"
   }
 ]

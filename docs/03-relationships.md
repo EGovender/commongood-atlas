@@ -95,6 +95,51 @@ flowchart TD
 
 Two class-hierarchy notes underpin this section: `Agent` is a new shared parent of `Person` and `Organization` (so a future relationship can target either without a duplicate predicate per entity type — the same reasoning `Result` follows for `Output`/`Outcome`/`Impact` above), and `agentPlaysRole` is now the preferred `Agent --plays--> Role` predicate, superseding the separate `playsRole` (Organization) and `personPlaysRole` (Person) predicates from the section above — both of which remain valid on existing data and are not migrated.
 
+## Grant Terms
+
+A `Grant Agreement` `specifiesGrantTerm` one or more `Grant Term`s — the normalized counterpart to the free-text `Terms and Conditions` above. `Grant Term` is an abstract concept; every real instance is one of its concrete subtypes (`Use Restriction`, `Grant Condition`, `Approval Requirement`, `Reporting Requirement`, or the re-parented `Compliance Requirement` and `Reporting Schedule`), and each `grantTermAppliesToAward` links it to the specific `Award` it governs — except `Compliance Requirement`, which keeps its own pre-existing `appliesToAward` relationship unchanged, and `Matching Requirement`/`Payment Condition`/`Reporting Schedule`, which are already reachable from `Award` through their existing chains (via `Grant Agreement`, `Installment`, and `Compliance Requirement` respectively) and so don't need a second, redundant Award link.
+
+A `Grant Condition` may `hasConditionResponsibleParty` an `Agent` (typically the `Grantee`'s own `Organization`) — who is on the hook for clearing the barrier — and an `Approval Requirement` may `requiresApprovalFrom` an `Agent` (typically the `Funder`) — whose sign-off is needed before the grantee acts. A `Reporting Requirement` is `fulfilledByReport` a `Report`; because this is independent of the `Reporting Schedule --obligatesReport--> Report` relationship above, a single submitted `Report` can satisfy more than one `Reporting Requirement` at once (e.g., one combined report fulfilling both a financial and a programmatic requirement).
+
+Every `Grant Term` carries `originalTermText` — the verbatim source clause it was normalized from — alongside its structured fields, plus `normalizationStatus` and `normalizationMethod` tracking how confidently and how it got there. Preserving the source text is deliberate: normalization is lossy in both directions (a human-drafted clause can express nuance no fixed vocabulary captures, and a fixed vocabulary can make comparable across awards what free text never could), so neither replaces the other.
+
+```mermaid
+flowchart TD
+    AGR[Grant Agreement] -->|specifiesGrantTerm| GT[Grant Term]
+    GT -->|grantTermAppliesToAward| AWD[Award]
+    UR[Use Restriction] -.->|is a| GT
+    GC[Grant Condition] -.->|is a| GT
+    AR[Approval Requirement] -.->|is a| GT
+    RR[Reporting Requirement] -.->|is a| GT
+    GC -->|hasConditionResponsibleParty| AGT1[Agent]
+    AR -->|requiresApprovalFrom| AGT2[Agent]
+    RR -->|fulfilledByReport| RPT[Report]
+```
+
+**Semantic boundaries worth stating explicitly** (a `Use Restriction` is not a `Grant Condition`, and neither is a `Compliance Requirement`):
+- A `Use Restriction` constrains *how* funds already flowing may be used (e.g., restricted to a project, barred from lobbying). It never has a pass/fail status of its own — funds are either used within the restriction or they aren't, which is a compliance question, not a state the restriction itself transitions through.
+- A `Grant Condition` ties a consequence to a measurable barrier (e.g., raising $50,000 in matching funds) and *does* carry a status (`not-yet-assessed` through `satisfied`/`not-satisfied`) — whether the barrier has been cleared is exactly the point of the concept.
+- A `Compliance Requirement` is an ongoing standing obligation (e.g., timely reporting, insurance) rather than a one-time barrier tied to a specific consequence — it stays a `Grant Term` in its own right rather than being folded into `Grant Condition`.
+- An `Approval Requirement` is prospective (approval sought before acting); a `Reporting Requirement` is retrospective (a report submitted after the fact) — the two are never interchangeable even when they cover the same underlying event (e.g., a budget reallocation might need prior approval *and* be described afterward in a report).
+
+## Classification
+
+An `Award` `awardHasClassification` and a `Population` `populationHasClassification` one or more `Classification Assignment`s — an explicit assertion that the resource is classified under a specific concept from a named external or internal scheme (e.g., Candid's Philanthropy Classification System). A `Classification Assignment`'s `classificationScheme` names *which* scheme the code belongs to (validated against the `classification-scheme-registry` reference data); its `classificationConceptCode` is the code within that scheme. Deliberately two properties, not one: which scheme is in play is validated, but the specific code within an externally-governed, evolving taxonomy is not independently checked against that taxonomy's own structure — see [Properties & Rules](06-properties-and-rules.md) for why, and the limitation this leaves open.
+
+```mermaid
+flowchart TD
+    AWD[Award] -->|awardHasClassification| CA1[Classification Assignment]
+    POP[Population] -->|populationHasClassification| CA2[Classification Assignment]
+    CA1 -.->|classificationScheme| SCHEME[classification-scheme-registry]
+```
+
+**Explicit, never inferred downward.** A `Classification Assignment` records only what was actually asserted. Its concept rolls *upward* through that concept's `broader` chain for reporting purposes (a resource classified under "Affordable Housing" is implicitly also covered by "Housing Development" and "Housing," its ancestors) — but never downward: a resource classified only under the broader "Housing" is never assumed to also be about "Affordable Housing" specifically, since the source data never made that more specific claim. That upward roll-up is computed at reporting time from the scheme's `broader` chain, not stored as its own `Classification Assignment` — so `assignmentMethod` (`source-provided`/`imported`/`manual`) describes only how the *explicit* assignment was made, and doesn't yet have a value for "derived by ancestor roll-up" or "derived by a CommonGood reporting-mapping" — consistent with no roll-up computation existing yet (see the reporting modes below).
+
+**Three reporting modes, documented but not computed live** (this ontology models the data; it does not ship an aggregation engine — see [Roadmap](04-roadmap.md)):
+- **Coverage** counts a resource once under every classification it carries, with no deduplication. In the worked example, Coastal Watch's Award has two Classification Assignments under `candid-pcs-subjects` (Environment and Economic Development) — Coverage-mode reporting counts the $250,000 award under *both* Environment and Economic Development in full.
+- **Primary** counts a resource only under the Classification Assignment(s) marked `isPrimary: true`. In the worked example, only the Environment assignment is primary, so Primary-mode reporting attributes the full $250,000 to Environment alone, and $0 to Economic Development.
+- **Allocated** splits a resource's value across its classifications by `allocationPercentage`, which should sum to 100 across a scheme when an allocation is asserted as complete. The worked example's two Award-level assignments deliberately omit `allocationPercentage` — they demonstrate Coverage vs. Primary, not Allocated reporting, and an absent allocation is a data-quality signal (see [Properties & Rules](06-properties-and-rules.md)), not something to default to an even split.
+
 ## Open questions
 
 - Does `Evaluation` belong strictly after `Closeout`, or can it run concurrently with an active `Award` (e.g., mid-grant evaluation informing a renewal)?

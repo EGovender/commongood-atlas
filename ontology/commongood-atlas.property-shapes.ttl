@@ -20,6 +20,15 @@ npo:application-property-shape
     sh:property [ sh:path npoprop:application-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """draft"""^^xsd:string """submitted"""^^xsd:string """under-review"""^^xsd:string """approved"""^^xsd:string """declined"""^^xsd:string ) ] ,
         [ sh:path npoprop:application-submitted-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] .
 
+npo:approval-requirement-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:approval-requirement ;
+    sh:property [ sh:path npoprop:approval-requirement-approval-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:approval-requirement-approval-status ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """not-requested"""^^xsd:string """requested"""^^xsd:string """approved"""^^xsd:string """denied"""^^xsd:string """not-applicable"""^^xsd:string ) ] ,
+        [ sh:path npoprop:approval-requirement-approval-threshold ; sh:datatype xsd:decimal ; sh:minCount 0 ; sh:maxCount 1 ; sh:minInclusive 0 ] ,
+        [ sh:path npoprop:approval-requirement-approval-type ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """budget-reallocation"""^^xsd:string """scope-change"""^^xsd:string """project-change"""^^xsd:string """key-personnel-change"""^^xsd:string """timeline-extension"""^^xsd:string """subgrant"""^^xsd:string """regrant"""^^xsd:string """contractor"""^^xsd:string """capital-purchase"""^^xsd:string """equipment-purchase"""^^xsd:string """equipment-disposition"""^^xsd:string """travel"""^^xsd:string """geographic-change"""^^xsd:string """population-change"""^^xsd:string """other"""^^xsd:string ) ] ,
+        [ sh:path npoprop:approval-requirement-threshold-unit ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] .
+
 npo:audit-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:audit ;
@@ -45,6 +54,18 @@ npo:budget-modification-property-shape
     sh:property [ sh:path npoprop:budget-modification-amount ; sh:datatype xsd:decimal ; sh:minCount 1 ; sh:maxCount 1 ] ,
         [ sh:path npoprop:budget-modification-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """requested"""^^xsd:string """approved"""^^xsd:string """denied"""^^xsd:string ) ] .
 
+npo:classification-assignment-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:classification-assignment ;
+    sh:property [ sh:path npoprop:classification-assignment-allocation-percentage ; sh:datatype xsd:decimal ; sh:minCount 0 ; sh:maxCount 1 ; sh:minInclusive 0 ; sh:maxInclusive 100 ] ,
+        [ sh:path npoprop:classification-assignment-assigned-at ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:classification-assignment-assignment-method ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """source-provided"""^^xsd:string """imported"""^^xsd:string """manual"""^^xsd:string ) ] ,
+        [ sh:path npoprop:classification-assignment-assignment-source ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:classification-assignment-classification-concept-code ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:classification-assignment-classification-scheme ; sh:class skos:Concept ; sh:node [ sh:property [ sh:path skos:inScheme ; sh:hasValue nporef:classification-scheme-registry ] ] ; sh:minCount 1 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:classification-assignment-is-primary ; sh:datatype xsd:boolean ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:classification-assignment-taxonomy-version ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] .
+
 npo:closeout-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:closeout ;
@@ -54,7 +75,7 @@ npo:closeout-property-shape
 npo:compliance-requirement-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:compliance-requirement ;
-    sh:property [ sh:path npoprop:compliance-requirement-requirement-type ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """reporting"""^^xsd:string """financial"""^^xsd:string """insurance"""^^xsd:string """other"""^^xsd:string ) ] ,
+    sh:property [ sh:path npoprop:compliance-requirement-requirement-type ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """reporting"""^^xsd:string """financial"""^^xsd:string """insurance"""^^xsd:string """other"""^^xsd:string """records-retention"""^^xsd:string """books-and-records-access"""^^xsd:string """financial-controls"""^^xsd:string """audit"""^^xsd:string """certification"""^^xsd:string """acknowledgement"""^^xsd:string """notification-of-change"""^^xsd:string """notification-of-breach"""^^xsd:string """conflict-disclosure"""^^xsd:string """legal-compliance"""^^xsd:string """tax-status-maintenance"""^^xsd:string """return-unused-funds"""^^xsd:string """data-protection"""^^xsd:string """publicity-requirement"""^^xsd:string ) ] ,
         [ sh:path npoprop:compliance-requirement-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """open"""^^xsd:string """satisfied"""^^xsd:string """overdue"""^^xsd:string ) ] .
 
 npo:decision-property-shape
@@ -107,6 +128,20 @@ npo:grant-agreement-property-shape
     sh:property [ sh:path npoprop:grant-agreement-effective-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
         [ sh:path npoprop:grant-agreement-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """draft"""^^xsd:string """signed"""^^xsd:string """active"""^^xsd:string """closed"""^^xsd:string ) ] .
 
+npo:grant-condition-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:grant-condition ;
+    sh:property [ sh:path npoprop:grant-condition-condition-barrier-type ; sh:class skos:Concept ; sh:node [ sh:property [ sh:path skos:inScheme ; sh:hasValue nporef:condition-barrier-type ] ] ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-condition-status ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """not-yet-assessed"""^^xsd:string """pending"""^^xsd:string """satisfied"""^^xsd:string """partially-satisfied"""^^xsd:string """not-satisfied"""^^xsd:string """waived"""^^xsd:string """expired"""^^xsd:string """not-applicable"""^^xsd:string ) ] ,
+        [ sh:path npoprop:grant-condition-due-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-failure-consequence ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """none-specified"""^^xsd:string """funds-withheld"""^^xsd:string """future-payment-withheld"""^^xsd:string """right-of-return"""^^xsd:string """repayment-required"""^^xsd:string """award-reduced"""^^xsd:string """award-suspended"""^^xsd:string """award-terminated"""^^xsd:string """corrective-action-required"""^^xsd:string """future-funding-affected"""^^xsd:string """other"""^^xsd:string ) ] ,
+        [ sh:path npoprop:grant-condition-has-barrier ; sh:datatype xsd:boolean ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-has-right-of-release ; sh:datatype xsd:boolean ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-has-right-of-return ; sh:datatype xsd:boolean ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-threshold-operator ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """greater-than"""^^xsd:string """greater-than-or-equal"""^^xsd:string """less-than"""^^xsd:string """less-than-or-equal"""^^xsd:string """equal"""^^xsd:string ) ] ,
+        [ sh:path npoprop:grant-condition-threshold-unit ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-condition-threshold-value ; sh:datatype xsd:decimal ; sh:minCount 0 ; sh:maxCount 1 ; sh:minInclusive 0 ] .
+
 npo:grant-program-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:grant-program ;
@@ -119,6 +154,19 @@ npo:grant-recommendation-property-shape
     sh:property [ sh:path npoprop:grant-recommendation-amount ; sh:datatype xsd:decimal ; sh:minCount 0 ; sh:maxCount 1 ] ,
         [ sh:path npoprop:grant-recommendation-date ; sh:datatype xsd:date ; sh:minCount 1 ; sh:maxCount 1 ] ,
         [ sh:path npoprop:grant-recommendation-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """pending"""^^xsd:string """approved"""^^xsd:string """declined"""^^xsd:string ) ] .
+
+npo:grant-term-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:grant-term ;
+    sh:property [ sh:path npoprop:grant-term-effective-from ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-effective-until ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-normalization-method ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """manual"""^^xsd:string """rules-based"""^^xsd:string """imported-structured"""^^xsd:string """machine-assisted"""^^xsd:string """reviewed-machine-assisted"""^^xsd:string ) ] ,
+        [ sh:path npoprop:grant-term-normalization-status ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """mapped"""^^xsd:string """partially-mapped"""^^xsd:string """unmapped"""^^xsd:string """needs-review"""^^xsd:string """not-applicable"""^^xsd:string ) ] ,
+        [ sh:path npoprop:grant-term-original-term-text ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-source-clause-identifier ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-source-field ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-source-record-identifier ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:grant-term-source-system ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] .
 
 npo:indirect-cost-rate-property-shape
     a sh:NodeShape ;
@@ -203,6 +251,16 @@ npo:report-property-shape
         [ sh:path npoprop:report-status ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """not-started"""^^xsd:string """submitted"""^^xsd:string """accepted"""^^xsd:string """rejected"""^^xsd:string ) ] ,
         [ sh:path npoprop:report-submitted-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] .
 
+npo:reporting-requirement-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:reporting-requirement ;
+    sh:property [ sh:path npoprop:reporting-requirement-due-date ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:reporting-requirement-frequency ; sh:class skos:Concept ; sh:node [ sh:property [ sh:path skos:inScheme ; sh:hasValue nporef:frequency ] ] ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:reporting-requirement-report-type ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """programmatic-report"""^^xsd:string """financial-report"""^^xsd:string """expenditure-report"""^^xsd:string """progress-report"""^^xsd:string """outcome-report"""^^xsd:string """impact-report"""^^xsd:string """final-report"""^^xsd:string """closeout-report"""^^xsd:string """audit-report"""^^xsd:string """certification-report"""^^xsd:string """other"""^^xsd:string ) ] ,
+        [ sh:path npoprop:reporting-requirement-reporting-period-end ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:reporting-requirement-reporting-period-start ; sh:datatype xsd:date ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:reporting-requirement-required-format ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] .
+
 npo:reporting-schedule-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:reporting-schedule ;
@@ -245,3 +303,10 @@ npo:terms-and-conditions-property-shape
     a sh:NodeShape ;
     sh:targetClass npo:terms-and-conditions ;
     sh:property [ sh:path npoprop:terms-and-conditions-restriction-type ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( """restricted"""^^xsd:string """unrestricted"""^^xsd:string ) ] .
+
+npo:use-restriction-property-shape
+    a sh:NodeShape ;
+    sh:targetClass npo:use-restriction ;
+    sh:property [ sh:path npoprop:use-restriction-restricted-to ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ] ,
+        [ sh:path npoprop:use-restriction-restriction-mode ; sh:datatype xsd:string ; sh:minCount 0 ; sh:maxCount 1 ; sh:in ( """required-use"""^^xsd:string """permitted-use"""^^xsd:string """prohibited-use"""^^xsd:string ) ] ,
+        [ sh:path npoprop:use-restriction-restriction-type ; sh:class skos:Concept ; sh:node [ sh:property [ sh:path skos:inScheme ; sh:hasValue nporef:use-restriction-type ] ] ; sh:minCount 1 ; sh:maxCount 1 ] .

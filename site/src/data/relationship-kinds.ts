@@ -16,7 +16,8 @@ export type RelationshipKind =
   | 'process'
   | 'compliance'
   | 'outcomes'
-  | 'programs';
+  | 'programs'
+  | 'classification';
 
 export const RELATIONSHIP_KIND_LABELS: Record<RelationshipKind, string> = {
   structural: 'Structural (is a)',
@@ -26,6 +27,7 @@ export const RELATIONSHIP_KIND_LABELS: Record<RelationshipKind, string> = {
   compliance: 'Award, disbursement & compliance',
   outcomes: 'Outcomes & closeout',
   programs: 'Programs, results & evidence',
+  classification: 'Classification & taxonomy',
 };
 
 const PREDICATE_KIND: Record<string, RelationshipKind> = {
@@ -92,6 +94,11 @@ const PREDICATE_KIND: Record<string, RelationshipKind> = {
   mayIncludeAudit: 'compliance',
   obligatesReport: 'compliance',
   appliesToAward: 'compliance',
+  specifiesGrantTerm: 'compliance',
+  grantTermAppliesToAward: 'compliance',
+  hasConditionResponsibleParty: 'compliance',
+  requiresApprovalFrom: 'compliance',
+  fulfilledByReport: 'compliance',
 
   // Outcomes & closeout.
   assessedAgainstLogicModel: 'outcomes',
@@ -130,6 +137,10 @@ const PREDICATE_KIND: Record<string, RelationshipKind> = {
   aboutResult: 'programs',
   supportedByEvidence: 'programs',
   providesEvidence: 'programs',
+
+  // Classification & taxonomy.
+  awardHasClassification: 'classification',
+  populationHasClassification: 'classification',
 };
 
 export function relationshipKind(predicate: string): RelationshipKind {

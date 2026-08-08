@@ -221,6 +221,69 @@
       "narrative": "The evaluation's Evidence Claim is deliberately modest: the workshops are recorded as having contributed to the observed habitat-health improvement, backed by moderate-strength evidence -- not presented as having caused it outright."
     },
     {
+      "id": "coastal-watch-alliance-org",
+      "concept": "organization",
+      "label": "Coastal Watch Alliance",
+      "properties": { "taxStatus": "tax-exempt-501c3", "operatingStatus": "active" },
+      "narrative": "Coastal Watch Alliance is itself an Organization, not just a Grantee -- distinguishing the entity from the role it plays in this award lets it also be named directly as the responsible party on a Grant Condition."
+    },
+    {
+      "id": "coastal-watch-project-restriction",
+      "concept": "use-restriction",
+      "label": "Restriction to Half Moon Cove Restoration Project",
+      "properties": { "restrictionType": "specific-project", "restrictionMode": "required-use", "restrictedTo": "Half Moon Cove Habitat Restoration Project", "originalTermText": "Grant funds shall be used exclusively for the Half Moon Cove Habitat Restoration Project as described in the grantee's proposal.", "normalizationStatus": "mapped", "normalizationMethod": "manual" },
+      "narrative": "The Grant Agreement's free-text restriction clause is normalized into a structured Use Restriction: funds are required to be used for the named project, with the original clause text preserved alongside the structured fields."
+    },
+    {
+      "id": "coastal-watch-lobbying-restriction",
+      "concept": "use-restriction",
+      "label": "Prohibition on Lobbying Use",
+      "properties": { "restrictionType": "lobbying", "restrictionMode": "prohibited-use", "originalTermText": "None of these funds may be used to carry on propaganda, or otherwise to attempt to influence legislation.", "normalizationStatus": "mapped", "normalizationMethod": "manual" },
+      "narrative": "A second, independent Use Restriction on the same agreement: a Prohibited Use, not a Required Use -- the two restriction modes are recorded as separate Use Restriction instances rather than conflated into one."
+    },
+    {
+      "id": "coastal-watch-matching-condition",
+      "concept": "grant-condition",
+      "label": "$50,000 Matching Funds Condition",
+      "properties": { "hasBarrier": true, "conditionBarrierType": "matching-requirement", "thresholdValue": "50000", "thresholdUnit": "USD", "thresholdOperator": "greater-than-or-equal", "conditionStatus": "pending", "failureConsequence": "future-payment-withheld", "originalTermText": "Grantee must raise at least $50,000 in matching funds from non-federal sources by the end of the grant period, or subsequent installments will be withheld.", "normalizationStatus": "mapped", "normalizationMethod": "manual" },
+      "narrative": "A Grant Condition -- distinct from a Use Restriction -- ties continued funding to a barrier the grantee must clear: raising $50,000 in matching funds, still pending, with a named consequence if it isn't met."
+    },
+    {
+      "id": "coastal-watch-budget-reallocation-approval",
+      "concept": "approval-requirement",
+      "label": "Approval Required for Budget Reallocation Over 10%",
+      "properties": { "approvalType": "budget-reallocation", "approvalThreshold": "10", "thresholdUnit": "percent", "approvalStatus": "not-requested", "originalTermText": "Grantee must obtain prior written approval from the Fund before reallocating more than 10% of the approved budget between line items.", "normalizationStatus": "mapped", "normalizationMethod": "manual" },
+      "narrative": "An Approval Requirement: reallocating more than 10% of the approved budget needs the Fund's sign-off before it happens, not merely a report afterward."
+    },
+    {
+      "id": "coastal-watch-financial-reporting-requirement",
+      "concept": "reporting-requirement",
+      "label": "Quarterly Financial Reporting Requirement",
+      "properties": { "reportType": "financial-report", "frequency": "quarterly", "dueDate": "2026-07-15", "reportingPeriodStart": "2026-04-01", "reportingPeriodEnd": "2026-06-30", "originalTermText": "Grantee shall submit a quarterly financial report itemizing expenditures against the approved budget.", "normalizationStatus": "mapped", "normalizationMethod": "manual" },
+      "narrative": "A Reporting Requirement distinct from the standing Reporting Schedule above: this one is specifically financial, and is fulfilled by the same Q2 Report Coastal Watch already submitted -- one Report can satisfy more than one Reporting Requirement at once."
+    },
+    {
+      "id": "coastal-watch-environment-classification",
+      "concept": "classification-assignment",
+      "label": "Award Classified as Environment (Candid PCS Subjects)",
+      "properties": { "classificationScheme": "candid-pcs-subjects", "classificationConceptCode": "environment", "taxonomyVersion": "illustrative-subset", "assignmentSource": "program-officer", "assignmentMethod": "manual", "assignedAt": "2026-04-01", "isPrimary": true },
+      "narrative": "The Award is explicitly classified under Candid's PCS Subjects facet as Environment, marked Primary -- consistent with the Project's own Issue Area, but recorded independently since a Classification Assignment reflects an external taxonomy's own terms, not a restatement of the Project's Issue Area."
+    },
+    {
+      "id": "coastal-watch-economic-development-classification",
+      "concept": "classification-assignment",
+      "label": "Award Also Classified as Economic Development (Candid PCS Subjects)",
+      "properties": { "classificationScheme": "candid-pcs-subjects", "classificationConceptCode": "economic-development", "taxonomyVersion": "illustrative-subset", "assignmentSource": "program-officer", "assignmentMethod": "manual", "assignedAt": "2026-04-01", "isPrimary": false },
+      "narrative": "The same Award also carries a second, non-primary Classification Assignment: the restoration work is judged to also touch Economic Development, in the same scheme. Coverage-mode reporting counts the Award once under each of Environment and Economic Development; Primary-mode reporting counts it only under Environment; Allocated-mode reporting would require an Allocation Percentage on each, which these two intentionally omit -- an unallocated pair of Coverage classifications, not an incomplete Allocated split."
+    },
+    {
+      "id": "coastal-watch-population-classification",
+      "concept": "classification-assignment",
+      "label": "Fishing Communities Classified as Economically Disadvantaged (Candid PCS Populations)",
+      "properties": { "classificationScheme": "candid-pcs-populations", "classificationConceptCode": "economically-disadvantaged-people", "taxonomyVersion": "illustrative-subset", "assignmentSource": "program-officer", "assignmentMethod": "manual", "assignedAt": "2026-04-01", "isPrimary": true },
+      "narrative": "The Population itself also carries a Classification Assignment, independent of the Award's: the Half Moon Cove fishing communities are classified under Candid's PCS Populations facet as Economically Disadvantaged People."
+    },
+    {
       "id": "ocean-conservation-fund-org",
       "concept": "organization",
       "label": "Ocean Conservation Fund",
@@ -439,6 +502,23 @@
     { "predicate": "producesEvidenceClaim", "subject": "coastal-watch-year1-evaluation", "object": "coastal-watch-habitat-outcome-claim" },
     { "predicate": "aboutResult", "subject": "coastal-watch-habitat-outcome-claim", "object": "coastal-watch-habitat-outcome" },
     { "predicate": "supportedByEvidence", "subject": "coastal-watch-habitat-outcome-claim", "object": "coastal-watch-year1-field-survey" },
+    { "predicate": "specifiesGrantTerm", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-project-restriction" },
+    { "predicate": "specifiesGrantTerm", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-lobbying-restriction" },
+    { "predicate": "specifiesGrantTerm", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-matching-condition" },
+    { "predicate": "specifiesGrantTerm", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-budget-reallocation-approval" },
+    { "predicate": "specifiesGrantTerm", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-financial-reporting-requirement" },
+    { "predicate": "grantTermAppliesToAward", "subject": "coastal-watch-project-restriction", "object": "coastal-watch-fy26-award" },
+    { "predicate": "grantTermAppliesToAward", "subject": "coastal-watch-lobbying-restriction", "object": "coastal-watch-fy26-award" },
+    { "predicate": "grantTermAppliesToAward", "subject": "coastal-watch-matching-condition", "object": "coastal-watch-fy26-award" },
+    { "predicate": "grantTermAppliesToAward", "subject": "coastal-watch-budget-reallocation-approval", "object": "coastal-watch-fy26-award" },
+    { "predicate": "grantTermAppliesToAward", "subject": "coastal-watch-financial-reporting-requirement", "object": "coastal-watch-fy26-award" },
+    { "predicate": "playsRole", "subject": "coastal-watch-alliance-org", "object": "coastal-watch-alliance" },
+    { "predicate": "hasConditionResponsibleParty", "subject": "coastal-watch-matching-condition", "object": "coastal-watch-alliance-org" },
+    { "predicate": "requiresApprovalFrom", "subject": "coastal-watch-budget-reallocation-approval", "object": "ocean-conservation-fund-org" },
+    { "predicate": "fulfilledByReport", "subject": "coastal-watch-financial-reporting-requirement", "object": "coastal-watch-q2-report" },
+    { "predicate": "awardHasClassification", "subject": "coastal-watch-fy26-award", "object": "coastal-watch-environment-classification" },
+    { "predicate": "awardHasClassification", "subject": "coastal-watch-fy26-award", "object": "coastal-watch-economic-development-classification" },
+    { "predicate": "populationHasClassification", "subject": "coastal-watch-fishing-communities", "object": "coastal-watch-population-classification" },
     { "predicate": "playsRole", "subject": "ocean-conservation-fund-org", "object": "ocean-conservation-fund" },
     { "predicate": "playsRole", "subject": "ocean-conservation-fund-org", "object": "ocean-conservation-fund-fiscal-sponsor-role" },
     { "predicate": "appliesWithin", "subject": "ocean-conservation-fund-fiscal-sponsor-role", "object": "tidewater-sponsorship-arrangement" },

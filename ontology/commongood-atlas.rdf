@@ -44,6 +44,14 @@
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#application-and-review" />
     <skos:altLabel>Grant Application</skos:altLabel>
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/approval-requirement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Approval Requirement</rdfs:label>
+    <skos:definition>A Grant Term requiring authorization from the funder or another specified party before a defined change, expenditure, action, or deviation may occur (e.g., prior written approval for a budget reallocation above a threshold). Not automatically a Grant Condition -- an approval requirement may simply govern administration of the Award.</skos:definition>
+    <npo:category>award-and-agreement</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/audit">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label>Audit</rdfs:label>
@@ -89,6 +97,13 @@
     <npo:category>disbursement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/classification-assignment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Classification Assignment</rdfs:label>
+    <skos:definition>A contextual assertion that a resource (e.g. an Award or Population) is classified by a concept from a specified external or internal classification scheme, such as Candid's Philanthropy Classification System. External taxonomies classify CommonGood resources; they do not define those resources -- Need, Population, and Organization remain the ontology's own entities regardless of which taxonomy terms are assigned to them.</skos:definition>
+    <npo:category>cross-cutting</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/closeout">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label>Closeout</rdfs:label>
@@ -110,6 +125,7 @@
     <skos:definition>An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance).</skos:definition>
     <npo:category>compliance-and-reporting</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/consultant">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -296,6 +312,14 @@
     <npo:category>award-and-agreement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/grant-condition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Grant Condition</rdfs:label>
+    <skos:definition>A Grant Term establishing a barrier, milestone, event, requirement, or other criterion that must be satisfied for grant entitlement, payment, continuation, release, or retention. Matching Requirement and Payment Condition are its existing concrete subtypes. A condition's barrier facts (e.g. hasBarrier, threshold) are captured here without the ontology itself making the accounting or legal determination of whether the grant is "conditional".</skos:definition>
+    <npo:category>award-and-agreement</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/grant-lifecycle">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label>Grant Lifecycle</rdfs:label>
@@ -317,6 +341,13 @@
     <npo:category>application-and-review</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#application-and-review" />
     <npo:legalNote>A Grant Recommendation's non-binding status is a legal requirement for donor-advised funds under federal tax law, not a design choice -- see Donor-Advised Fund and Donor Advisor.</npo:legalNote>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/grant-term">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Grant Term</rdfs:label>
+    <skos:definition>A provision associated with a Grant Agreement or Award that establishes a restriction, condition, obligation, approval requirement, reporting requirement, or other requirement governing the use, administration, performance, or continuation of grant funding. Preserves its original source wording (via originalTermText) alongside its normalized classification -- the classification is an interpretation of the source text, not a replacement for it.</skos:definition>
+    <npo:category>award-and-agreement</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/grantee">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -385,6 +416,7 @@
     <skos:definition>A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match).</skos:definition>
     <npo:category>award-and-agreement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/measurement">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -460,6 +492,7 @@
     <skos:definition>A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released.</skos:definition>
     <npo:category>disbursement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/payment-schedule">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -539,12 +572,21 @@
     <npo:category>compliance-and-reporting</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Reporting Requirement</rdfs:label>
+    <skos:definition>A Grant Term requiring submission of information concerning grant activities, finances, progress, outputs, outcomes, compliance, or closeout. Finer-grained than a Reporting Schedule (which sets the overall cadence for an award): one clause such as "quarterly programmatic and financial reports are required" normalizes into two Reporting Requirements, one per report type, each of which may be fulfilledBy a submitted Report.</skos:definition>
+    <npo:category>award-and-agreement</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reporting-schedule">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label>Reporting Schedule</rdfs:label>
     <skos:definition>The agreed cadence and due dates for narrative and financial reports over the life of an award.</skos:definition>
     <npo:category>compliance-and-reporting</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/restricted-funding">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -632,7 +674,7 @@
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/terms-and-conditions">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
     <rdfs:label>Terms and Conditions</rdfs:label>
-    <skos:definition>The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements).</skos:definition>
+    <skos:definition>The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements). Its own restrictionType property is a coarse restricted/unrestricted flag, superseded for new data by the structured Use Restriction model (see Grant Term) -- retained for backward compatibility.</skos:definition>
     <npo:category>award-and-agreement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
   </rdf:Description>
@@ -650,6 +692,14 @@
     <npo:category>award-and-agreement</npo:category>
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
     <owl:deprecated>true</owl:deprecated>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/use-restriction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
+    <rdfs:label>Use Restriction</rdfs:label>
+    <skos:definition>A Grant Term limiting the purposes, activities, populations, geographies, time periods, cost categories, or other uses for which grant resources may be applied. Governs permitted use -- distinct from a Grant Condition, which governs whether some entitlement, payment, or continuation becomes effective.</skos:definition>
+    <npo:category>award-and-agreement</npo:category>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement" />
+    <rdfs:subClassOf rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/vendor">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class" />
@@ -715,6 +765,14 @@
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/review" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/requiresApprovalFrom">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>requires approval from</rdfs:label>
+    <rdfs:comment>An Approval Requirement identifies the Agent whose authorization is required before the governed change, expenditure, action, or deviation may occur -- typically the Funder.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/agent" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/awardedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label>is awarded by</rdfs:label>
@@ -762,6 +820,14 @@
     <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/project" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#programs-results-and-evidence" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/awardHasClassification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>has classification</rdfs:label>
+    <rdfs:comment>An Award has one or more Classification Assignments (e.g. Candid PCS Subjects) drawn from an external or internal classification scheme. The scheme classifies the Award; it does not redefine it.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/hasPaymentSchedule">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
@@ -1003,6 +1069,14 @@
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/unrestricted-funding" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/specifiesGrantTerm">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>specifies</rdfs:label>
+    <rdfs:comment>A Grant Agreement specifies one or more Grant Terms. Declared against the abstract Grant Term concept rather than each subtype separately, so any Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement, Compliance Requirement, or Reporting Schedule instance satisfies it the same way.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-agreement" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/specifiesTermsAndConditions">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label>specifies</rdfs:label>
@@ -1010,6 +1084,14 @@
     <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-agreement" />
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/terms-and-conditions" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/hasConditionResponsibleParty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>has responsible party</rdfs:label>
+    <rdfs:comment>A Grant Condition optionally identifies the Agent (Person or Organization) responsible for satisfying it -- e.g. the grantee organization for a matching requirement, or a fiscal sponsor rather than the project itself.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/agent" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/fundedBy">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
@@ -1050,6 +1132,14 @@
     <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-recommendation" />
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/organization" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/grantTermAppliesToAward">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>applies to</rdfs:label>
+    <rdfs:comment>A Grant Term applies to a specific Award. Declared against the abstract Grant Term concept, used by Use Restriction, Grant Condition, Approval Requirement, and Reporting Requirement instances -- Compliance Requirement keeps its own existing, more specific appliesToAward predicate unchanged, and Matching Requirement/Payment Condition/Reporting Schedule are already reachable from Award through their existing relationships, so none of those three need this one too.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/mayRequestBudgetModification">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
@@ -1263,6 +1353,14 @@
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/organization" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/populationHasClassification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>has classification</rdfs:label>
+    <rdfs:comment>A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/population" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/associatedWithGrantProgram">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label>is associated with</rdfs:label>
@@ -1358,6 +1456,14 @@
     <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/report" />
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/evidence" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#programs-results-and-evidence" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/fulfilledByReport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>is fulfilled by</rdfs:label>
+    <rdfs:comment>A Reporting Requirement is fulfilled by a submitted Report. Requirement is what must be supplied; Report is the artifact that was actually supplied.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/report" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/obligatesReport">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
@@ -1463,6 +1569,76 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/approval-requirement-approval-date">
+    <rdfs:label>Approval Date</rdfs:label>
+    <rdfs:comment>When approval was granted, once it has been.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/approval-requirement-approval-status">
+    <rdfs:label>Approval Status</rdfs:label>
+    <rdfs:comment>Where a specific instance of this approval requirement stands.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>not-requested</npo:allowedValue>
+    <npo:allowedValue>requested</npo:allowedValue>
+    <npo:allowedValue>approved</npo:allowedValue>
+    <npo:allowedValue>denied</npo:allowedValue>
+    <npo:allowedValue>not-applicable</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/approval-requirement-approval-threshold">
+    <rdfs:label>Approval Threshold</rdfs:label>
+    <rdfs:comment>The numeric threshold above which prior approval is required, where applicable (e.g. 10 for a 10% budget-reallocation threshold).</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/approval-requirement-approval-type">
+    <rdfs:label>Approval Type</rdfs:label>
+    <rdfs:comment>What kind of change, expenditure, action, or deviation this Approval Requirement governs.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:group>classification</npo:group>
+    <npo:required>true</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>budget-reallocation</npo:allowedValue>
+    <npo:allowedValue>scope-change</npo:allowedValue>
+    <npo:allowedValue>project-change</npo:allowedValue>
+    <npo:allowedValue>key-personnel-change</npo:allowedValue>
+    <npo:allowedValue>timeline-extension</npo:allowedValue>
+    <npo:allowedValue>subgrant</npo:allowedValue>
+    <npo:allowedValue>regrant</npo:allowedValue>
+    <npo:allowedValue>contractor</npo:allowedValue>
+    <npo:allowedValue>capital-purchase</npo:allowedValue>
+    <npo:allowedValue>equipment-purchase</npo:allowedValue>
+    <npo:allowedValue>equipment-disposition</npo:allowedValue>
+    <npo:allowedValue>travel</npo:allowedValue>
+    <npo:allowedValue>geographic-change</npo:allowedValue>
+    <npo:allowedValue>population-change</npo:allowedValue>
+    <npo:allowedValue>other</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/approval-requirement-threshold-unit">
+    <rdfs:label>Threshold Unit</rdfs:label>
+    <rdfs:comment>The unit the approval threshold is expressed in (e.g. percent, USD).</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/audit-scheduled-date">
     <rdfs:label>Scheduled Date</rdfs:label>
     <rdfs:comment>When the Audit is scheduled to occur.</rdfs:comment>
@@ -1564,6 +1740,90 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-allocation-percentage">
+    <rdfs:label>Allocation Percentage</rdfs:label>
+    <rdfs:comment>An actual distribution of the classified resource's value across classifications, only stored when supported by real source information -- never inferred to make reporting additive.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-assigned-at">
+    <rdfs:label>Assigned At</rdfs:label>
+    <rdfs:comment>When this classification assignment was created or imported.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-assignment-method">
+    <rdfs:label>Assignment Method</rdfs:label>
+    <rdfs:comment>How this classification was assigned. Ancestor classifications reached via the scheme's broader hierarchy are not normally stored as their own assignment with this field -- they're computed from the hierarchy at reporting time instead.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>source-provided</npo:allowedValue>
+    <npo:allowedValue>imported</npo:allowedValue>
+    <npo:allowedValue>manual</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-assignment-source">
+    <rdfs:label>Assignment Source</rdfs:label>
+    <rdfs:comment>Where this classification originated (e.g. "Candid import", "manual CommonGood assignment").</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-classification-concept-code">
+    <rdfs:label>Classification Concept Code</rdfs:label>
+    <rdfs:comment>The code of the term selected from the named classificationScheme (e.g. "affordable-housing"). A plain string, not independently validated against that scheme -- a reference-typed property's referenceScheme must be one fixed scheme declared on the property itself, and this field's scheme genuinely varies per instance. See docs/06-properties-and-rules.md for the full explanation of this known limitation.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>classification</npo:group>
+    <npo:required>true</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-classification-scheme">
+    <rdfs:label>Classification Scheme</rdfs:label>
+    <rdfs:comment>Which classification scheme classificationConceptCode is drawn from.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>classification</npo:group>
+    <npo:required>true</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <npo:referenceScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-is-primary">
+    <rdfs:label>Is Primary</rdfs:label>
+    <rdfs:comment>Whether this is the exclusive reporting classification for the classified resource within this scheme. At most one Classification Assignment per classified resource + scheme should be primary -- see business rules.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>classification</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/classification-assignment-taxonomy-version">
+    <rdfs:label>Taxonomy Version</rdfs:label>
+    <rdfs:comment>The version or release of the classification scheme used for this assignment, so historical assignments retain the taxonomy version they were made under.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/closeout-date">
     <rdfs:label>Closeout Date</rdfs:label>
     <rdfs:comment>When Closeout was completed.</rdfs:comment>
@@ -1599,6 +1859,20 @@
     <npo:allowedValue>financial</npo:allowedValue>
     <npo:allowedValue>insurance</npo:allowedValue>
     <npo:allowedValue>other</npo:allowedValue>
+    <npo:allowedValue>records-retention</npo:allowedValue>
+    <npo:allowedValue>books-and-records-access</npo:allowedValue>
+    <npo:allowedValue>financial-controls</npo:allowedValue>
+    <npo:allowedValue>audit</npo:allowedValue>
+    <npo:allowedValue>certification</npo:allowedValue>
+    <npo:allowedValue>acknowledgement</npo:allowedValue>
+    <npo:allowedValue>notification-of-change</npo:allowedValue>
+    <npo:allowedValue>notification-of-breach</npo:allowedValue>
+    <npo:allowedValue>conflict-disclosure</npo:allowedValue>
+    <npo:allowedValue>legal-compliance</npo:allowedValue>
+    <npo:allowedValue>tax-status-maintenance</npo:allowedValue>
+    <npo:allowedValue>return-unused-funds</npo:allowedValue>
+    <npo:allowedValue>data-protection</npo:allowedValue>
+    <npo:allowedValue>publicity-requirement</npo:allowedValue>
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/compliance-requirement-status">
     <rdfs:label>Status</rdfs:label>
@@ -1812,6 +2086,131 @@
     <npo:allowedValue>active</npo:allowedValue>
     <npo:allowedValue>closed</npo:allowedValue>
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-condition-barrier-type">
+    <rdfs:label>Condition Barrier Type</rdfs:label>
+    <rdfs:comment>What kind of barrier this condition's entitlement, payment, continuation, release, or retention depends on.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>classification</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <npo:referenceScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-condition-status">
+    <rdfs:label>Condition Status</rdfs:label>
+    <rdfs:comment>Whether this condition has been satisfied. Never inferred solely from dates.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>not-yet-assessed</npo:allowedValue>
+    <npo:allowedValue>pending</npo:allowedValue>
+    <npo:allowedValue>satisfied</npo:allowedValue>
+    <npo:allowedValue>partially-satisfied</npo:allowedValue>
+    <npo:allowedValue>not-satisfied</npo:allowedValue>
+    <npo:allowedValue>waived</npo:allowedValue>
+    <npo:allowedValue>expired</npo:allowedValue>
+    <npo:allowedValue>not-applicable</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-due-date">
+    <rdfs:label>Due Date</rdfs:label>
+    <rdfs:comment>The date by which this condition must be satisfied, where applicable.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-failure-consequence">
+    <rdfs:label>Failure Consequence</rdfs:label>
+    <rdfs:comment>What happens if this condition is not met.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>none-specified</npo:allowedValue>
+    <npo:allowedValue>funds-withheld</npo:allowedValue>
+    <npo:allowedValue>future-payment-withheld</npo:allowedValue>
+    <npo:allowedValue>right-of-return</npo:allowedValue>
+    <npo:allowedValue>repayment-required</npo:allowedValue>
+    <npo:allowedValue>award-reduced</npo:allowedValue>
+    <npo:allowedValue>award-suspended</npo:allowedValue>
+    <npo:allowedValue>award-terminated</npo:allowedValue>
+    <npo:allowedValue>corrective-action-required</npo:allowedValue>
+    <npo:allowedValue>future-funding-affected</npo:allowedValue>
+    <npo:allowedValue>other</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-has-barrier">
+    <rdfs:label>Has Barrier</rdfs:label>
+    <rdfs:comment>Whether this condition has a defined barrier that must be overcome. Captures the fact without the ontology itself concluding that the grant is legally or accountingly "conditional" -- that determination may require separate accounting or legal analysis.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-has-right-of-release">
+    <rdfs:label>Has Right Of Release</rdfs:label>
+    <rdfs:comment>Whether satisfying this condition releases funds that were otherwise being withheld.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-has-right-of-return">
+    <rdfs:label>Has Right Of Return</rdfs:label>
+    <rdfs:comment>Whether failing this condition creates a right for the funder to require return of funds already disbursed.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-threshold-operator">
+    <rdfs:label>Threshold Operator</rdfs:label>
+    <rdfs:comment>How the threshold value must be compared against to satisfy the condition.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>greater-than</npo:allowedValue>
+    <npo:allowedValue>greater-than-or-equal</npo:allowedValue>
+    <npo:allowedValue>less-than</npo:allowedValue>
+    <npo:allowedValue>less-than-or-equal</npo:allowedValue>
+    <npo:allowedValue>equal</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-threshold-unit">
+    <rdfs:label>Threshold Unit</rdfs:label>
+    <rdfs:comment>The unit the threshold value is expressed in (e.g. USD, percent, participants).</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-condition-threshold-value">
+    <rdfs:label>Threshold Value</rdfs:label>
+    <rdfs:comment>The numeric threshold this condition's barrier is measured against (e.g. 250000, or 10 for a percentage), where applicable.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:group>financial</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-program-status">
     <rdfs:label>Status</rdfs:label>
     <rdfs:comment>Where the Grant Program currently sits in its own lifecycle.</rdfs:comment>
@@ -1867,6 +2266,106 @@
     <npo:allowedValue>pending</npo:allowedValue>
     <npo:allowedValue>approved</npo:allowedValue>
     <npo:allowedValue>declined</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-effective-from">
+    <rdfs:label>Effective From</rdfs:label>
+    <rdfs:comment>When this specific term takes effect -- not assumed to equal the whole Grant Agreement's effective date.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-effective-until">
+    <rdfs:label>Effective Until</rdfs:label>
+    <rdfs:comment>When this specific term stops applying, if it has an end date.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-normalization-method">
+    <rdfs:label>Normalization Method</rdfs:label>
+    <rdfs:comment>How this term was normalized from its source. Machine-derived normalization is not treated as equivalent to source-provided structured data.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>manual</npo:allowedValue>
+    <npo:allowedValue>rules-based</npo:allowedValue>
+    <npo:allowedValue>imported-structured</npo:allowedValue>
+    <npo:allowedValue>machine-assisted</npo:allowedValue>
+    <npo:allowedValue>reviewed-machine-assisted</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-normalization-status">
+    <rdfs:label>Normalization Status</rdfs:label>
+    <rdfs:comment>Whether this term's normalization from source text is complete, partial, or still needs review. Preferred over forcing an uncertain clause into an incorrect category.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>mapped</npo:allowedValue>
+    <npo:allowedValue>partially-mapped</npo:allowedValue>
+    <npo:allowedValue>unmapped</npo:allowedValue>
+    <npo:allowedValue>needs-review</npo:allowedValue>
+    <npo:allowedValue>not-applicable</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-original-term-text">
+    <rdfs:label>Original Term Text</rdfs:label>
+    <rdfs:comment>The term's original source wording, preserved verbatim. Recommended for imported terms; the normalized classification is an interpretation of this text, not a replacement for it.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-source-clause-identifier">
+    <rdfs:label>Source Clause Identifier</rdfs:label>
+    <rdfs:comment>An identifier tying this term back to the specific source clause it was segmented from -- lets several Grant Terms normalized from one free-text field retain a shared linkage back to that field.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-source-field">
+    <rdfs:label>Source Field</rdfs:label>
+    <rdfs:comment>The source system's field this term was imported from, if any.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-source-record-identifier">
+    <rdfs:label>Source Record Identifier</rdfs:label>
+    <rdfs:comment>The identifier of the source record this term was imported from, if any.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/grant-term-source-system">
+    <rdfs:label>Source System</rdfs:label>
+    <rdfs:comment>The system this term was imported from (e.g. Tides), if any.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/indirect-cost-rate-rate">
     <rdfs:label>Rate</rdfs:label>
@@ -2213,6 +2712,78 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-due-date">
+    <rdfs:label>Due Date</rdfs:label>
+    <rdfs:comment>When a specific instance of this report is due.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-frequency">
+    <rdfs:label>Frequency</rdfs:label>
+    <rdfs:comment>How often this report is due, reusing the same Frequency scheme Reporting Schedule already uses.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <npo:referenceScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/frequency" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-report-type">
+    <rdfs:label>Report Type</rdfs:label>
+    <rdfs:comment>What kind of report this requirement obligates.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>classification</npo:group>
+    <npo:required>true</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>programmatic-report</npo:allowedValue>
+    <npo:allowedValue>financial-report</npo:allowedValue>
+    <npo:allowedValue>expenditure-report</npo:allowedValue>
+    <npo:allowedValue>progress-report</npo:allowedValue>
+    <npo:allowedValue>outcome-report</npo:allowedValue>
+    <npo:allowedValue>impact-report</npo:allowedValue>
+    <npo:allowedValue>final-report</npo:allowedValue>
+    <npo:allowedValue>closeout-report</npo:allowedValue>
+    <npo:allowedValue>audit-report</npo:allowedValue>
+    <npo:allowedValue>certification-report</npo:allowedValue>
+    <npo:allowedValue>other</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-reporting-period-end">
+    <rdfs:label>Reporting Period End</rdfs:label>
+    <rdfs:comment>The end of the period this report covers.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-reporting-period-start">
+    <rdfs:label>Reporting Period Start</rdfs:label>
+    <rdfs:comment>The start of the period this report covers.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>lifecycle</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-requirement-required-format">
+    <rdfs:label>Required Format</rdfs:label>
+    <rdfs:comment>The format the report must be submitted in, where the funder specifies one.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:group>governance</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/reporting-schedule-frequency">
     <rdfs:label>Frequency</rdfs:label>
     <rdfs:comment>How often Reports are due under this Reporting Schedule.</rdfs:comment>
@@ -2373,7 +2944,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/terms-and-conditions-restriction-type">
     <rdfs:label>Restriction Type</rdfs:label>
-    <rdfs:comment>Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding.</rdfs:comment>
+    <rdfs:comment>Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding. A coarse flag, superseded for new data by one or more structured Use Restriction Grant Terms (see grant-term), which can express what specifically the funding is restricted to or from -- retained here for backward compatibility.</rdfs:comment>
     <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/terms-and-conditions" />
     <npo:group>governance</npo:group>
     <npo:required>true</npo:required>
@@ -2382,6 +2953,40 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
     <npo:allowedValue>restricted</npo:allowedValue>
     <npo:allowedValue>unrestricted</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/use-restriction-restricted-to">
+    <rdfs:label>Restricted To</rdfs:label>
+    <rdfs:comment>Free-text naming what the funds are specifically restricted to (e.g. a project or program name), where applicable.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/use-restriction" />
+    <npo:group>classification</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/use-restriction-restriction-mode">
+    <rdfs:label>Restriction Mode</rdfs:label>
+    <rdfs:comment>Whether this restriction requires a use, merely permits it, or prohibits it. An Award may carry more than one Use Restriction with different modes (e.g. a required-use restriction to a project, and a separate prohibited-use restriction on lobbying).</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/use-restriction" />
+    <npo:group>classification</npo:group>
+    <npo:required>false</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string" />
+    <npo:allowedValue>required-use</npo:allowedValue>
+    <npo:allowedValue>permitted-use</npo:allowedValue>
+    <npo:allowedValue>prohibited-use</npo:allowedValue>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/properties/use-restriction-restriction-type">
+    <rdfs:label>Restriction Type</rdfs:label>
+    <rdfs:comment>The nature of what this Use Restriction limits grant funds to or from.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/use-restriction" />
+    <npo:group>classification</npo:group>
+    <npo:required>true</npo:required>
+    <npo:cardinality>one</npo:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <npo:referenceScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-active-role-requires-effective-from">
     <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
@@ -2411,6 +3016,31 @@
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/decision" />
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/application" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-classification-assignment-allocation-should-sum-to-100">
+    <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
+    <rdfs:label>Allocation percentages should sum to 100 when allocation is asserted complete</rdfs:label>
+    <rdfs:comment>When a classified resource's Classification Assignments for a given scheme carry an Allocation Percentage, those percentages should sum to 100 once the allocation is asserted as complete. An incomplete sum is a data-quality signal to surface, not a gap to silently renormalize or complete on the resource's behalf.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/population" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-classification-assignment-at-most-one-primary">
+    <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
+    <rdfs:label>At most one primary Classification Assignment per resource and scheme</rdfs:label>
+    <rdfs:comment>For a given classified resource (e.g. an Award or a Population) and a given classification scheme, at most one Classification Assignment should have Is Primary set to true -- multiple simultaneous primaries make Primary-mode reporting ambiguous about which classification the resource is chiefly attributed to.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/population" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-classification-rolls-up-not-down">
+    <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
+    <rdfs:label>Classification rolls upward through broader terms, never downward</rdfs:label>
+    <rdfs:comment>A Classification Assignment's Classification Concept Code rolls upward through that concept's Broader chain for reporting purposes -- a resource explicitly classified under a narrower term is implicitly also covered by every broader ancestor. The reverse never holds: a resource explicitly classified under a broader term is not implicitly classified under any of its more specific descendants, since the source data made no claim that specific.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/classification-assignment" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-closeout-requires-payments-and-reports">
     <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
     <rdfs:label>Closeout requires both financial and reporting conditions</rdfs:label>
@@ -2436,6 +3066,19 @@
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md" />
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-recommendation" />
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/donor-advised-fund" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-grant-term-should-identify-its-award">
+    <rdf:type rdf:resource="https://egovender.github.io/commongood-atlas/ontology/BusinessRule" />
+    <rdfs:label>A Grant Term should identify which Award it applies to</rdfs:label>
+    <rdfs:comment>A Grant Term should specify the Award it applies to (via Grant Term Applies To Award, or, for a Compliance Requirement, its own existing Applies To Award relationship), unless it is still in draft or unnormalized form -- an Award-less Grant Term that has completed normalization is missing the link that makes it actionable.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-term" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/use-restriction" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/grant-condition" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/approval-requirement" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reporting-requirement" />
+    <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/compliance-requirement" />
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/rules/rule-installment-condition-before-payment">
@@ -2485,6 +3128,93 @@
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/person" />
     <npo:appliesTo rdf:resource="https://egovender.github.io/commongood-atlas/ontology/organization" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <skos:prefLabel>Candid PCS Populations</skos:prefLabel>
+    <skos:definition>A small illustrative subset of Candid's Philanthropy Classification System (PCS) Populations facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. Multiple population classifications on the same Population resource are valid, since a population may have several characteristics at once.</skos:definition>
+    <npo:schemeDomain>classification</npo:schemeDomain>
+    <npo:authorityType>external</npo:authorityType>
+    <npo:version>illustrative-subset</npo:version>
+    <npo:publicationStatus rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/publication-status-draft" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations-economically-disadvantaged-people">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations" />
+    <skos:notation>economically-disadvantaged-people</skos:notation>
+    <skos:prefLabel>Economically Disadvantaged People</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Economically Disadvantaged People population.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations-people-of-color">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations" />
+    <skos:notation>people-of-color</skos:notation>
+    <skos:prefLabel>People of Color</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's People of Color population.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations-young-adults">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-populations" />
+    <skos:notation>young-adults</skos:notation>
+    <skos:prefLabel>Young Adults</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Young Adults population.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <skos:prefLabel>Candid PCS Subjects</skos:prefLabel>
+    <skos:definition>A small illustrative subset of Candid's Philanthropy Classification System (PCS) Subjects facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes, hierarchy, and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. affordable-housing's mapping to CommonGood's own issue-area-housing uses broadMatch, not exactMatch, since Affordable Housing is more specific than the CommonGood Housing issue area.</skos:definition>
+    <npo:schemeDomain>classification</npo:schemeDomain>
+    <npo:authorityType>external</npo:authorityType>
+    <npo:version>illustrative-subset</npo:version>
+    <npo:publicationStatus rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/publication-status-draft" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-affordable-housing">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>affordable-housing</skos:notation>
+    <skos:prefLabel>Affordable Housing</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Affordable Housing subject.</skos:definition>
+    <skos:broader rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-housing-development" />
+    <skos:broadMatch rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-housing" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-economic-development">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>economic-development</skos:notation>
+    <skos:prefLabel>Economic Development</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Economic Development subject.</skos:definition>
+    <skos:broadMatch rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-economic-development" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-education">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>education</skos:notation>
+    <skos:prefLabel>Education</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Education subject.</skos:definition>
+    <skos:broadMatch rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-education" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-environment">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>environment</skos:notation>
+    <skos:prefLabel>Environment</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Environment subject.</skos:definition>
+    <skos:broadMatch rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/issue-area-environment" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-housing">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>housing</skos:notation>
+    <skos:prefLabel>Housing</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Housing subject.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-housing-development">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects" />
+    <skos:notation>housing-development</skos:notation>
+    <skos:prefLabel>Housing Development</skos:prefLabel>
+    <skos:definition>Illustrative placeholder for Candid PCS's Housing Development subject.</skos:definition>
+    <skos:broader rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/candid-pcs-subjects-housing" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/claim-type">
     <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
     <skos:prefLabel>Claim Type</skos:prefLabel>
@@ -2521,6 +3251,171 @@
     <skos:notation>contribution</skos:notation>
     <skos:prefLabel>Contribution</skos:prefLabel>
     <skos:definition>There is evidence that the intervention played some role in producing the result, alongside other factors.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <skos:prefLabel>Classification Scheme Registry</skos:prefLabel>
+    <skos:definition>Which classification scheme a Classification Assignment draws its classificationConceptCode from. This registry entry is what's SHACL-validated; the code itself is a plain string naming a value within that scheme, not independently validated against it -- see docs/06-properties-and-rules.md for why. Candid PCS Organization Types, Transaction Types, and Support Strategies are registered here as valid facets but not yet populated as their own reference-data files -- add them when real data needs them, following candid-pcs-subjects.json/candid-pcs-populations.json as the template.</skos:definition>
+    <npo:schemeDomain>classification</npo:schemeDomain>
+    <npo:authorityType>internal</npo:authorityType>
+    <npo:version>1.0.0</npo:version>
+    <npo:publicationStatus rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/publication-status-published" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-candid-pcs-organization-types">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>candid-pcs-organization-types</skos:notation>
+    <skos:prefLabel>Candid PCS Organization Types</skos:prefLabel>
+    <skos:definition>Candid's Philanthropy Classification System organization-type facet. Registered but not yet populated as its own reference-data file.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-candid-pcs-populations">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>candid-pcs-populations</skos:notation>
+    <skos:prefLabel>Candid PCS Populations</skos:prefLabel>
+    <skos:definition>Candid's Philanthropy Classification System population facet -- what population(s) a resource serves or describes.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-candid-pcs-subjects">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>candid-pcs-subjects</skos:notation>
+    <skos:prefLabel>Candid PCS Subjects</skos:prefLabel>
+    <skos:definition>Candid's Philanthropy Classification System subject facet -- what issue or subject a resource addresses or supports.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-candid-pcs-support-strategies">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>candid-pcs-support-strategies</skos:notation>
+    <skos:prefLabel>Candid PCS Support Strategies</skos:prefLabel>
+    <skos:definition>Candid's Philanthropy Classification System support-strategy facet. Registered but not yet populated as its own reference-data file.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-candid-pcs-transaction-types">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>candid-pcs-transaction-types</skos:notation>
+    <skos:prefLabel>Candid PCS Transaction Types</skos:prefLabel>
+    <skos:definition>Candid's Philanthropy Classification System transaction-type facet -- the form through which support is provided or received. Registered but not yet populated as its own reference-data file.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry-commongood-issue-areas">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/classification-scheme-registry" />
+    <skos:notation>commongood-issue-areas</skos:notation>
+    <skos:prefLabel>CommonGood Issue Areas</skos:prefLabel>
+    <skos:definition>This ontology's own Issue Area scheme (see issue-area.json), usable as a classification scheme in its own right alongside external taxonomies.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <skos:prefLabel>Condition Barrier Type</skos:prefLabel>
+    <skos:definition>What kind of barrier, milestone, or event a Grant Condition's entitlement, payment, continuation, release, or retention depends on.</skos:definition>
+    <npo:schemeDomain>award-and-agreement</npo:schemeDomain>
+    <npo:authorityType>internal</npo:authorityType>
+    <npo:version>1.0.0</npo:version>
+    <npo:publicationStatus rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/publication-status-published" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-cost-sharing-requirement">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>cost-sharing-requirement</skos:notation>
+    <skos:prefLabel>Cost-Sharing Requirement</skos:prefLabel>
+    <skos:definition>Contingent on sharing costs alongside the award.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-fundraising-target">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>fundraising-target</skos:notation>
+    <skos:prefLabel>Fundraising Target</skos:prefLabel>
+    <skos:definition>Contingent on reaching a fundraising target.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-matching-requirement">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>matching-requirement</skos:notation>
+    <skos:prefLabel>Matching Requirement</skos:prefLabel>
+    <skos:definition>Contingent on raising or contributing matching funds.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-other">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>other</skos:notation>
+    <skos:prefLabel>Other</skos:prefLabel>
+    <skos:definition>A condition barrier not captured by another value in this scheme.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-other-measurable-barrier">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>other-measurable-barrier</skos:notation>
+    <skos:prefLabel>Other Measurable Barrier</skos:prefLabel>
+    <skos:definition>Contingent on another measurable barrier not otherwise listed.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-outcome-threshold">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>outcome-threshold</skos:notation>
+    <skos:prefLabel>Outcome Threshold</skos:prefLabel>
+    <skos:definition>Contingent on reaching a specified outcome level.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-output-threshold">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>output-threshold</skos:notation>
+    <skos:prefLabel>Output Threshold</skos:prefLabel>
+    <skos:definition>Contingent on reaching a specified output count.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-performance-milestone">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>performance-milestone</skos:notation>
+    <skos:prefLabel>Performance Milestone</skos:prefLabel>
+    <skos:definition>Contingent on reaching a defined performance milestone.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-qualifying-expenses">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>qualifying-expenses</skos:notation>
+    <skos:prefLabel>Qualifying Expenses</skos:prefLabel>
+    <skos:definition>Contingent on incurring qualifying expenses.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-regulatory-approval">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>regulatory-approval</skos:notation>
+    <skos:prefLabel>Regulatory Approval</skos:prefLabel>
+    <skos:definition>Contingent on obtaining regulatory approval.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-service-level-threshold">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>service-level-threshold</skos:notation>
+    <skos:prefLabel>Service-Level Threshold</skos:prefLabel>
+    <skos:definition>Contingent on reaching a specified service level.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-specified-event">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>specified-event</skos:notation>
+    <skos:prefLabel>Specified Event</skos:prefLabel>
+    <skos:definition>Contingent on a specified event occurring.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-specified-method">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>specified-method</skos:notation>
+    <skos:prefLabel>Specified Method</skos:prefLabel>
+    <skos:definition>Contingent on using a specified method.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-specified-personnel">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>specified-personnel</skos:notation>
+    <skos:prefLabel>Specified Personnel</skos:prefLabel>
+    <skos:definition>Contingent on specified personnel being engaged.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type-specified-protocol">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/condition-barrier-type" />
+    <skos:notation>specified-protocol</skos:notation>
+    <skos:prefLabel>Specified Protocol</skos:prefLabel>
+    <skos:definition>Contingent on following a specified protocol.</skos:definition>
   </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/evidence-strength">
     <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
@@ -2817,5 +3712,161 @@
     <skos:notation>suspended</skos:notation>
     <skos:prefLabel>Suspended</skos:prefLabel>
     <skos:definition>The role occupancy is temporarily paused without having formally ended.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme" />
+    <skos:prefLabel>Use Restriction Type</skos:prefLabel>
+    <skos:definition>The nature of what a Use Restriction limits grant funds to (or from) -- distinct from Fund's own restriction-type scheme, which describes a Fund's accounting restriction status rather than the specific nature of a grant term's use restriction. Values do not all carry identical legal significance.</skos:definition>
+    <npo:schemeDomain>award-and-agreement</npo:schemeDomain>
+    <npo:authorityType>internal</npo:authorityType>
+    <npo:version>1.0.0</npo:version>
+    <npo:publicationStatus rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/publication-status-published" />
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-capital-only">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>capital-only</skos:notation>
+    <skos:prefLabel>Capital Only</skos:prefLabel>
+    <skos:definition>Restricted to capital expenditures.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-endowment">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>endowment</skos:notation>
+    <skos:prefLabel>Endowment</skos:prefLabel>
+    <skos:definition>Restricted to an endowment fund.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-equipment-only">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>equipment-only</skos:notation>
+    <skos:prefLabel>Equipment Only</skos:prefLabel>
+    <skos:definition>Restricted to equipment purchases.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-general-purpose">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>general-purpose</skos:notation>
+    <skos:prefLabel>General Purpose</skos:prefLabel>
+    <skos:definition>Not restricted beyond the grantee's general mission.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-individual-benefit">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>individual-benefit</skos:notation>
+    <skos:prefLabel>Individual Benefit</skos:prefLabel>
+    <skos:definition>Concerns benefit to a specific individual, typically as a prohibited use.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-lobbying">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>lobbying</skos:notation>
+    <skos:prefLabel>Lobbying</skos:prefLabel>
+    <skos:definition>Concerns lobbying activity, typically as a prohibited use.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-noncharitable-purpose">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>noncharitable-purpose</skos:notation>
+    <skos:prefLabel>Noncharitable Purpose</skos:prefLabel>
+    <skos:definition>Concerns use for a noncharitable purpose, typically as a prohibited use.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-other">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>other</skos:notation>
+    <skos:prefLabel>Other</skos:prefLabel>
+    <skos:definition>A use restriction not captured by another value in this scheme.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-political-campaign-activity">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>political-campaign-activity</skos:notation>
+    <skos:prefLabel>Political Campaign Activity</skos:prefLabel>
+    <skos:definition>Concerns political campaign activity, typically as a prohibited use.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-regranting">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>regranting</skos:notation>
+    <skos:prefLabel>Regranting</skos:prefLabel>
+    <skos:definition>Restricted to redistribution as regrants.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-scholarship">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>scholarship</skos:notation>
+    <skos:prefLabel>Scholarship</skos:prefLabel>
+    <skos:definition>Restricted to scholarship purposes.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-activity">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-activity</skos:notation>
+    <skos:prefLabel>Specific Activity</skos:prefLabel>
+    <skos:definition>Restricted to a named activity.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-budget">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-budget</skos:notation>
+    <skos:prefLabel>Specific Budget</skos:prefLabel>
+    <skos:definition>Restricted to a specific approved budget.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-cost-category">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-cost-category</skos:notation>
+    <skos:prefLabel>Specific Cost Category</skos:prefLabel>
+    <skos:definition>Restricted to a specific cost category (e.g. personnel, equipment).</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-geography">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-geography</skos:notation>
+    <skos:prefLabel>Specific Geography</skos:prefLabel>
+    <skos:definition>Restricted to a named geographic area.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-population">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-population</skos:notation>
+    <skos:prefLabel>Specific Population</skos:prefLabel>
+    <skos:definition>Restricted to serving a named population.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-program">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-program</skos:notation>
+    <skos:prefLabel>Specific Program</skos:prefLabel>
+    <skos:definition>Restricted to a named program.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-project">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-project</skos:notation>
+    <skos:prefLabel>Specific Project</skos:prefLabel>
+    <skos:definition>Restricted to a named project.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-specific-time-period">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>specific-time-period</skos:notation>
+    <skos:prefLabel>Specific Time Period</skos:prefLabel>
+    <skos:definition>Restricted to use within a defined time period.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-subgranting">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>subgranting</skos:notation>
+    <skos:prefLabel>Subgranting</skos:prefLabel>
+    <skos:definition>Restricted to redistribution as subgrants.</skos:definition>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type-voter-registration">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+    <skos:inScheme rdf:resource="https://egovender.github.io/commongood-atlas/ontology/reference-data/use-restriction-type" />
+    <skos:notation>voter-registration</skos:notation>
+    <skos:prefLabel>Voter Registration</skos:prefLabel>
+    <skos:definition>Concerns voter registration activity.</skos:definition>
   </rdf:Description>
 </rdf:RDF>

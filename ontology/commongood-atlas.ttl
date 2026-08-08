@@ -138,6 +138,71 @@ npoprop:application-submitted-date a owl:DatatypeProperty ;
     npo:group "lifecycle" ;
     npo:required false .
 
+npoprop:approval-requirement-approval-date a owl:DatatypeProperty ;
+    rdfs:label "Approval Date" ;
+    rdfs:comment "When approval was granted, once it has been." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:approval-requirement-approval-status a owl:DatatypeProperty ;
+    rdfs:label "Approval Status" ;
+    rdfs:comment "Where a specific instance of this approval requirement stands." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "approved",
+        "denied",
+        "not-applicable",
+        "not-requested",
+        "requested" ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:approval-requirement-approval-threshold a owl:DatatypeProperty ;
+    rdfs:label "Approval Threshold" ;
+    rdfs:comment "The numeric threshold above which prior approval is required, where applicable (e.g. 10 for a 10% budget-reallocation threshold)." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:range xsd:decimal ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
+npoprop:approval-requirement-approval-type a owl:DatatypeProperty ;
+    rdfs:label "Approval Type" ;
+    rdfs:comment "What kind of change, expenditure, action, or deviation this Approval Requirement governs." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "budget-reallocation",
+        "capital-purchase",
+        "contractor",
+        "equipment-disposition",
+        "equipment-purchase",
+        "geographic-change",
+        "key-personnel-change",
+        "other",
+        "population-change",
+        "project-change",
+        "regrant",
+        "scope-change",
+        "subgrant",
+        "timeline-extension",
+        "travel" ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required true .
+
+npoprop:approval-requirement-threshold-unit a owl:DatatypeProperty ;
+    rdfs:label "Threshold Unit" ;
+    rdfs:comment "The unit the approval threshold is expressed in (e.g. percent, USD)." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
 npoprop:audit-scheduled-date a owl:DatatypeProperty ;
     rdfs:label "Scheduled Date" ;
     rdfs:comment "When the Audit is scheduled to occur." ;
@@ -230,6 +295,82 @@ npoprop:budget-total-amount a owl:DatatypeProperty ;
     npo:group "financial" ;
     npo:required true .
 
+npoprop:classification-assignment-allocation-percentage a owl:DatatypeProperty ;
+    rdfs:label "Allocation Percentage" ;
+    rdfs:comment "An actual distribution of the classified resource's value across classifications, only stored when supported by real source information -- never inferred to make reporting additive." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:decimal ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
+npoprop:classification-assignment-assigned-at a owl:DatatypeProperty ;
+    rdfs:label "Assigned At" ;
+    rdfs:comment "When this classification assignment was created or imported." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:classification-assignment-assignment-method a owl:DatatypeProperty ;
+    rdfs:label "Assignment Method" ;
+    rdfs:comment "How this classification was assigned. Ancestor classifications reached via the scheme's broader hierarchy are not normally stored as their own assignment with this field -- they're computed from the hierarchy at reporting time instead." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "imported",
+        "manual",
+        "source-provided" ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:classification-assignment-assignment-source a owl:DatatypeProperty ;
+    rdfs:label "Assignment Source" ;
+    rdfs:comment "Where this classification originated (e.g. \"Candid import\", \"manual CommonGood assignment\")." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:classification-assignment-classification-concept-code a owl:DatatypeProperty ;
+    rdfs:label "Classification Concept Code" ;
+    rdfs:comment "The code of the term selected from the named classificationScheme (e.g. \"affordable-housing\"). A plain string, not independently validated against that scheme -- a reference-typed property's referenceScheme must be one fixed scheme declared on the property itself, and this field's scheme genuinely varies per instance. See docs/06-properties-and-rules.md for the full explanation of this known limitation." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required true .
+
+npoprop:classification-assignment-classification-scheme a owl:ObjectProperty ;
+    rdfs:label "Classification Scheme" ;
+    rdfs:comment "Which classification scheme classificationConceptCode is drawn from." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range skos:Concept ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:referenceScheme nporef:classification-scheme-registry ;
+    npo:required true .
+
+npoprop:classification-assignment-is-primary a owl:DatatypeProperty ;
+    rdfs:label "Is Primary" ;
+    rdfs:comment "Whether this is the exclusive reporting classification for the classified resource within this scheme. At most one Classification Assignment per classified resource + scheme should be primary -- see business rules." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:boolean ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required false .
+
+npoprop:classification-assignment-taxonomy-version a owl:DatatypeProperty ;
+    rdfs:label "Taxonomy Version" ;
+    rdfs:comment "The version or release of the classification scheme used for this assignment, so historical assignments retain the taxonomy version they were made under." ;
+    rdfs:domain npo:classification-assignment ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
 npoprop:closeout-date a owl:DatatypeProperty ;
     rdfs:label "Closeout Date" ;
     rdfs:comment "When Closeout was completed." ;
@@ -255,10 +396,24 @@ npoprop:compliance-requirement-requirement-type a owl:DatatypeProperty ;
     rdfs:comment "The kind of obligation the Compliance Requirement imposes." ;
     rdfs:domain npo:compliance-requirement ;
     rdfs:range xsd:string ;
-    npo:allowedValue "financial",
+    npo:allowedValue "acknowledgement",
+        "audit",
+        "books-and-records-access",
+        "certification",
+        "conflict-disclosure",
+        "data-protection",
+        "financial",
+        "financial-controls",
         "insurance",
+        "legal-compliance",
+        "notification-of-breach",
+        "notification-of-change",
         "other",
-        "reporting" ;
+        "publicity-requirement",
+        "records-retention",
+        "reporting",
+        "return-unused-funds",
+        "tax-status-maintenance" ;
     npo:cardinality "one" ;
     npo:group "governance" ;
     npo:required true .
@@ -456,6 +611,121 @@ npoprop:grant-agreement-status a owl:DatatypeProperty ;
     npo:group "lifecycle" ;
     npo:required true .
 
+npoprop:grant-condition-condition-barrier-type a owl:ObjectProperty ;
+    rdfs:label "Condition Barrier Type" ;
+    rdfs:comment "What kind of barrier this condition's entitlement, payment, continuation, release, or retention depends on." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range skos:Concept ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:referenceScheme nporef:condition-barrier-type ;
+    npo:required false .
+
+npoprop:grant-condition-condition-status a owl:DatatypeProperty ;
+    rdfs:label "Condition Status" ;
+    rdfs:comment "Whether this condition has been satisfied. Never inferred solely from dates." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "expired",
+        "not-applicable",
+        "not-satisfied",
+        "not-yet-assessed",
+        "partially-satisfied",
+        "pending",
+        "satisfied",
+        "waived" ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:grant-condition-due-date a owl:DatatypeProperty ;
+    rdfs:label "Due Date" ;
+    rdfs:comment "The date by which this condition must be satisfied, where applicable." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:grant-condition-failure-consequence a owl:DatatypeProperty ;
+    rdfs:label "Failure Consequence" ;
+    rdfs:comment "What happens if this condition is not met." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "award-reduced",
+        "award-suspended",
+        "award-terminated",
+        "corrective-action-required",
+        "funds-withheld",
+        "future-funding-affected",
+        "future-payment-withheld",
+        "none-specified",
+        "other",
+        "repayment-required",
+        "right-of-return" ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-condition-has-barrier a owl:DatatypeProperty ;
+    rdfs:label "Has Barrier" ;
+    rdfs:comment "Whether this condition has a defined barrier that must be overcome. Captures the fact without the ontology itself concluding that the grant is legally or accountingly \"conditional\" -- that determination may require separate accounting or legal analysis." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:boolean ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-condition-has-right-of-release a owl:DatatypeProperty ;
+    rdfs:label "Has Right Of Release" ;
+    rdfs:comment "Whether satisfying this condition releases funds that were otherwise being withheld." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:boolean ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-condition-has-right-of-return a owl:DatatypeProperty ;
+    rdfs:label "Has Right Of Return" ;
+    rdfs:comment "Whether failing this condition creates a right for the funder to require return of funds already disbursed." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:boolean ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-condition-threshold-operator a owl:DatatypeProperty ;
+    rdfs:label "Threshold Operator" ;
+    rdfs:comment "How the threshold value must be compared against to satisfy the condition." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "equal",
+        "greater-than",
+        "greater-than-or-equal",
+        "less-than",
+        "less-than-or-equal" ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
+npoprop:grant-condition-threshold-unit a owl:DatatypeProperty ;
+    rdfs:label "Threshold Unit" ;
+    rdfs:comment "The unit the threshold value is expressed in (e.g. USD, percent, participants)." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
+npoprop:grant-condition-threshold-value a owl:DatatypeProperty ;
+    rdfs:label "Threshold Value" ;
+    rdfs:comment "The numeric threshold this condition's barrier is measured against (e.g. 250000, or 10 for a percentage), where applicable." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:range xsd:decimal ;
+    npo:cardinality "one" ;
+    npo:group "financial" ;
+    npo:required false .
+
 npoprop:grant-program-status a owl:DatatypeProperty ;
     rdfs:label "Status" ;
     rdfs:comment "Where the Grant Program currently sits in its own lifecycle." ;
@@ -506,6 +776,97 @@ npoprop:grant-recommendation-status a owl:DatatypeProperty ;
     npo:cardinality "one" ;
     npo:group "lifecycle" ;
     npo:required true .
+
+npoprop:grant-term-effective-from a owl:DatatypeProperty ;
+    rdfs:label "Effective From" ;
+    rdfs:comment "When this specific term takes effect -- not assumed to equal the whole Grant Agreement's effective date." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:grant-term-effective-until a owl:DatatypeProperty ;
+    rdfs:label "Effective Until" ;
+    rdfs:comment "When this specific term stops applying, if it has an end date." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:grant-term-normalization-method a owl:DatatypeProperty ;
+    rdfs:label "Normalization Method" ;
+    rdfs:comment "How this term was normalized from its source. Machine-derived normalization is not treated as equivalent to source-provided structured data." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "imported-structured",
+        "machine-assisted",
+        "manual",
+        "reviewed-machine-assisted",
+        "rules-based" ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-normalization-status a owl:DatatypeProperty ;
+    rdfs:label "Normalization Status" ;
+    rdfs:comment "Whether this term's normalization from source text is complete, partial, or still needs review. Preferred over forcing an uncertain clause into an incorrect category." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "mapped",
+        "needs-review",
+        "not-applicable",
+        "partially-mapped",
+        "unmapped" ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-original-term-text a owl:DatatypeProperty ;
+    rdfs:label "Original Term Text" ;
+    rdfs:comment "The term's original source wording, preserved verbatim. Recommended for imported terms; the normalized classification is an interpretation of this text, not a replacement for it." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-source-clause-identifier a owl:DatatypeProperty ;
+    rdfs:label "Source Clause Identifier" ;
+    rdfs:comment "An identifier tying this term back to the specific source clause it was segmented from -- lets several Grant Terms normalized from one free-text field retain a shared linkage back to that field." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-source-field a owl:DatatypeProperty ;
+    rdfs:label "Source Field" ;
+    rdfs:comment "The source system's field this term was imported from, if any." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-source-record-identifier a owl:DatatypeProperty ;
+    rdfs:label "Source Record Identifier" ;
+    rdfs:comment "The identifier of the source record this term was imported from, if any." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
+npoprop:grant-term-source-system a owl:DatatypeProperty ;
+    rdfs:label "Source System" ;
+    rdfs:comment "The system this term was imported from (e.g. Tides), if any." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
 
 npoprop:indirect-cost-rate-rate a owl:DatatypeProperty ;
     rdfs:label "Rate" ;
@@ -821,6 +1182,72 @@ npoprop:report-submitted-date a owl:DatatypeProperty ;
     npo:group "lifecycle" ;
     npo:required false .
 
+npoprop:reporting-requirement-due-date a owl:DatatypeProperty ;
+    rdfs:label "Due Date" ;
+    rdfs:comment "When a specific instance of this report is due." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:reporting-requirement-frequency a owl:ObjectProperty ;
+    rdfs:label "Frequency" ;
+    rdfs:comment "How often this report is due, reusing the same Frequency scheme Reporting Schedule already uses." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range skos:Concept ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:referenceScheme nporef:frequency ;
+    npo:required false .
+
+npoprop:reporting-requirement-report-type a owl:DatatypeProperty ;
+    rdfs:label "Report Type" ;
+    rdfs:comment "What kind of report this requirement obligates." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "audit-report",
+        "certification-report",
+        "closeout-report",
+        "expenditure-report",
+        "final-report",
+        "financial-report",
+        "impact-report",
+        "other",
+        "outcome-report",
+        "programmatic-report",
+        "progress-report" ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required true .
+
+npoprop:reporting-requirement-reporting-period-end a owl:DatatypeProperty ;
+    rdfs:label "Reporting Period End" ;
+    rdfs:comment "The end of the period this report covers." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:reporting-requirement-reporting-period-start a owl:DatatypeProperty ;
+    rdfs:label "Reporting Period Start" ;
+    rdfs:comment "The start of the period this report covers." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range xsd:date ;
+    npo:cardinality "one" ;
+    npo:group "lifecycle" ;
+    npo:required false .
+
+npoprop:reporting-requirement-required-format a owl:DatatypeProperty ;
+    rdfs:label "Required Format" ;
+    rdfs:comment "The format the report must be submitted in, where the funder specifies one." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "governance" ;
+    npo:required false .
+
 npoprop:reporting-schedule-frequency a owl:ObjectProperty ;
     rdfs:label "Frequency" ;
     rdfs:comment "How often Reports are due under this Reporting Schedule." ;
@@ -967,7 +1394,7 @@ npoprop:target-value a owl:DatatypeProperty ;
 
 npoprop:terms-and-conditions-restriction-type a owl:DatatypeProperty ;
     rdfs:label "Restriction Type" ;
-    rdfs:comment "Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding." ;
+    rdfs:comment "Whether the funding governed by these Terms and Conditions is Restricted or Unrestricted Funding. A coarse flag, superseded for new data by one or more structured Use Restriction Grant Terms (see grant-term), which can express what specifically the funding is restricted to or from -- retained here for backward compatibility." ;
     rdfs:domain npo:terms-and-conditions ;
     rdfs:range xsd:string ;
     npo:allowedValue "restricted",
@@ -975,6 +1402,84 @@ npoprop:terms-and-conditions-restriction-type a owl:DatatypeProperty ;
     npo:cardinality "one" ;
     npo:group "governance" ;
     npo:required true .
+
+npoprop:use-restriction-restricted-to a owl:DatatypeProperty ;
+    rdfs:label "Restricted To" ;
+    rdfs:comment "Free-text naming what the funds are specifically restricted to (e.g. a project or program name), where applicable." ;
+    rdfs:domain npo:use-restriction ;
+    rdfs:range xsd:string ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required false .
+
+npoprop:use-restriction-restriction-mode a owl:DatatypeProperty ;
+    rdfs:label "Restriction Mode" ;
+    rdfs:comment "Whether this restriction requires a use, merely permits it, or prohibits it. An Award may carry more than one Use Restriction with different modes (e.g. a required-use restriction to a project, and a separate prohibited-use restriction on lobbying)." ;
+    rdfs:domain npo:use-restriction ;
+    rdfs:range xsd:string ;
+    npo:allowedValue "permitted-use",
+        "prohibited-use",
+        "required-use" ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:required false .
+
+npoprop:use-restriction-restriction-type a owl:ObjectProperty ;
+    rdfs:label "Restriction Type" ;
+    rdfs:comment "The nature of what this Use Restriction limits grant funds to or from." ;
+    rdfs:domain npo:use-restriction ;
+    rdfs:range skos:Concept ;
+    npo:cardinality "one" ;
+    npo:group "classification" ;
+    npo:referenceScheme nporef:use-restriction-type ;
+    npo:required true .
+
+nporef:candid-pcs-populations-economically-disadvantaged-people a skos:Concept ;
+    skos:definition "Illustrative placeholder for Candid PCS's Economically Disadvantaged People population." ;
+    skos:inScheme nporef:candid-pcs-populations ;
+    skos:notation "economically-disadvantaged-people" ;
+    skos:prefLabel "Economically Disadvantaged People" .
+
+nporef:candid-pcs-populations-people-of-color a skos:Concept ;
+    skos:definition "Illustrative placeholder for Candid PCS's People of Color population." ;
+    skos:inScheme nporef:candid-pcs-populations ;
+    skos:notation "people-of-color" ;
+    skos:prefLabel "People of Color" .
+
+nporef:candid-pcs-populations-young-adults a skos:Concept ;
+    skos:definition "Illustrative placeholder for Candid PCS's Young Adults population." ;
+    skos:inScheme nporef:candid-pcs-populations ;
+    skos:notation "young-adults" ;
+    skos:prefLabel "Young Adults" .
+
+nporef:candid-pcs-subjects-affordable-housing a skos:Concept ;
+    skos:broadMatch nporef:issue-area-housing ;
+    skos:broader nporef:candid-pcs-subjects-housing-development ;
+    skos:definition "Illustrative placeholder for Candid PCS's Affordable Housing subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "affordable-housing" ;
+    skos:prefLabel "Affordable Housing" .
+
+nporef:candid-pcs-subjects-economic-development a skos:Concept ;
+    skos:broadMatch nporef:issue-area-economic-development ;
+    skos:definition "Illustrative placeholder for Candid PCS's Economic Development subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "economic-development" ;
+    skos:prefLabel "Economic Development" .
+
+nporef:candid-pcs-subjects-education a skos:Concept ;
+    skos:broadMatch nporef:issue-area-education ;
+    skos:definition "Illustrative placeholder for Candid PCS's Education subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "education" ;
+    skos:prefLabel "Education" .
+
+nporef:candid-pcs-subjects-environment a skos:Concept ;
+    skos:broadMatch nporef:issue-area-environment ;
+    skos:definition "Illustrative placeholder for Candid PCS's Environment subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "environment" ;
+    skos:prefLabel "Environment" .
 
 nporef:claim-type-association a skos:Concept ;
     skos:definition "Two phenomena are observed together, without asserting that one influenced the other." ;
@@ -999,6 +1504,132 @@ nporef:claim-type-contribution a skos:Concept ;
     skos:inScheme nporef:claim-type ;
     skos:notation "contribution" ;
     skos:prefLabel "Contribution" .
+
+nporef:classification-scheme-registry-candid-pcs-organization-types a skos:Concept ;
+    skos:definition "Candid's Philanthropy Classification System organization-type facet. Registered but not yet populated as its own reference-data file." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "candid-pcs-organization-types" ;
+    skos:prefLabel "Candid PCS Organization Types" .
+
+nporef:classification-scheme-registry-candid-pcs-populations a skos:Concept ;
+    skos:definition "Candid's Philanthropy Classification System population facet -- what population(s) a resource serves or describes." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "candid-pcs-populations" ;
+    skos:prefLabel "Candid PCS Populations" .
+
+nporef:classification-scheme-registry-candid-pcs-subjects a skos:Concept ;
+    skos:definition "Candid's Philanthropy Classification System subject facet -- what issue or subject a resource addresses or supports." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "candid-pcs-subjects" ;
+    skos:prefLabel "Candid PCS Subjects" .
+
+nporef:classification-scheme-registry-candid-pcs-support-strategies a skos:Concept ;
+    skos:definition "Candid's Philanthropy Classification System support-strategy facet. Registered but not yet populated as its own reference-data file." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "candid-pcs-support-strategies" ;
+    skos:prefLabel "Candid PCS Support Strategies" .
+
+nporef:classification-scheme-registry-candid-pcs-transaction-types a skos:Concept ;
+    skos:definition "Candid's Philanthropy Classification System transaction-type facet -- the form through which support is provided or received. Registered but not yet populated as its own reference-data file." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "candid-pcs-transaction-types" ;
+    skos:prefLabel "Candid PCS Transaction Types" .
+
+nporef:classification-scheme-registry-commongood-issue-areas a skos:Concept ;
+    skos:definition "This ontology's own Issue Area scheme (see issue-area.json), usable as a classification scheme in its own right alongside external taxonomies." ;
+    skos:inScheme nporef:classification-scheme-registry ;
+    skos:notation "commongood-issue-areas" ;
+    skos:prefLabel "CommonGood Issue Areas" .
+
+nporef:condition-barrier-type-cost-sharing-requirement a skos:Concept ;
+    skos:definition "Contingent on sharing costs alongside the award." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "cost-sharing-requirement" ;
+    skos:prefLabel "Cost-Sharing Requirement" .
+
+nporef:condition-barrier-type-fundraising-target a skos:Concept ;
+    skos:definition "Contingent on reaching a fundraising target." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "fundraising-target" ;
+    skos:prefLabel "Fundraising Target" .
+
+nporef:condition-barrier-type-matching-requirement a skos:Concept ;
+    skos:definition "Contingent on raising or contributing matching funds." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "matching-requirement" ;
+    skos:prefLabel "Matching Requirement" .
+
+nporef:condition-barrier-type-other a skos:Concept ;
+    skos:definition "A condition barrier not captured by another value in this scheme." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "other" ;
+    skos:prefLabel "Other" .
+
+nporef:condition-barrier-type-other-measurable-barrier a skos:Concept ;
+    skos:definition "Contingent on another measurable barrier not otherwise listed." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "other-measurable-barrier" ;
+    skos:prefLabel "Other Measurable Barrier" .
+
+nporef:condition-barrier-type-outcome-threshold a skos:Concept ;
+    skos:definition "Contingent on reaching a specified outcome level." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "outcome-threshold" ;
+    skos:prefLabel "Outcome Threshold" .
+
+nporef:condition-barrier-type-output-threshold a skos:Concept ;
+    skos:definition "Contingent on reaching a specified output count." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "output-threshold" ;
+    skos:prefLabel "Output Threshold" .
+
+nporef:condition-barrier-type-performance-milestone a skos:Concept ;
+    skos:definition "Contingent on reaching a defined performance milestone." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "performance-milestone" ;
+    skos:prefLabel "Performance Milestone" .
+
+nporef:condition-barrier-type-qualifying-expenses a skos:Concept ;
+    skos:definition "Contingent on incurring qualifying expenses." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "qualifying-expenses" ;
+    skos:prefLabel "Qualifying Expenses" .
+
+nporef:condition-barrier-type-regulatory-approval a skos:Concept ;
+    skos:definition "Contingent on obtaining regulatory approval." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "regulatory-approval" ;
+    skos:prefLabel "Regulatory Approval" .
+
+nporef:condition-barrier-type-service-level-threshold a skos:Concept ;
+    skos:definition "Contingent on reaching a specified service level." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "service-level-threshold" ;
+    skos:prefLabel "Service-Level Threshold" .
+
+nporef:condition-barrier-type-specified-event a skos:Concept ;
+    skos:definition "Contingent on a specified event occurring." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "specified-event" ;
+    skos:prefLabel "Specified Event" .
+
+nporef:condition-barrier-type-specified-method a skos:Concept ;
+    skos:definition "Contingent on using a specified method." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "specified-method" ;
+    skos:prefLabel "Specified Method" .
+
+nporef:condition-barrier-type-specified-personnel a skos:Concept ;
+    skos:definition "Contingent on specified personnel being engaged." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "specified-personnel" ;
+    skos:prefLabel "Specified Personnel" .
+
+nporef:condition-barrier-type-specified-protocol a skos:Concept ;
+    skos:definition "Contingent on following a specified protocol." ;
+    skos:inScheme nporef:condition-barrier-type ;
+    skos:notation "specified-protocol" ;
+    skos:prefLabel "Specified Protocol" .
 
 nporef:evidence-strength-anecdotal a skos:Concept ;
     skos:definition "Based on isolated stories or individual accounts, not a systematic review." ;
@@ -1060,24 +1691,6 @@ nporef:issue-area-arts-and-culture a skos:Concept ;
     skos:notation "arts-and-culture" ;
     skos:prefLabel "Arts and Culture" .
 
-nporef:issue-area-economic-development a skos:Concept ;
-    skos:definition "Employment, income, and local economic opportunity." ;
-    skos:inScheme nporef:issue-area ;
-    skos:notation "economic-development" ;
-    skos:prefLabel "Economic Development" .
-
-nporef:issue-area-education a skos:Concept ;
-    skos:definition "Access to and quality of learning, from early childhood through adult education." ;
-    skos:inScheme nporef:issue-area ;
-    skos:notation "education" ;
-    skos:prefLabel "Education" .
-
-nporef:issue-area-environment a skos:Concept ;
-    skos:definition "Conservation, climate, and natural-resource stewardship." ;
-    skos:inScheme nporef:issue-area ;
-    skos:notation "environment" ;
-    skos:prefLabel "Environment" .
-
 nporef:issue-area-food-security a skos:Concept ;
     skos:definition "Reliable access to sufficient, affordable, nutritious food." ;
     skos:inScheme nporef:issue-area ;
@@ -1089,12 +1702,6 @@ nporef:issue-area-health a skos:Concept ;
     skos:inScheme nporef:issue-area ;
     skos:notation "health" ;
     skos:prefLabel "Health" .
-
-nporef:issue-area-housing a skos:Concept ;
-    skos:definition "Access to safe, stable, and affordable housing." ;
-    skos:inScheme nporef:issue-area ;
-    skos:notation "housing" ;
-    skos:prefLabel "Housing" .
 
 nporef:issue-area-human-rights a skos:Concept ;
     skos:definition "Civil rights, civil liberties, and human-rights advocacy." ;
@@ -1131,12 +1738,6 @@ nporef:publication-status-deprecated a skos:Concept ;
     skos:inScheme nporef:publication-status ;
     skos:notation "deprecated" ;
     skos:prefLabel "Deprecated" .
-
-nporef:publication-status-draft a skos:Concept ;
-    skos:definition "The scheme is still being defined and does not yet constrain any concept property." ;
-    skos:inScheme nporef:publication-status ;
-    skos:notation "draft" ;
-    skos:prefLabel "Draft" .
 
 nporef:restriction-type-permanently-restricted a skos:Concept ;
     skos:broader nporef:restriction-type-donor-restricted ;
@@ -1187,6 +1788,132 @@ nporef:role-status-suspended a skos:Concept ;
     skos:inScheme nporef:role-status ;
     skos:notation "suspended" ;
     skos:prefLabel "Suspended" .
+
+nporef:use-restriction-type-capital-only a skos:Concept ;
+    skos:definition "Restricted to capital expenditures." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "capital-only" ;
+    skos:prefLabel "Capital Only" .
+
+nporef:use-restriction-type-endowment a skos:Concept ;
+    skos:definition "Restricted to an endowment fund." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "endowment" ;
+    skos:prefLabel "Endowment" .
+
+nporef:use-restriction-type-equipment-only a skos:Concept ;
+    skos:definition "Restricted to equipment purchases." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "equipment-only" ;
+    skos:prefLabel "Equipment Only" .
+
+nporef:use-restriction-type-general-purpose a skos:Concept ;
+    skos:definition "Not restricted beyond the grantee's general mission." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "general-purpose" ;
+    skos:prefLabel "General Purpose" .
+
+nporef:use-restriction-type-individual-benefit a skos:Concept ;
+    skos:definition "Concerns benefit to a specific individual, typically as a prohibited use." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "individual-benefit" ;
+    skos:prefLabel "Individual Benefit" .
+
+nporef:use-restriction-type-lobbying a skos:Concept ;
+    skos:definition "Concerns lobbying activity, typically as a prohibited use." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "lobbying" ;
+    skos:prefLabel "Lobbying" .
+
+nporef:use-restriction-type-noncharitable-purpose a skos:Concept ;
+    skos:definition "Concerns use for a noncharitable purpose, typically as a prohibited use." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "noncharitable-purpose" ;
+    skos:prefLabel "Noncharitable Purpose" .
+
+nporef:use-restriction-type-other a skos:Concept ;
+    skos:definition "A use restriction not captured by another value in this scheme." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "other" ;
+    skos:prefLabel "Other" .
+
+nporef:use-restriction-type-political-campaign-activity a skos:Concept ;
+    skos:definition "Concerns political campaign activity, typically as a prohibited use." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "political-campaign-activity" ;
+    skos:prefLabel "Political Campaign Activity" .
+
+nporef:use-restriction-type-regranting a skos:Concept ;
+    skos:definition "Restricted to redistribution as regrants." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "regranting" ;
+    skos:prefLabel "Regranting" .
+
+nporef:use-restriction-type-scholarship a skos:Concept ;
+    skos:definition "Restricted to scholarship purposes." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "scholarship" ;
+    skos:prefLabel "Scholarship" .
+
+nporef:use-restriction-type-specific-activity a skos:Concept ;
+    skos:definition "Restricted to a named activity." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-activity" ;
+    skos:prefLabel "Specific Activity" .
+
+nporef:use-restriction-type-specific-budget a skos:Concept ;
+    skos:definition "Restricted to a specific approved budget." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-budget" ;
+    skos:prefLabel "Specific Budget" .
+
+nporef:use-restriction-type-specific-cost-category a skos:Concept ;
+    skos:definition "Restricted to a specific cost category (e.g. personnel, equipment)." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-cost-category" ;
+    skos:prefLabel "Specific Cost Category" .
+
+nporef:use-restriction-type-specific-geography a skos:Concept ;
+    skos:definition "Restricted to a named geographic area." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-geography" ;
+    skos:prefLabel "Specific Geography" .
+
+nporef:use-restriction-type-specific-population a skos:Concept ;
+    skos:definition "Restricted to serving a named population." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-population" ;
+    skos:prefLabel "Specific Population" .
+
+nporef:use-restriction-type-specific-program a skos:Concept ;
+    skos:definition "Restricted to a named program." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-program" ;
+    skos:prefLabel "Specific Program" .
+
+nporef:use-restriction-type-specific-project a skos:Concept ;
+    skos:definition "Restricted to a named project." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-project" ;
+    skos:prefLabel "Specific Project" .
+
+nporef:use-restriction-type-specific-time-period a skos:Concept ;
+    skos:definition "Restricted to use within a defined time period." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "specific-time-period" ;
+    skos:prefLabel "Specific Time Period" .
+
+nporef:use-restriction-type-subgranting a skos:Concept ;
+    skos:definition "Restricted to redistribution as subgrants." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "subgranting" ;
+    skos:prefLabel "Subgranting" .
+
+nporef:use-restriction-type-voter-registration a skos:Concept ;
+    skos:definition "Concerns voter registration activity." ;
+    skos:inScheme nporef:use-restriction-type ;
+    skos:notation "voter-registration" ;
+    skos:prefLabel "Voter Registration" .
 
 nporel:aboutResult a owl:ObjectProperty ;
     rdfs:label "is about" ;
@@ -1286,6 +2013,13 @@ nporel:attachesComplianceRequirement a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end> ;
     rdfs:range npo:compliance-requirement .
 
+nporel:awardHasClassification a owl:ObjectProperty ;
+    rdfs:label "has classification" ;
+    rdfs:comment "An Award has one or more Classification Assignments (e.g. Candid PCS Subjects) drawn from an external or internal classification scheme. The scheme classifies the Award; it does not redefine it." ;
+    rdfs:domain npo:award ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification> ;
+    rdfs:range npo:classification-assignment .
+
 nporel:awardedBy a owl:ObjectProperty ;
     rdfs:label "is awarded by" ;
     rdfs:comment "An Award is awarded by an Organization -- the original source of the funding, which may differ from the organization that administers it." ;
@@ -1384,6 +2118,13 @@ nporel:formalizedByGrantAgreement a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end> ;
     rdfs:range npo:grant-agreement .
 
+nporel:fulfilledByReport a owl:ObjectProperty ;
+    rdfs:label "is fulfilled by" ;
+    rdfs:comment "A Reporting Requirement is fulfilled by a submitted Report. Requirement is what must be supplied; Report is the artifact that was actually supplied." ;
+    rdfs:domain npo:reporting-requirement ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    rdfs:range npo:report .
+
 nporel:fundedBy a owl:ObjectProperty ;
     rdfs:label "is funded by" ;
     rdfs:comment "A Grant Program is funded by a Fund -- the pool of financial resources backing the program's giving strategy." ;
@@ -1411,6 +2152,20 @@ nporel:governs a owl:ObjectProperty ;
     rdfs:domain npo:donor-advised-fund-arrangement ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md> ;
     rdfs:range npo:donor-advised-fund .
+
+nporel:grantTermAppliesToAward a owl:ObjectProperty ;
+    rdfs:label "applies to" ;
+    rdfs:comment "A Grant Term applies to a specific Award. Declared against the abstract Grant Term concept, used by Use Restriction, Grant Condition, Approval Requirement, and Reporting Requirement instances -- Compliance Requirement keeps its own existing, more specific appliesToAward predicate unchanged, and Matching Requirement/Payment Condition/Reporting Schedule are already reachable from Award through their existing relationships, so none of those three need this one too." ;
+    rdfs:domain npo:grant-term ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    rdfs:range npo:award .
+
+nporel:hasConditionResponsibleParty a owl:ObjectProperty ;
+    rdfs:label "has responsible party" ;
+    rdfs:comment "A Grant Condition optionally identifies the Agent (Person or Organization) responsible for satisfying it -- e.g. the grantee organization for a matching requirement, or a fiscal sponsor rather than the project itself." ;
+    rdfs:domain npo:grant-condition ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    rdfs:range npo:agent .
 
 nporel:hasLegalForm a owl:ObjectProperty ;
     rdfs:label "has legal form" ;
@@ -1696,6 +2451,13 @@ nporel:pools a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md> ;
     rdfs:range npo:fund .
 
+nporel:populationHasClassification a owl:ObjectProperty ;
+    rdfs:label "has classification" ;
+    rdfs:comment "A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms." ;
+    rdfs:domain npo:population ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification> ;
+    rdfs:range npo:classification-assignment .
+
 nporel:producesDecision a owl:ObjectProperty ;
     rdfs:label "produces" ;
     rdfs:comment "A Review produces a Decision." ;
@@ -1752,6 +2514,13 @@ nporel:regrantsTo a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/08-organizations-roles-and-arrangements.md> ;
     rdfs:range npo:organization .
 
+nporel:requiresApprovalFrom a owl:ObjectProperty ;
+    rdfs:label "requires approval from" ;
+    rdfs:comment "An Approval Requirement identifies the Agent whose authorization is required before the governed change, expenditure, action, or deviation may occur -- typically the Funder." ;
+    rdfs:domain npo:approval-requirement ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    rdfs:range npo:agent .
+
 nporel:respondsToFundingOpportunity a owl:ObjectProperty ;
     rdfs:label "responds to" ;
     rdfs:comment "An Application is submitted in response to a specific Funding Opportunity." ;
@@ -1793,6 +2562,13 @@ nporel:specifiesEligibilityCriteria a owl:ObjectProperty ;
     rdfs:domain npo:funding-opportunity ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end> ;
     rdfs:range npo:eligibility-criteria .
+
+nporel:specifiesGrantTerm a owl:ObjectProperty ;
+    rdfs:label "specifies" ;
+    rdfs:comment "A Grant Agreement specifies one or more Grant Terms. Declared against the abstract Grant Term concept rather than each subtype separately, so any Use Restriction, Grant Condition, Approval Requirement, Reporting Requirement, Compliance Requirement, or Reporting Schedule instance satisfies it the same way." ;
+    rdfs:domain npo:grant-agreement ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    rdfs:range npo:grant-term .
 
 nporel:specifiesTermsAndConditions a owl:ObjectProperty ;
     rdfs:label "specifies" ;
@@ -1868,6 +2644,28 @@ nporule:rule-award-requires-approved-decision a npo:BusinessRule ;
         npo:award,
         npo:decision .
 
+nporule:rule-classification-assignment-allocation-should-sum-to-100 a npo:BusinessRule ;
+    rdfs:label "Allocation percentages should sum to 100 when allocation is asserted complete" ;
+    rdfs:comment "When a classified resource's Classification Assignments for a given scheme carry an Allocation Percentage, those percentages should sum to 100 once the allocation is asserted as complete. An incomplete sum is a data-quality signal to surface, not a gap to silently renormalize or complete on the resource's behalf." ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification> ;
+    npo:appliesTo npo:award,
+        npo:classification-assignment,
+        npo:population .
+
+nporule:rule-classification-assignment-at-most-one-primary a npo:BusinessRule ;
+    rdfs:label "At most one primary Classification Assignment per resource and scheme" ;
+    rdfs:comment "For a given classified resource (e.g. an Award or a Population) and a given classification scheme, at most one Classification Assignment should have Is Primary set to true -- multiple simultaneous primaries make Primary-mode reporting ambiguous about which classification the resource is chiefly attributed to." ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification> ;
+    npo:appliesTo npo:award,
+        npo:classification-assignment,
+        npo:population .
+
+nporule:rule-classification-rolls-up-not-down a npo:BusinessRule ;
+    rdfs:label "Classification rolls upward through broader terms, never downward" ;
+    rdfs:comment "A Classification Assignment's Classification Concept Code rolls upward through that concept's Broader chain for reporting purposes -- a resource explicitly classified under a narrower term is implicitly also covered by every broader ancestor. The reverse never holds: a resource explicitly classified under a broader term is not implicitly classified under any of its more specific descendants, since the source data made no claim that specific." ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#classification> ;
+    npo:appliesTo npo:classification-assignment .
+
 nporule:rule-closeout-requires-payments-and-reports a npo:BusinessRule ;
     rdfs:label "Closeout requires both financial and reporting conditions" ;
     rdfs:comment "Closeout requires both financial conditions (all Payments made or the award formally reduced) and reporting conditions (all required Reports accepted) to be true." ;
@@ -1891,6 +2689,18 @@ nporule:rule-grant-recommendation-non-binding a npo:BusinessRule ;
     npo:appliesTo npo:award,
         npo:donor-advised-fund,
         npo:grant-recommendation .
+
+nporule:rule-grant-term-should-identify-its-award a npo:BusinessRule ;
+    rdfs:label "A Grant Term should identify which Award it applies to" ;
+    rdfs:comment "A Grant Term should specify the Award it applies to (via Grant Term Applies To Award, or, for a Compliance Requirement, its own existing Applies To Award relationship), unless it is still in draft or unnormalized form -- an Award-less Grant Term that has completed normalization is missing the link that makes it actionable." ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#grant-terms> ;
+    npo:appliesTo npo:approval-requirement,
+        npo:award,
+        npo:compliance-requirement,
+        npo:grant-condition,
+        npo:grant-term,
+        npo:reporting-requirement,
+        npo:use-restriction .
 
 nporule:rule-installment-condition-before-payment a npo:BusinessRule ;
     rdfs:label "An Installment's Payment Condition must be met before release" ;
@@ -2018,6 +2828,43 @@ npo:program-officer a owl:Class ;
     skos:definition "The role a person occupies when they manage a portfolio of grants on behalf of a funder, from soliciting or reviewing applications through monitoring active awards." ;
     npo:category "organizational-entities" .
 
+nporef:candid-pcs-subjects-housing a skos:Concept ;
+    skos:definition "Illustrative placeholder for Candid PCS's Housing subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "housing" ;
+    skos:prefLabel "Housing" .
+
+nporef:candid-pcs-subjects-housing-development a skos:Concept ;
+    skos:broader nporef:candid-pcs-subjects-housing ;
+    skos:definition "Illustrative placeholder for Candid PCS's Housing Development subject." ;
+    skos:inScheme nporef:candid-pcs-subjects ;
+    skos:notation "housing-development" ;
+    skos:prefLabel "Housing Development" .
+
+nporef:issue-area-economic-development a skos:Concept ;
+    skos:definition "Employment, income, and local economic opportunity." ;
+    skos:inScheme nporef:issue-area ;
+    skos:notation "economic-development" ;
+    skos:prefLabel "Economic Development" .
+
+nporef:issue-area-education a skos:Concept ;
+    skos:definition "Access to and quality of learning, from early childhood through adult education." ;
+    skos:inScheme nporef:issue-area ;
+    skos:notation "education" ;
+    skos:prefLabel "Education" .
+
+nporef:issue-area-environment a skos:Concept ;
+    skos:definition "Conservation, climate, and natural-resource stewardship." ;
+    skos:inScheme nporef:issue-area ;
+    skos:notation "environment" ;
+    skos:prefLabel "Environment" .
+
+nporef:issue-area-housing a skos:Concept ;
+    skos:definition "Access to safe, stable, and affordable housing." ;
+    skos:inScheme nporef:issue-area ;
+    skos:notation "housing" ;
+    skos:prefLabel "Housing" .
+
 npo:regranting-arrangement a owl:Class ;
     rdfs:label "Regranting Arrangement" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#funding-structure> ;
@@ -2119,6 +2966,12 @@ npo:need a owl:Class ;
     skos:definition "A condition, problem, gap, or opportunity identified as warranting intervention or investment." ;
     npo:category "outcomes-and-closeout" .
 
+nporef:publication-status-draft a skos:Concept ;
+    skos:definition "The scheme is still being defined and does not yet constrain any concept property." ;
+    skos:inScheme nporef:publication-status ;
+    skos:notation "draft" ;
+    skos:prefLabel "Draft" .
+
 nporef:restriction-type-donor-restricted a skos:Concept ;
     skos:definition "The fund's use is constrained by the donor, without specifying here whether the constraint is time-limited or perpetual." ;
     skos:inScheme nporef:restriction-type ;
@@ -2135,7 +2988,7 @@ nporel:agentPlaysRole a owl:ObjectProperty ;
 npo:terms-and-conditions a owl:Class ;
     rdfs:label "Terms and Conditions" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
-    skos:definition "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements)." ;
+    skos:definition "The specific obligations, restrictions, and expectations attached to an award (e.g., allowable uses of funds, reporting requirements). Its own restrictionType property is a coarse restricted/unrestricted flag, superseded for new data by the structured Use Restriction model (see Grant Term) -- retained for backward compatibility." ;
     npo:category "award-and-agreement" .
 
 npo:theory-of-change a owl:Class ;
@@ -2149,12 +3002,6 @@ npo:activity a owl:Class ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#outcomes-and-closeout> ;
     skos:definition "A defined action or body of work performed by a Project to produce Outputs and contribute toward intended Outcomes." ;
     npo:category "outcomes-and-closeout" .
-
-npo:agent a owl:Class ;
-    rdfs:label "Agent" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting> ;
-    skos:definition "An entity capable of participating in an activity, relationship, decision, transaction, or role. Person and Organization are its two subtypes." ;
-    npo:category "cross-cutting" .
 
 npo:audit a owl:Class ;
     rdfs:label "Audit" ;
@@ -2192,12 +3039,14 @@ npo:indicator a owl:Class ;
 npo:matching-requirement a owl:Class ;
     rdfs:label "Matching Requirement" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    rdfs:subClassOf npo:grant-condition ;
     skos:definition "A condition requiring the grantee to raise or contribute additional funds alongside the award, often as a ratio (e.g., 1:1 match)." ;
     npo:category "award-and-agreement" .
 
 npo:payment-condition a owl:Class ;
     rdfs:label "Payment Condition" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#disbursement> ;
+    rdfs:subClassOf npo:grant-condition ;
     skos:definition "A requirement (e.g., a submitted report, a milestone reached) that must be satisfied before a scheduled payment is released." ;
     npo:category "disbursement" .
 
@@ -2216,11 +3065,13 @@ npo:person a owl:Class ;
     skos:definition "A natural person who participates in nonprofit, philanthropic, governance, employment, advisory, or service relationships." ;
     npo:category "organizational-entities" .
 
-npo:population a owl:Class ;
-    rdfs:label "Population" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#outcomes-and-closeout> ;
-    skos:definition "A group of people defined by demographic, geographic, institutional, experiential, or other characteristics relevant to a Need, Project, Result, or Evaluation." ;
-    npo:category "outcomes-and-closeout" .
+nporef:candid-pcs-populations a skos:ConceptScheme ;
+    skos:definition "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Populations facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. Multiple population classifications on the same Population resource are valid, since a population may have several characteristics at once." ;
+    skos:prefLabel "Candid PCS Populations" ;
+    npo:authorityType "external" ;
+    npo:publicationStatus nporef:publication-status-draft ;
+    npo:schemeDomain "classification" ;
+    npo:version "illustrative-subset" .
 
 nporef:publication-status a skos:ConceptScheme ;
     skos:definition "The lifecycle state of a reference-data scheme itself -- whether it's still being drafted, actively governing one or more properties, or deprecated in favor of something else. Distinct from a single value's own `deprecated` flag: a scheme can stay published while one of its values is retired." ;
@@ -2233,6 +3084,7 @@ nporef:publication-status a skos:ConceptScheme ;
 npo:reporting-schedule a owl:Class ;
     rdfs:label "Reporting Schedule" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting> ;
+    rdfs:subClassOf npo:grant-term ;
     skos:definition "The agreed cadence and due dates for narrative and financial reports over the life of an award." ;
     npo:category "compliance-and-reporting" .
 
@@ -2277,6 +3129,19 @@ npo:outcome a owl:Class ;
     skos:definition "A change in condition, behavior, knowledge, capacity, practice, or status that is intended or observed in association with a Project or Activity, distinct from a direct Output. A recorded Outcome does not by itself establish that the Project caused it -- see Evidence Claim for how a specific causal or contributory interpretation is represented and evidenced." ;
     npo:category "outcomes-and-closeout" .
 
+npo:use-restriction a owl:Class ;
+    rdfs:label "Use Restriction" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    rdfs:subClassOf npo:grant-term ;
+    skos:definition "A Grant Term limiting the purposes, activities, populations, geographies, time periods, cost categories, or other uses for which grant resources may be applied. Governs permitted use -- distinct from a Grant Condition, which governs whether some entitlement, payment, or continuation becomes effective." ;
+    npo:category "award-and-agreement" .
+
+npo:agent a owl:Class ;
+    rdfs:label "Agent" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting> ;
+    skos:definition "An entity capable of participating in an activity, relationship, decision, transaction, or role. Person and Organization are its two subtypes." ;
+    npo:category "cross-cutting" .
+
 npo:decision a owl:Class ;
     rdfs:label "Decision" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#application-and-review> ;
@@ -2308,14 +3173,6 @@ nporef:claim-type a skos:ConceptScheme ;
     npo:authorityType "internal" ;
     npo:publicationStatus nporef:publication-status-published ;
     npo:schemeDomain "program" ;
-    npo:version "1.0.0" .
-
-nporef:frequency a skos:ConceptScheme ;
-    skos:definition "How often a recurring obligation is due. Currently used for how often Reports are due under a Reporting Schedule; generic enough to apply to other recurring obligations later without a new scheme." ;
-    skos:prefLabel "Frequency" ;
-    npo:authorityType "internal" ;
-    npo:publicationStatus nporef:publication-status-published ;
-    npo:schemeDomain "scheduling" ;
     npo:version "1.0.0" .
 
 nporef:organization-operating-status a skos:ConceptScheme ;
@@ -2372,12 +3229,34 @@ npo:logic-model a owl:Class ;
     skos:definition "A structured diagram connecting a project's inputs, activities, outputs, and outcomes, used to plan and evaluate a grant-funded project." ;
     npo:category "outcomes-and-closeout" .
 
+npo:population a owl:Class ;
+    rdfs:label "Population" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#outcomes-and-closeout> ;
+    skos:definition "A group of people defined by demographic, geographic, institutional, experiential, or other characteristics relevant to a Need, Project, Result, or Evaluation." ;
+    npo:category "outcomes-and-closeout" .
+
+nporef:candid-pcs-subjects a skos:ConceptScheme ;
+    skos:definition "A small illustrative subset of Candid's Philanthropy Classification System (PCS) Subjects facet, used to demonstrate CommonGood Atlas's classification-assignment mechanism -- NOT a reproduction of Candid's actual licensed PCS taxonomy. Real codes, hierarchy, and coverage should be imported from Candid's own published taxonomy release before this scheme is used for anything beyond illustration. affordable-housing's mapping to CommonGood's own issue-area-housing uses broadMatch, not exactMatch, since Affordable Housing is more specific than the CommonGood Housing issue area." ;
+    skos:prefLabel "Candid PCS Subjects" ;
+    npo:authorityType "external" ;
+    npo:publicationStatus nporef:publication-status-draft ;
+    npo:schemeDomain "classification" ;
+    npo:version "illustrative-subset" .
+
 nporef:evidence-strength a skos:ConceptScheme ;
     skos:definition "How strong the supporting Evidence is for an Evidence Claim, independent of the claim's type (association/contribution/attribution/causation) -- a causation claim and an association claim can each be backed by strong or weak evidence." ;
     skos:prefLabel "Evidence Strength" ;
     npo:authorityType "internal" ;
     npo:publicationStatus nporef:publication-status-published ;
     npo:schemeDomain "program" ;
+    npo:version "1.0.0" .
+
+nporef:frequency a skos:ConceptScheme ;
+    skos:definition "How often a recurring obligation is due. Currently used for how often Reports are due under a Reporting Schedule; generic enough to apply to other recurring obligations later without a new scheme." ;
+    skos:prefLabel "Frequency" ;
+    npo:authorityType "internal" ;
+    npo:publicationStatus nporef:publication-status-published ;
+    npo:schemeDomain "scheduling" ;
     npo:version "1.0.0" .
 
 nporef:role-status a skos:ConceptScheme ;
@@ -2394,6 +3273,13 @@ npo:review a owl:Class ;
     skos:definition "The process of evaluating an application, producing a recommendation and often a score, conducted by one or more reviewers." ;
     npo:category "application-and-review" .
 
+npo:approval-requirement a owl:Class ;
+    rdfs:label "Approval Requirement" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    rdfs:subClassOf npo:grant-term ;
+    skos:definition "A Grant Term requiring authorization from the funder or another specified party before a defined change, expenditure, action, or deviation may occur (e.g., prior written approval for a budget reallocation above a threshold). Not automatically a Grant Condition -- an approval requirement may simply govern administration of the Award." ;
+    npo:category "award-and-agreement" .
+
 npo:funding-opportunity a owl:Class ;
     rdfs:label "Funding Opportunity" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#funding-structure> ;
@@ -2404,18 +3290,20 @@ npo:funding-opportunity a owl:Class ;
     skos:definition "A specific, time-bound invitation to apply for funding under a grant program, with defined eligibility, focus area, and deadlines." ;
     npo:category "funding-structure" .
 
+nporef:classification-scheme-registry a skos:ConceptScheme ;
+    skos:definition "Which classification scheme a Classification Assignment draws its classificationConceptCode from. This registry entry is what's SHACL-validated; the code itself is a plain string naming a value within that scheme, not independently validated against it -- see docs/06-properties-and-rules.md for why. Candid PCS Organization Types, Transaction Types, and Support Strategies are registered here as valid facets but not yet populated as their own reference-data files -- add them when real data needs them, following candid-pcs-subjects.json/candid-pcs-populations.json as the template." ;
+    skos:prefLabel "Classification Scheme Registry" ;
+    npo:authorityType "internal" ;
+    npo:publicationStatus nporef:publication-status-published ;
+    npo:schemeDomain "classification" ;
+    npo:version "1.0.0" .
+
 npo:application a owl:Class ;
     rdfs:label "Application" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#application-and-review> ;
     skos:altLabel "Grant Application" ;
     skos:definition "A grantee's formal submission requesting funding under a specific funding opportunity, including a proposal narrative and budget." ;
     npo:category "application-and-review" .
-
-npo:compliance-requirement a owl:Class ;
-    rdfs:label "Compliance Requirement" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting> ;
-    skos:definition "An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance)." ;
-    npo:category "compliance-and-reporting" .
 
 npo:grant-recommendation a owl:Class ;
     rdfs:label "Grant Recommendation" ;
@@ -2424,11 +3312,19 @@ npo:grant-recommendation a owl:Class ;
     npo:category "application-and-review" ;
     npo:legalNote "A Grant Recommendation's non-binding status is a legal requirement for donor-advised funds under federal tax law, not a design choice -- see Donor-Advised Fund and Donor Advisor." .
 
-nporef:publication-status-published a skos:Concept ;
-    skos:definition "The scheme is stable and in active use, constraining one or more concept properties." ;
-    skos:inScheme nporef:publication-status ;
-    skos:notation "published" ;
-    skos:prefLabel "Published" .
+npo:reporting-requirement a owl:Class ;
+    rdfs:label "Reporting Requirement" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    rdfs:subClassOf npo:grant-term ;
+    skos:definition "A Grant Term requiring submission of information concerning grant activities, finances, progress, outputs, outcomes, compliance, or closeout. Finer-grained than a Reporting Schedule (which sets the overall cadence for an award): one clause such as \"quarterly programmatic and financial reports are required\" normalizes into two Reporting Requirements, one per report type, each of which may be fulfilledBy a submitted Report." ;
+    npo:category "award-and-agreement" .
+
+npo:compliance-requirement a owl:Class ;
+    rdfs:label "Compliance Requirement" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting> ;
+    rdfs:subClassOf npo:grant-term ;
+    skos:definition "An obligation attached to an award that the grantee must satisfy to remain in good standing (e.g., timely reporting, allowable use of funds, insurance)." ;
+    npo:category "compliance-and-reporting" .
 
 npo:payment a owl:Class ;
     rdfs:label "Payment" ;
@@ -2450,17 +3346,23 @@ npo:fund a owl:Class ;
     skos:definition "A designated pool of financial resources set aside for a purpose, distinct from the grant program or strategy that directs how it's used." ;
     npo:category "funding-structure" .
 
-npo:grant-agreement a owl:Class ;
-    rdfs:label "Grant Agreement" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
-    skos:definition "The legal document, signed by both funder and grantee, that formalizes an award's terms, conditions, and obligations." ;
-    npo:category "award-and-agreement" .
-
 npo:philanthropic-arrangement a owl:Class ;
     rdfs:label "Philanthropic Arrangement" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#funding-structure> ;
     skos:definition "A structured relationship among organizations that channels philanthropic funding outside a direct funder-to-grantee award -- such as a fiscal sponsorship or donor-advised fund arrangement." ;
     npo:category "funding-structure" .
+
+nporef:publication-status-published a skos:Concept ;
+    skos:definition "The scheme is stable and in active use, constraining one or more concept properties." ;
+    skos:inScheme nporef:publication-status ;
+    skos:notation "published" ;
+    skos:prefLabel "Published" .
+
+npo:grant-agreement a owl:Class ;
+    rdfs:label "Grant Agreement" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    skos:definition "The legal document, signed by both funder and grantee, that formalizes an award's terms, conditions, and obligations." ;
+    npo:category "award-and-agreement" .
 
 npo:report a owl:Class ;
     rdfs:label "Report" ;
@@ -2474,11 +3376,24 @@ npo:role a owl:Class ;
     skos:definition "A contextual capacity an agent occupies, distinct from the agent's permanent identity or classification." ;
     npo:category "organizational-entities" .
 
+npo:classification-assignment a owl:Class ;
+    rdfs:label "Classification Assignment" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting> ;
+    skos:definition "A contextual assertion that a resource (e.g. an Award or Population) is classified by a concept from a specified external or internal classification scheme, such as Candid's Philanthropy Classification System. External taxonomies classify CommonGood resources; they do not define those resources -- Need, Population, and Organization remain the ontology's own entities regardless of which taxonomy terms are assigned to them." ;
+    npo:category "cross-cutting" .
+
 npo:project a owl:Class ;
     rdfs:label "Project" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#cross-cutting> ;
     skos:definition "A defined body of work undertaken over a period of time to address one or more needs or objectives -- the work being performed, distinct from the Application requesting funding for it or the Award committing funding to it." ;
     npo:category "cross-cutting" .
+
+npo:grant-condition a owl:Class ;
+    rdfs:label "Grant Condition" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    rdfs:subClassOf npo:grant-term ;
+    skos:definition "A Grant Term establishing a barrier, milestone, event, requirement, or other criterion that must be satisfied for grant entitlement, payment, continuation, release, or retention. Matching Requirement and Payment Condition are its existing concrete subtypes. A condition's barrier facts (e.g. hasBarrier, threshold) are captured here without the ontology itself making the accounting or legal determination of whether the grant is \"conditional\"." ;
+    npo:category "award-and-agreement" .
 
 npo:person-role a owl:Class ;
     rdfs:label "Person Role" ;
@@ -2487,11 +3402,40 @@ npo:person-role a owl:Class ;
     skos:definition "A contextual capacity a person occupies within an organization, award, application, agreement, arrangement, program, project, or other defined context." ;
     npo:category "organizational-entities" .
 
+nporef:condition-barrier-type a skos:ConceptScheme ;
+    skos:definition "What kind of barrier, milestone, or event a Grant Condition's entitlement, payment, continuation, release, or retention depends on." ;
+    skos:prefLabel "Condition Barrier Type" ;
+    npo:authorityType "internal" ;
+    npo:publicationStatus nporef:publication-status-published ;
+    npo:schemeDomain "award-and-agreement" ;
+    npo:version "1.0.0" .
+
 npo:organization-role a owl:Class ;
     rdfs:label "Organization Role" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#organizational-entities> ;
     rdfs:subClassOf npo:role ;
     skos:definition "A contextual capacity an organization occupies within a specific arrangement or award -- such as acting as a funder, grant recipient, or fiscal sponsor -- rather than a permanent trait of the organization itself." ;
+    npo:category "organizational-entities" .
+
+npo:grant-term a owl:Class ;
+    rdfs:label "Grant Term" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#award-and-agreement> ;
+    skos:definition "A provision associated with a Grant Agreement or Award that establishes a restriction, condition, obligation, approval requirement, reporting requirement, or other requirement governing the use, administration, performance, or continuation of grant funding. Preserves its original source wording (via originalTermText) alongside its normalized classification -- the classification is an interpretation of the source text, not a replacement for it." ;
+    npo:category "award-and-agreement" .
+
+nporef:use-restriction-type a skos:ConceptScheme ;
+    skos:definition "The nature of what a Use Restriction limits grant funds to (or from) -- distinct from Fund's own restriction-type scheme, which describes a Fund's accounting restriction status rather than the specific nature of a grant term's use restriction. Values do not all carry identical legal significance." ;
+    skos:prefLabel "Use Restriction Type" ;
+    npo:authorityType "internal" ;
+    npo:publicationStatus nporef:publication-status-published ;
+    npo:schemeDomain "award-and-agreement" ;
+    npo:version "1.0.0" .
+
+npo:organization a owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#organizational-entities> ;
+    rdfs:subClassOf npo:agent ;
+    skos:definition "Any legal entity participating in grantmaking or philanthropy. An organization occupies one or more contextual roles (see Organization Role) rather than being permanently classified as a funder or a recipient." ;
     npo:category "organizational-entities" .
 
 npo:award a owl:Class ;
@@ -2500,10 +3444,3 @@ npo:award a owl:Class ;
     skos:altLabel "Grant Award" ;
     skos:definition "A funder's formal commitment to provide a specific amount of funding to a grantee, following an approved application or decision." ;
     npo:category "award-and-agreement" .
-
-npo:organization a owl:Class ;
-    rdfs:label "Organization" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#organizational-entities> ;
-    rdfs:subClassOf npo:agent ;
-    skos:definition "Any legal entity participating in grantmaking or philanthropy. An organization occupies one or more contextual roles (see Organization Role) rather than being permanently classified as a funder or a recipient." ;
-    npo:category "organizational-entities" .

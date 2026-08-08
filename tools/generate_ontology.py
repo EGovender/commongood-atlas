@@ -241,6 +241,8 @@ def load_source():
         else:
             assert p["allowedValues"] is None, f"non-enum property has allowedValues: {p['id']}"
             assert p.get("referenceScheme") is None, f"non-reference property has referenceScheme: {p['id']}"
+        if p.get("minValue") is not None or p.get("maxValue") is not None:
+            assert p["datatype"] == "decimal", f"minValue/maxValue only valid on decimal properties: {p['id']}"
 
     rule_ids = [r["id"] for r in business_rules]
     assert len(set(rule_ids)) == len(rule_ids), "duplicate business rule id"
@@ -511,8 +513,9 @@ def turtle_string(s: str) -> str:
 
 def build_property_shapes_text(properties) -> str:
     """Per-concept SHACL PropertyShapes enforcing required-ness, datatype (or,
-    for reference-backed properties, scheme membership), and allowed values
-    for each attribute in properties.json. Generated -- see
+    for reference-backed properties, scheme membership), allowed values, and
+    -- for decimal properties with an optional minValue/maxValue -- a numeric
+    range, for each attribute in properties.json. Generated -- see
     docs/06-properties-and-rules.md. Kept separate from the hand-authored
     ontology/commongood-atlas.shapes.ttl, which validates the ontology's own
     structural completeness rather than per-concept business data.
@@ -556,6 +559,10 @@ def build_property_shapes_text(properties) -> str:
             if p["allowedValues"]:
                 values = " ".join(turtle_string(v) for v in p["allowedValues"])
                 parts.append(f"sh:in ( {values} )")
+            if p.get("minValue") is not None:
+                parts.append(f"sh:minInclusive {p['minValue']}")
+            if p.get("maxValue") is not None:
+                parts.append(f"sh:maxInclusive {p['maxValue']}")
             prop_blocks.append("[ " + " ; ".join(parts) + " ]")
 
         lines.append(f"npo:{concept_id}-property-shape")
