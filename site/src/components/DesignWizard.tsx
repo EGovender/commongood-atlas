@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CORE_CONCEPTS, DESIGN_QUESTIONS, DESIGN_SECTIONS, type DesignQuestion } from '../data/design-questions';
+import { CORE_CONCEPTS, DESIGN_QUESTIONS, DESIGN_SECTIONS } from '../data/design-questions';
 import {
   buildDesignJson,
   buildDesignJsonLd,
@@ -9,30 +9,15 @@ import {
 } from '../data/design-export';
 import { concepts, requireConcept } from '../data/ontology';
 import { CATEGORIES } from '../data/categories';
+import {
+  isQuestionVisible,
+  normalizeAnswers,
+  parseAnswersFromSearchParams,
+  writeAnswersToSearchParams,
+} from '../data/program-model/answers';
 
 interface Props {
   base: string;
-}
-
-function isVisible(q: DesignQuestion, answers: Record<string, string>): boolean {
-  if (!q.showIf) return true;
-  return answers[q.showIf.questionId] === q.showIf.equals;
-}
-
-function readAnswersFromURL(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
-  const params = new URLSearchParams(window.location.search);
-  const answers: Record<string, string> = {};
-  for (const q of DESIGN_QUESTIONS) {
-    const value = params.get(q.id);
-    if (!value) continue;
-    if (q.type === 'boolean') {
-      if (value === 'yes' || value === 'no') answers[q.id] = value;
-    } else if (q.options.some((o) => o.value === value)) {
-      answers[q.id] = value;
-    }
-  }
-  return answers;
 }
 
 export default function DesignWizard({ base }: Props) {
@@ -46,13 +31,14 @@ export default function DesignWizard({ base }: Props) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const restored = readAnswersFromURL();
+    const raw = parseAnswersFromSearchParams(window.location.search);
+    const { answers: restored } = normalizeAnswers(raw);
     if (Object.keys(restored).length > 0) setAnswers(restored);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const visibleQuestions = useMemo(
-    () => DESIGN_QUESTIONS.filter((q) => isVisible(q, answers)),
+    () => DESIGN_QUESTIONS.filter((q) => isQuestionVisible(q, answers)),
     [answers]
   );
 
@@ -90,18 +76,19 @@ export default function DesignWizard({ base }: Props) {
 
   // Keep the URL in sync so the current answer set is a shareable link.
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams();
-    for (const q of DESIGN_QUESTIONS) {
-      if (answers[q.id]) params.set(q.id, answers[q.id]);
-    }
-    const qs = params.toString();
+    const qs = writeAnswersToSearchParams(answers).toString();
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
   }, [answers]);
 
+  // Re-normalizing on every change (rather than just merging the new value
+  // in) means a stale answer to a question that just became hidden -- e.g.
+  // site-visit=yes after flipping review to No -- is dropped immediately,
+  // instead of silently continuing to occupy state/the URL. See
+  // normalizeAnswers() for why this needs no recursion despite reasoning
+  // about visibility: showIf is never chained more than one level deep.
   function setAnswer(questionId: string, value: string) {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }));
+    setAnswers((prev) => normalizeAnswers({ ...prev, [questionId]: value }).answers);
   }
 
   function reset() {
@@ -164,7 +151,7 @@ export default function DesignWizard({ base }: Props) {
 
         {DESIGN_SECTIONS.map((section, sectionIndex) => {
           const sectionQuestions = DESIGN_QUESTIONS.filter(
-            (q) => q.section === section.id && isVisible(q, answers)
+            (q) => q.section === section.id && isQuestionVisible(q, answers)
           );
           if (sectionQuestions.length === 0) return null;
           const sectionAnswered = sectionQuestions.filter((q) => answers[q.id]).length;
