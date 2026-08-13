@@ -231,6 +231,8 @@ export function buildProgramProfile(
           required: p.required,
           cardinality: p.cardinality,
           allowedValues: p.allowedValues,
+          minValue: p.minValue,
+          maxValue: p.maxValue,
           description: p.description,
           declaredOnConceptId: p.concept,
           appliesToConceptIds: [id],

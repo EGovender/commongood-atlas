@@ -58,6 +58,7 @@ export default function ProgramModelWorkbench({ base }: Props) {
 
   const editAnswersQueryString = writeAnswersToSearchParams(answers).toString();
   const editAnswersHref = `${base}design/${editAnswersQueryString ? `?${editAnswersQueryString}` : ''}`;
+  const logicalModelHref = `${base}design/logical-model/${editAnswersQueryString ? `?${editAnswersQueryString}` : ''}`;
 
   function downloadProgramProfile() {
     downloadFile('commongood-atlas-program-profile.json', buildProgramProfileJson(profile), 'application/json');
@@ -90,6 +91,9 @@ export default function ProgramModelWorkbench({ base }: Props) {
           <span className="muted">Ontology v{ontologyVersion}</span>
         </div>
         <div className="program-model-header-actions">
+          <a className="home-cta" href={logicalModelHref}>
+            Logical model
+          </a>
           <a className="home-cta" href={editAnswersHref}>
             Edit answers
           </a>

@@ -2420,6 +2420,41 @@ mark {
   font-size: 0.85rem;
 }
 
+.logical-entity-type-badge {
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+}
+
+.logical-entity-type-badge-abstract-entity {
+  border-style: dashed;
+}
+
+.logical-entity-type-badge-reference-entity {
+  border-color: var(--brand-navy);
+}
+
+.logical-attribute-list {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.logical-pk-marker {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  padding: 0 0.3rem;
+  margin-right: 0.35rem;
+}
+
 .program-model-center-toolbar {
   display: flex;
   align-items: flex-start;
