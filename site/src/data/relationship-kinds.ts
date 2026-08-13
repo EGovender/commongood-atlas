@@ -8,9 +8,13 @@
 //
 // 'structural' isn't listed here -- it's assigned directly by GraphExplorer
 // to the subClassOf edges it synthesizes itself, which never appear in
-// relationships.json.
+// relationships.json. Neither is 'inherited' -- also assigned directly by
+// GraphExplorer, to the ancestor-relationship edges it synthesizes for
+// concepts with no literal relationships of their own (see GraphExplorer.tsx
+// and docs/03-relationships.md's connectivity note).
 export type RelationshipKind =
   | 'structural'
+  | 'inherited'
   | 'organizational'
   | 'funding'
   | 'process'
@@ -21,6 +25,7 @@ export type RelationshipKind =
 
 export const RELATIONSHIP_KIND_LABELS: Record<RelationshipKind, string> = {
   structural: 'Structural (is a)',
+  inherited: 'Inherited from parent',
   organizational: 'Organizational',
   funding: 'Funding & program setup',
   process: 'Application & decision',
@@ -94,6 +99,7 @@ const PREDICATE_KIND: Record<string, RelationshipKind> = {
   mayIncludeAudit: 'compliance',
   obligatesReport: 'compliance',
   appliesToAward: 'compliance',
+  indirectCostRateAppliesToAward: 'compliance',
   specifiesGrantTerm: 'compliance',
   grantTermAppliesToAward: 'compliance',
   hasConditionResponsibleParty: 'compliance',
