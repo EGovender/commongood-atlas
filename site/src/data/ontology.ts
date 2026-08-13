@@ -80,6 +80,10 @@ export interface Property {
   required: boolean;
   cardinality: 'one' | 'many';
   allowedValues: string[] | null;
+  /** Numeric bounds on a 'decimal' property, where properties.json declares
+   * them (e.g. a percentage capped at 0-100) -- absent for most properties. */
+  minValue?: number;
+  maxValue?: number;
   description: string;
 }
 

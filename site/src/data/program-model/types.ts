@@ -71,6 +71,8 @@ export interface ProgramProfileProperty {
   required: boolean;
   cardinality: 'one' | 'many';
   allowedValues: string[] | null;
+  minValue?: number;
+  maxValue?: number;
   description: string;
   /** The concept the property is actually declared on in properties.json --
    * may differ from every id in appliesToConceptIds when it's inherited. */
