@@ -1173,6 +1173,14 @@
     <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/target" />
     <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#programs-results-and-evidence" />
   </rdf:Description>
+  <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/indirectCostRateAppliesToAward">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
+    <rdfs:label>applies to</rdfs:label>
+    <rdfs:comment>An Indirect Cost Rate applies to a specific Award -- the rate itself may be negotiated at the organization level (independent of any one award), but this relationship tracks which Award's budget it is actually being charged against, mirroring why Compliance Requirement's own appliesToAward attaches to a specific Award rather than the Grantee in the abstract: the same organization can have a different applicable rate situation on one award than another. A distinct predicate from Compliance Requirement's own appliesToAward for the same reason every relationship predicate in this ontology is unique -- the generator requires one fixed declared subject per predicate.</rdfs:comment>
+    <rdfs:domain rdf:resource="https://egovender.github.io/commongood-atlas/ontology/indirect-cost-rate" />
+    <rdfs:range rdf:resource="https://egovender.github.io/commongood-atlas/ontology/award" />
+    <rdfs:isDefinedBy rdf:resource="https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end" />
+  </rdf:Description>
   <rdf:Description rdf:about="https://egovender.github.io/commongood-atlas/ontology/relations/disbursedAsPayment">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty" />
     <rdfs:label>is disbursed as</rdfs:label>

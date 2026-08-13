@@ -1246,6 +1246,16 @@ mark {
   opacity: 0.5;
 }
 
+/* Ancestor-inherited relationships (e.g. Vendor's Organization Role
+   relationships), distinct from both a literal relationship (solid) and a
+   subClassOf "is a" edge (dashed) -- a finer dotted stroke reads as "real,
+   but implied" rather than either of those. */
+.graph-edge.inherited-edge {
+  stroke-dasharray: 1 3;
+  stroke-linecap: round;
+  opacity: 0.45;
+}
+
 .graph-edge.connected {
   opacity: 1;
 }

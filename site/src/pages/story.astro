@@ -42,12 +42,21 @@ const SCENARIO_META: Record<string, { description: string; complexity: 'Simple' 
 };
 const DEFAULT_SCENARIO_META = { description: 'A connected thread in the worked example.', complexity: 'Moderate' as const };
 
+// Financial-group decimal properties that are unconditionally a percentage
+// per their own definition (never a dollar amount, so no sibling unit field
+// exists to check).
+const PERCENTAGE_DECIMAL_PROPERTY_IDS = new Set(['indirect-cost-rate-rate', 'fiscal-sponsorship-arrangement-fee-percentage']);
+
 /** Renders a property value the way someone reading the story (not the raw
  * data) would expect: reference-backed codes as their scheme label, decimals
- * in the "financial" group with thousands separators, dates spelled out,
+ * in the "financial" group with thousands separators (using a sibling
+ * `thresholdUnit` property, where one exists on the individual, to tell a
+ * percentage or other unit apart from a dollar amount -- properties.json's
+ * threshold-value/approval-threshold properties are unit-agnostic numbers,
+ * not currency, despite living in the "financial" group), dates spelled out,
  * booleans as Yes/No, other enums title-cased. Falls back to the raw value
  * for anything that doesn't map cleanly, rather than guessing. */
-function formatPropertyValue(pdef: Property | undefined, value: string): string {
+function formatPropertyValue(pdef: Property | undefined, value: string, siblingProperties?: Record<string, string>): string {
   if (!pdef) return value;
   if (pdef.datatype === 'reference' && pdef.referenceScheme) {
     const match = getReferenceScheme(pdef.referenceScheme).values.find((v) => v.code === value);
@@ -57,6 +66,9 @@ function formatPropertyValue(pdef: Property | undefined, value: string): string 
     const num = Number(value);
     if (!Number.isFinite(num)) return value;
     const formatted = num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (PERCENTAGE_DECIMAL_PROPERTY_IDS.has(pdef.id)) return `${formatted}%`;
+    const unit = siblingProperties?.thresholdUnit;
+    if (unit) return unit.toLowerCase() === 'usd' ? `$${formatted}` : unit.toLowerCase() === 'percent' ? `${formatted}%` : `${formatted} ${unit}`;
     return pdef.group === 'financial' ? `$${formatted}` : formatted;
   }
   if (pdef.datatype === 'date') {
@@ -240,7 +252,7 @@ flushBucket();
                         const pdef = conceptProperties.find((p) => p.name === name);
                         return (
                           <span class="chip">
-                            {pdef?.label ?? name}: {formatPropertyValue(pdef, value)}
+                            {pdef?.label ?? name}: {formatPropertyValue(pdef, value, individual.properties)}
                           </span>
                         );
                       })}

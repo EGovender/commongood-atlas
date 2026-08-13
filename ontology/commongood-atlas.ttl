@@ -2265,6 +2265,13 @@ nporel:includesReportingSchedule a owl:ObjectProperty ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end> ;
     rdfs:range npo:reporting-schedule .
 
+nporel:indirectCostRateAppliesToAward a owl:ObjectProperty ;
+    rdfs:label "applies to" ;
+    rdfs:comment "An Indirect Cost Rate applies to a specific Award -- the rate itself may be negotiated at the organization level (independent of any one award), but this relationship tracks which Award's budget it is actually being charged against, mirroring why Compliance Requirement's own appliesToAward attaches to a specific Award rather than the Grantee in the abstract: the same organization can have a different applicable rate situation on one award than another. A distinct predicate from Compliance Requirement's own appliesToAward for the same reason every relationship predicate in this ontology is unique -- the generator requires one fixed declared subject per predicate." ;
+    rdfs:domain npo:indirect-cost-rate ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/03-relationships.md#the-grant-lifecycle-end-to-end> ;
+    rdfs:range npo:award .
+
 nporel:issuesFundingOpportunity a owl:ObjectProperty ;
     rdfs:label "issues" ;
     rdfs:comment "A Grant Program issues Funding Opportunities during defined Funding Cycles." ;
@@ -2941,12 +2948,6 @@ npo:grant-administrator a owl:Class ;
     skos:definition "The role a person occupies when they are responsible for compliance, reporting, and financial management of an award on behalf of the grantee organization." ;
     npo:category "organizational-entities" .
 
-npo:indirect-cost-rate a owl:Class ;
-    rdfs:label "Indirect Cost Rate" ;
-    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting> ;
-    skos:definition "The negotiated or de minimis rate at which a grantee may charge overhead/administrative costs against an award." ;
-    npo:category "compliance-and-reporting" .
-
 npo:input a owl:Class ;
     rdfs:label "Input" ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#outcomes-and-closeout> ;
@@ -3035,6 +3036,12 @@ npo:indicator a owl:Class ;
     rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#outcomes-and-closeout> ;
     skos:definition "A defined measure used to assess the state or change of a Result (e.g., percentage of participants employed after six months, graduation rate)." ;
     npo:category "outcomes-and-closeout" .
+
+npo:indirect-cost-rate a owl:Class ;
+    rdfs:label "Indirect Cost Rate" ;
+    rdfs:isDefinedBy <https://github.com/EGovender/commongood-atlas/blob/main/docs/02-core-concepts.md#compliance-and-reporting> ;
+    skos:definition "The negotiated or de minimis rate at which a grantee may charge overhead/administrative costs against an award." ;
+    npo:category "compliance-and-reporting" .
 
 npo:matching-requirement a owl:Class ;
     rdfs:label "Matching Requirement" ;

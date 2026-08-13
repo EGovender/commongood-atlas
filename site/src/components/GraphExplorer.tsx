@@ -298,6 +298,71 @@ export default function GraphExplorer({ base, mode = 'full', focusConceptId }: P
     window.history.replaceState(null, '', url);
   }, [isMini, viewId, customConceptIds, selectedId, searchQuery]);
 
+  // The two kinds of edges GraphExplorer synthesizes itself rather than
+  // reading literally from relationships.json: subClassOf "is a" edges, and
+  // -- for concepts with NO literal relationship of their own -- their
+  // ancestor-inherited relationships (the same ones a concept's own
+  // Connections tab already shows via getOutgoingRelationships/
+  // getIncomingRelationships, which are ancestor-aware; this canvas
+  // previously wasn't, which is why e.g. Vendor/Partner/Sponsoring
+  // Organization looked disconnected here despite having real connections).
+  // Scoped to zero-literal-relationship concepts deliberately: drawing
+  // inherited edges for every concept would nearly double total edge count
+  // and badly clutter already-well-connected hub concepts like Organization.
+  // Hoisted into its own memo (rather than computed inline in the D3 effect
+  // below) so the relationship-kind filter-chip counts further down can
+  // count these same synthesized edges too, instead of only literal rows --
+  // which is also why the existing "Structural (is a)" filter chip has
+  // never appeared until now, despite subclass edges rendering since this
+  // component shipped.
+  const synthesizedLinks = useMemo(() => {
+    const conceptIds = new Set(concepts.map((c) => c.id));
+    const ownRelationshipConceptIds = new Set<string>();
+    for (const r of relationships) {
+      ownRelationshipConceptIds.add(r.subject);
+      ownRelationshipConceptIds.add(r.object);
+    }
+
+    const structural: SimLink[] = concepts
+      .filter((c) => c.subClassOf && neighborHas(concepts, c.subClassOf))
+      .map((c) => ({
+        id: `${c.id}-subclass-of`,
+        source: c.id,
+        target: c.subClassOf as string,
+        label: 'is a',
+        relKind: 'structural' as RelationshipKind,
+        isSubclass: true,
+      }));
+
+    const inherited: SimLink[] = concepts
+      .filter((c) => !ownRelationshipConceptIds.has(c.id))
+      .flatMap((c) => {
+        const outgoing = getOutgoingRelationships(c.id)
+          .filter(({ relationship: r }) => r.subject !== c.id && conceptIds.has(r.object))
+          .map(({ relationship: r }) => ({
+            id: `${c.id}-inherited-out-${r.id}`,
+            source: c.id,
+            target: r.object,
+            label: r.label,
+            relKind: 'inherited' as RelationshipKind,
+            isSubclass: false,
+          }));
+        const incoming = getIncomingRelationships(c.id)
+          .filter(({ relationship: r }) => r.object !== c.id && conceptIds.has(r.subject))
+          .map(({ relationship: r }) => ({
+            id: `${c.id}-inherited-in-${r.id}`,
+            source: r.subject,
+            target: c.id,
+            label: r.label,
+            relKind: 'inherited' as RelationshipKind,
+            isSubclass: false,
+          }));
+        return [...outgoing, ...incoming];
+      });
+
+    return [...structural, ...inherited];
+  }, [concepts, relationships]);
+
   // Build the graph once (or whenever the underlying element set changes).
   useEffect(() => {
     const svgEl = svgRef.current;
@@ -334,16 +399,7 @@ export default function GraphExplorer({ base, mode = 'full', focusConceptId }: P
         relKind: relationshipKind(r.predicate),
         isSubclass: false,
       })),
-      ...concepts
-        .filter((c) => c.subClassOf && neighborHas(concepts, c.subClassOf))
-        .map((c) => ({
-          id: `${c.id}-subclass-of`,
-          source: c.id,
-          target: c.subClassOf as string,
-          label: 'is a',
-          relKind: 'structural' as RelationshipKind,
-          isSubclass: true,
-        })),
+      ...synthesizedLinks,
     ];
 
     const svg = select(svgEl);
@@ -402,7 +458,10 @@ export default function GraphExplorer({ base, mode = 'full', focusConceptId }: P
       .selectAll<SVGLineElement, SimLink>('line')
       .data(links, (d) => d.id)
       .join('line')
-      .attr('class', (d) => `graph-edge${d.isSubclass ? ' subclass-edge' : ''}`)
+      .attr(
+        'class',
+        (d) => `graph-edge${d.isSubclass ? ' subclass-edge' : ''}${d.relKind === 'inherited' ? ' inherited-edge' : ''}`
+      )
       .attr('data-rel-kind', (d) => d.relKind)
       .attr('marker-end', 'url(#graph-arrow)');
 
@@ -589,7 +648,7 @@ export default function GraphExplorer({ base, mode = 'full', focusConceptId }: P
     // are handled by their own effects below (and reapplied synchronously
     // above right after every rebuild).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [concepts, relationships, isMini, focusConceptId]);
+  }, [concepts, relationships, synthesizedLinks, isMini, focusConceptId]);
 
   // Applies the category, kind, and relationship-type filters -- hides
   // nodes whose category or kind is unchecked, and hides edges whose
@@ -962,10 +1021,18 @@ export default function GraphExplorer({ base, mode = 'full', focusConceptId }: P
   for (const c of concepts) categoryCounts.set(c.category, (categoryCounts.get(c.category) ?? 0) + 1);
   const categoriesInView = CATEGORIES.filter((cat) => (categoryCounts.get(cat.id) ?? 0) > 0);
 
+  // Counts both literal relationships.json rows AND the edges this
+  // component synthesizes itself (structural "is a" + inherited) -- without
+  // the latter, the "Structural (is a)" and "Inherited from parent" filter
+  // chips would never appear, since no literal predicate ever maps to
+  // either kind.
   const relKindCounts = new Map<RelationshipKind, number>();
   for (const r of relationships) {
     const k = relationshipKind(r.predicate);
     relKindCounts.set(k, (relKindCounts.get(k) ?? 0) + 1);
+  }
+  for (const link of synthesizedLinks) {
+    relKindCounts.set(link.relKind, (relKindCounts.get(link.relKind) ?? 0) + 1);
   }
   const relKindsInView = (Object.keys(RELATIONSHIP_KIND_LABELS) as RelationshipKind[]).filter(
     (k) => (relKindCounts.get(k) ?? 0) > 0
