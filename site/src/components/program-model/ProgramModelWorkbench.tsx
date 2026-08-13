@@ -16,6 +16,7 @@ import ProgramModelSummary from './ProgramModelSummary';
 import ConceptualModelList from './ConceptualModelList';
 import ConceptualModelDiagram from './ConceptualModelDiagram';
 import ConceptualModelInspector from './ConceptualModelInspector';
+import ProgramModelSearch from './ProgramModelSearch';
 
 interface Props {
   base: string;
@@ -138,23 +139,26 @@ export default function ProgramModelWorkbench({ base }: Props) {
           <ProgramModelSummary profile={profile} />
         </aside>
         <div className="program-model-center">
-          <div className="program-model-view-toggle" role="group" aria-label="Model view">
-            <button
-              type="button"
-              className={`program-model-view-toggle-button${view === 'diagram' ? ' active' : ''}`}
-              aria-pressed={view === 'diagram'}
-              onClick={() => setView('diagram')}
-            >
-              Diagram
-            </button>
-            <button
-              type="button"
-              className={`program-model-view-toggle-button${view === 'list' ? ' active' : ''}`}
-              aria-pressed={view === 'list'}
-              onClick={() => setView('list')}
-            >
-              List
-            </button>
+          <div className="program-model-center-toolbar">
+            <div className="program-model-view-toggle" role="group" aria-label="Model view">
+              <button
+                type="button"
+                className={`program-model-view-toggle-button${view === 'diagram' ? ' active' : ''}`}
+                aria-pressed={view === 'diagram'}
+                onClick={() => setView('diagram')}
+              >
+                Diagram
+              </button>
+              <button
+                type="button"
+                className={`program-model-view-toggle-button${view === 'list' ? ' active' : ''}`}
+                aria-pressed={view === 'list'}
+                onClick={() => setView('list')}
+              >
+                List
+              </button>
+            </div>
+            <ProgramModelSearch model={model} onSelect={setSelectedId} />
           </div>
           {view === 'diagram' ? (
             <ConceptualModelDiagram model={model} selectedId={selectedId} onSelect={setSelectedId} />

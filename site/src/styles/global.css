@@ -2410,10 +2410,33 @@ mark {
   font-size: 0.85rem;
 }
 
+.program-model-center-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.program-model-search {
+  position: relative;
+  min-width: 220px;
+}
+
+/* Overlay the results instead of pushing the diagram/list down. */
+.program-model-search .search-results,
+.program-model-search .search-no-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: max(100%, 320px);
+}
+
 .program-model-view-toggle {
   display: flex;
   gap: 0.4rem;
-  margin-bottom: 0.75rem;
 }
 
 .program-model-view-toggle-button {
@@ -2554,6 +2577,20 @@ mark {
   }
 }
 
+/* Medium desktop: three columns become too narrow for a useful inspector,
+   so it drops to a full-width row below the sidebar+center instead --
+   same reasoning as .graph-workspace.has-inspector. */
+@media (max-width: 1449px) {
+  .program-model-workspace.has-inspector {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+  .program-model-workspace.has-inspector .program-model-inspector {
+    grid-column: 1 / -1;
+    position: static;
+    max-height: none;
+  }
+}
+
 @media (max-width: 900px) {
   .program-model-workspace,
   .program-model-workspace.has-inspector {
@@ -2565,6 +2602,23 @@ mark {
   }
   .conceptual-model-diagram-wrap {
     height: 500px;
+  }
+  .program-model-center-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .program-model-search {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .program-model-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .conceptual-model-diagram-wrap {
+    height: 420px;
   }
 }
 
