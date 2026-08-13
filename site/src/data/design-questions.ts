@@ -166,14 +166,19 @@ export const DESIGN_QUESTIONS: DesignQuestion[] = [
     no: [],
   },
   {
+    // restricted-funding/unrestricted-funding are deprecated concepts (see concepts.json);
+    // the ontology now models this as Fund.restrictionType instance data (a real
+    // reference-backed enum with its own broader/narrower hierarchy), not as separate
+    // concepts. All three answers converge on the same effect -- ensuring Fund is in
+    // scope -- since the distinction this question captures is now data, not schema.
     id: 'funding-restriction',
     type: 'single-select',
     section: 'funding-structure',
     text: 'Is the funding you award restricted to a specific purpose, unrestricted, or does it vary by grant?',
     options: [
-      { value: 'restricted', label: 'Always restricted', concepts: ['restricted-funding'] },
-      { value: 'unrestricted', label: 'Always unrestricted', concepts: ['unrestricted-funding'] },
-      { value: 'varies', label: 'Depends on the grant', concepts: ['restricted-funding', 'unrestricted-funding'] },
+      { value: 'restricted', label: 'Always restricted', concepts: ['fund'] },
+      { value: 'unrestricted', label: 'Always unrestricted', concepts: ['fund'] },
+      { value: 'varies', label: 'Depends on the grant', concepts: ['fund'] },
     ],
   },
 

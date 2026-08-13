@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProgramModelWorkbench from '../../components/program-model/ProgramModelWorkbench';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Your Program Model"
+  description="A personalized conceptual model generated from your Model Your Program responses -- concepts, relationships, and why each one is there."
+  wide="full"
+>
+  <PageHero
+    slot="pageHero"
+    eyebrow="Build your model"
+    title="Your Program Model"
+    description="Conceptual model generated from your Model Your Program responses."
+  />
+  <ProgramModelWorkbench client:load base={base} />
+</BaseLayout>

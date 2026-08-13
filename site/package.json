@@ -12,7 +12,8 @@
     "prebuild": "npm run sync-data",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
@@ -36,6 +37,7 @@
     "@types/d3-shape": "^3.1.8",
     "@types/d3-transition": "^3.0.9",
     "@types/d3-zoom": "^3.0.8",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }

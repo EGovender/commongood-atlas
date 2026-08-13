@@ -178,7 +178,7 @@ export interface RelatedConcept {
  * declared directly on it, mirroring tools/generate_ontology.py's
  * resolve_properties_by_concept/ancestor_ids.
  */
-function getAncestorChain(conceptId: string): Concept[] {
+export function getAncestorChain(conceptId: string): Concept[] {
   const chain: Concept[] = [];
   const seen = new Set<string>();
   let currentId: string | null = conceptId;

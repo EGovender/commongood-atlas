@@ -2145,6 +2145,483 @@ mark {
   }
 }
 
+/* Program Model workbench (/design/model/) */
+
+.program-model-workbench {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.program-model-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.program-model-header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.program-model-header-stats strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.program-model-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.program-model-download {
+  position: relative;
+}
+
+.program-model-download summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.program-model-download summary::-webkit-details-marker {
+  display: none;
+}
+
+.program-model-download-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 20;
+  display: grid;
+  gap: 0.15rem;
+  min-width: 220px;
+  padding: 0.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.program-model-download-menu .link-button {
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.35rem;
+}
+
+.program-model-download-menu .link-button:hover {
+  background: var(--surface);
+}
+
+.program-model-workspace {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.program-model-workspace.has-inspector {
+  grid-template-columns: 270px minmax(0, 1fr) minmax(350px, 390px);
+}
+
+.program-model-sidebar,
+.program-model-inspector {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.conceptual-model-inspector-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.conceptual-model-inspector-meta {
+  margin: -0.3rem 0 0.6rem;
+  font-size: 0.85rem;
+}
+
+.conceptual-model-inspector-reason-group {
+  margin-bottom: 0.6rem;
+}
+
+.conceptual-model-inspector-reason-label {
+  margin: 0 0 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.conceptual-model-inspector-reason-group ul,
+.conceptual-model-inspector-relationships,
+.conceptual-model-inspector-details ul {
+  list-style: none;
+  margin: 0 0 0.6rem;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.85rem;
+}
+
+.conceptual-model-inspector-details {
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.conceptual-model-inspector-details summary {
+  cursor: pointer;
+}
+
+.conceptual-model-inspector-link {
+  margin-top: 0.5rem;
+}
+
+.program-model-summary-count {
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.program-model-summary-breakdown {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+}
+
+.program-model-summary-breakdown li {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.program-model-category-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.program-model-category-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.program-model-category-label {
+  flex: 1;
+}
+
+.program-model-warnings ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.program-model-center {
+  min-width: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+}
+
+.program-model-loading {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.conceptual-model-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.conceptual-model-list-category-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.6rem;
+}
+
+.conceptual-model-list-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.conceptual-model-list-item {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.85rem;
+}
+
+.conceptual-model-list-item.selected {
+  border-color: var(--brand-navy);
+  border-width: 2px;
+  padding: calc(0.65rem - 1px) calc(0.85rem - 1px);
+}
+
+.conceptual-model-list-item-label {
+  font-weight: 700;
+}
+
+.conceptual-model-list-item-badge {
+  margin-left: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.conceptual-model-list-item-inspect {
+  margin-left: 0.75rem;
+  font-size: 0.78rem;
+}
+
+.conceptual-model-list-edges {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+}
+
+.program-model-center-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.program-model-search {
+  position: relative;
+  min-width: 220px;
+}
+
+/* Overlay the results instead of pushing the diagram/list down. */
+.program-model-search .search-results,
+.program-model-search .search-no-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: max(100%, 320px);
+}
+
+.program-model-view-toggle {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.program-model-view-toggle-button {
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.program-model-view-toggle-button.active {
+  border-color: var(--brand-navy);
+  background: var(--brand-navy);
+  color: #ffffff;
+}
+
+.conceptual-model-diagram-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 600px;
+}
+
+.conceptual-model-diagram-toolbar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.conceptual-model-diagram-canvas {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(46, 52, 62, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 52, 62, 0.05) 1px, transparent 1px),
+    #ffffff;
+  background-size: 24px 24px;
+}
+
+/* Diagram node/edge primitives -- mirrors GraphExplorer's own
+   .graph-node/.graph-edge visual language (see docs/10-program-model-
+   generation.md) under a parallel class prefix, since this is a separate,
+   smaller component rather than a fork of that one. */
+
+.conceptual-node-shape {
+  stroke: none;
+  cursor: pointer;
+}
+
+.conceptual-node:focus-visible .conceptual-node-shape {
+  outline: none;
+  stroke: var(--link);
+  stroke-width: 3px;
+}
+
+.conceptual-node-label {
+  font-size: 11px;
+  fill: var(--text-primary);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+  user-select: none;
+}
+
+.conceptual-node.selected .conceptual-node-shape {
+  stroke: var(--text-primary);
+  stroke-width: 3px;
+}
+
+.conceptual-node.selected .conceptual-node-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.conceptual-node.connected {
+  opacity: 1;
+}
+
+.conceptual-node.faded {
+  opacity: 0.15;
+}
+
+.conceptual-node.faded .conceptual-node-label {
+  display: none;
+}
+
+.conceptual-edge {
+  stroke: #b7b9c2;
+  stroke-width: 1.4;
+  opacity: 0.85;
+}
+
+.conceptual-edge.specialization-edge {
+  stroke-dasharray: 4 3;
+  opacity: 0.5;
+}
+
+.conceptual-edge.connected {
+  opacity: 1;
+}
+
+.conceptual-edge.faded {
+  opacity: 0.12;
+}
+
+.conceptual-arrowhead {
+  fill: var(--gridline);
+}
+
+.conceptual-edge-label {
+  font-size: 10px;
+  fill: var(--text-secondary);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.conceptual-edge-label.visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .conceptual-edge-label {
+    transition: none;
+  }
+}
+
+/* Medium desktop: three columns become too narrow for a useful inspector,
+   so it drops to a full-width row below the sidebar+center instead --
+   same reasoning as .graph-workspace.has-inspector. */
+@media (max-width: 1449px) {
+  .program-model-workspace.has-inspector {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+  .program-model-workspace.has-inspector .program-model-inspector {
+    grid-column: 1 / -1;
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .program-model-workspace,
+  .program-model-workspace.has-inspector {
+    grid-template-columns: 1fr;
+  }
+  .program-model-sidebar {
+    position: static;
+    max-height: none;
+  }
+  .conceptual-model-diagram-wrap {
+    height: 500px;
+  }
+  .program-model-center-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .program-model-search {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .program-model-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .conceptual-model-diagram-wrap {
+    height: 420px;
+  }
+}
+
 /* Story mode */
 
 .story-timeline {
