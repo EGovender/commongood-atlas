@@ -14,10 +14,13 @@ import {
 } from '../../data/program-model';
 import ProgramModelSummary from './ProgramModelSummary';
 import ConceptualModelList from './ConceptualModelList';
+import ConceptualModelDiagram from './ConceptualModelDiagram';
 
 interface Props {
   base: string;
 }
+
+type ModelView = 'diagram' | 'list';
 
 /**
  * The /design/model/ workspace: reads the same answer query-string
@@ -41,6 +44,15 @@ export default function ProgramModelWorkbench({ base }: Props) {
 
   const profile = useMemo(() => buildProgramProfile(answers), [answers]);
   const model = useMemo(() => buildConceptualModel(profile), [profile]);
+
+  const [view, setView] = useState<ModelView>('diagram');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  // A selection from a previous model (different answers) can't carry over
+  // -- the node may no longer exist, or mean something different.
+  useEffect(() => {
+    setSelectedId(null);
+  }, [model]);
 
   const editAnswersQueryString = writeAnswersToSearchParams(answers).toString();
   const editAnswersHref = `${base}design/${editAnswersQueryString ? `?${editAnswersQueryString}` : ''}`;
@@ -125,7 +137,29 @@ export default function ProgramModelWorkbench({ base }: Props) {
           <ProgramModelSummary profile={profile} />
         </aside>
         <div className="program-model-center">
-          <ConceptualModelList model={model} base={base} />
+          <div className="program-model-view-toggle" role="group" aria-label="Model view">
+            <button
+              type="button"
+              className={`program-model-view-toggle-button${view === 'diagram' ? ' active' : ''}`}
+              aria-pressed={view === 'diagram'}
+              onClick={() => setView('diagram')}
+            >
+              Diagram
+            </button>
+            <button
+              type="button"
+              className={`program-model-view-toggle-button${view === 'list' ? ' active' : ''}`}
+              aria-pressed={view === 'list'}
+              onClick={() => setView('list')}
+            >
+              List
+            </button>
+          </div>
+          {view === 'diagram' ? (
+            <ConceptualModelDiagram model={model} selectedId={selectedId} onSelect={setSelectedId} />
+          ) : (
+            <ConceptualModelList model={model} base={base} />
+          )}
         </div>
       </div>
     </div>
