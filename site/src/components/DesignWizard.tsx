@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CORE_CONCEPTS, DESIGN_QUESTIONS, DESIGN_SECTIONS } from '../data/design-questions';
+import { DESIGN_QUESTIONS, DESIGN_SECTIONS } from '../data/design-questions';
 import {
   buildDesignJson,
   buildDesignJsonLd,
@@ -7,14 +7,15 @@ import {
   buildDesignSummary,
   downloadFile,
 } from '../data/design-export';
-import { concepts, requireConcept } from '../data/ontology';
-import { CATEGORIES } from '../data/categories';
+import { concepts } from '../data/ontology';
+import { getCategory } from '../data/categories';
 import {
   isQuestionVisible,
   normalizeAnswers,
   parseAnswersFromSearchParams,
   writeAnswersToSearchParams,
 } from '../data/program-model/answers';
+import { buildProgramProfile, buildProgramProfileJson } from '../data/program-model';
 
 interface Props {
   base: string;
@@ -42,37 +43,13 @@ export default function DesignWizard({ base }: Props) {
     [answers]
   );
 
-  // Tracks WHY each recommended concept is included -- "foundation" (every
-  // program needs it, regardless of answers) or the question/answer that
-  // added it -- so the result list can show its reason instead of just
-  // appearing with no explanation. First cause wins; a concept added by an
-  // earlier question keeps that reason even if a later one would also add it.
-  const { recommendedIds, reasonByConceptId } = useMemo(() => {
-    const ids = new Set(CORE_CONCEPTS);
-    const reasons = new Map<string, string>();
-    for (const id of CORE_CONCEPTS) reasons.set(id, 'Foundation: every grantmaking program needs this.');
-    for (const q of visibleQuestions) {
-      const answer = answers[q.id];
-      if (!answer) continue;
-      let added: string[];
-      let answerLabel: string;
-      if (q.type === 'boolean') {
-        added = answer === 'yes' ? q.yes : q.no;
-        answerLabel = answer === 'yes' ? 'Yes' : 'No';
-      } else {
-        const opt = q.options.find((o) => o.value === answer);
-        added = opt?.concepts ?? [];
-        answerLabel = opt?.label ?? answer;
-      }
-      for (const id of added) {
-        ids.add(id);
-        if (!reasons.has(id)) reasons.set(id, `Because you answered "${answerLabel}" to: ${q.text}`);
-      }
-    }
-    return { recommendedIds: ids, reasonByConceptId: reasons };
-  }, [answers, visibleQuestions]);
-
-  const answeredCount = visibleQuestions.filter((q) => answers[q.id]).length;
+  // The single source of truth for "what's in the model and why" -- the
+  // questionnaire sidebar and the /design/model/ workspace both derive from
+  // this, so they can never disagree about a concept's inclusion or its
+  // provenance. buildProgramProfile normalizes `answers` itself, so passing
+  // the (already-normalized) state through again is cheap and safe.
+  const profile = useMemo(() => buildProgramProfile(answers), [answers]);
+  const profileConceptIds = useMemo(() => new Set(profile.concepts.map((c) => c.id)), [profile]);
 
   // Keep the URL in sync so the current answer set is a shareable link.
   useEffect(() => {
@@ -95,13 +72,34 @@ export default function DesignWizard({ base }: Props) {
     setAnswers({});
   }
 
-  const recommendedByCategory = CATEGORIES.map((cat) => ({
-    category: cat,
-    items: concepts.filter((c) => c.category === cat.id && recommendedIds.has(c.id)),
-  })).filter((g) => g.items.length > 0);
+  // Foundation / Added from your answers / Supporting structure -- the
+  // Program Profile's own inclusion categories (see docs/10-program-model-
+  // generation.md), replacing the flat "core vs added" split. Supporting
+  // structure starts collapsed since it wasn't something the questionnaire
+  // specifically recommended, just what the model needs to stay coherent.
+  const inclusionGroups = [
+    {
+      id: 'foundation',
+      label: 'Foundation',
+      showReasons: false,
+      items: profile.concepts.filter((c) => c.inclusionKinds.includes('foundation')),
+    },
+    {
+      id: 'answers',
+      label: 'Added from your answers',
+      showReasons: true,
+      items: profile.concepts.filter((c) => c.direct && !c.inclusionKinds.includes('foundation')),
+    },
+    {
+      id: 'supporting',
+      label: 'Supporting structure',
+      showReasons: true,
+      items: profile.concepts.filter((c) => !c.direct),
+    },
+  ].filter((g) => g.items.length > 0);
 
-  const recommendedConcepts = concepts.filter((c) => recommendedIds.has(c.id));
-  const excluded = concepts.filter((c) => !recommendedIds.has(c.id));
+  const recommendedConcepts = concepts.filter((c) => profileConceptIds.has(c.id));
+  const excluded = concepts.filter((c) => !profileConceptIds.has(c.id));
 
   function exportAs(format: 'json' | 'jsonld' | 'markdown') {
     const input = { answers, recommended: recommendedConcepts, excluded };
@@ -112,6 +110,10 @@ export default function DesignWizard({ base }: Props) {
     } else {
       downloadFile('commongood-atlas-design.md', buildDesignMarkdown(input), 'text/markdown');
     }
+  }
+
+  function downloadProgramProfile() {
+    downloadFile('commongood-atlas-program-profile.json', buildProgramProfileJson(profile), 'application/json');
   }
 
   function downloadSummary() {
@@ -131,7 +133,9 @@ export default function DesignWizard({ base }: Props) {
     });
   }
 
-  const openInGraphHref = `${base}explore?concepts=${Array.from(recommendedIds).join(',')}`;
+  const openInGraphHref = `${base}explore?concepts=${profile.concepts.map((c) => c.id).join(',')}`;
+  const modelQueryString = writeAnswersToSearchParams(answers).toString();
+  const modelHref = `${base}design/model/${modelQueryString ? `?${modelQueryString}` : ''}`;
 
   return (
     <div className="design-wizard">
@@ -140,10 +144,14 @@ export default function DesignWizard({ base }: Props) {
           <div className="design-progress-label">
             <span>Your progress</span>
             <span className="muted">
-              {answeredCount} of {visibleQuestions.length} answered
+              {profile.stats.answeredQuestions} of {profile.stats.applicableQuestions} answered
             </span>
           </div>
-          <progress className="design-progress-bar" value={answeredCount} max={visibleQuestions.length} />
+          <progress
+            className="design-progress-bar"
+            value={profile.stats.answeredQuestions}
+            max={profile.stats.applicableQuestions}
+          />
           <button type="button" className="link-button design-progress-reset" onClick={reset}>
             Reset
           </button>
@@ -219,21 +227,25 @@ export default function DesignWizard({ base }: Props) {
       <aside className="design-result">
         <div className="design-result-summary">
           <h2 className="inspector-group-title">Your model</h2>
-          <p className="design-result-summary-count">{recommendedIds.size} concepts recommended</p>
+          <p className="design-result-summary-count">{profile.stats.totalConcepts} concepts recommended</p>
           <p className="design-result-summary-split">
-            {CORE_CONCEPTS.filter((id) => recommendedIds.has(id)).length} core concepts
+            {profile.stats.foundationConcepts} foundation
             <br />
-            {recommendedIds.size - CORE_CONCEPTS.filter((id) => recommendedIds.has(id)).length} added from your
-            answers
+            {profile.stats.answerSelectedConcepts} added from your answers
+            <br />
+            {profile.stats.supportingConcepts} supporting structure
           </p>
         </div>
         <p className="secondary design-foundation-note">
-          Core concepts apply to most grantmaking programs, whether or not you've answered anything below; the
-          rest are included because of a specific answer.
+          Foundation concepts apply to most grantmaking programs, whether or not you've answered anything below;
+          the rest are included because of a specific answer, or because the model needs them to stay coherent.
         </p>
 
         <div className="design-actions">
-          <a className="home-cta home-cta-primary" href={openInGraphHref}>
+          <a className="home-cta home-cta-primary" href={modelHref}>
+            View conceptual model
+          </a>
+          <a className="home-cta" href={openInGraphHref}>
             Open in graph
           </a>
           <button type="button" className="home-cta" onClick={downloadSummary}>
@@ -256,29 +268,39 @@ export default function DesignWizard({ base }: Props) {
             <button type="button" className="link-button" onClick={() => exportAs('markdown')}>
               Markdown
             </button>
+            <button type="button" className="link-button" onClick={downloadProgramProfile}>
+              Program Profile JSON
+            </button>
           </div>
         </details>
 
-        {recommendedByCategory.map(({ category, items }) => (
-          <section key={category.id} className="inspector-group">
-            <h3 className="inspector-group-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span
-                className="search-result-swatch"
-                style={{ background: `light-dark(${category.colorLight}, ${category.colorDark})`, marginTop: 0 }}
-              />
-              {category.label}
-            </h3>
+        {inclusionGroups.map((group) => (
+          <details key={group.id} className="inspector-group" open={group.id !== 'supporting'}>
+            <summary className="inspector-group-title">
+              {group.label} ({group.items.length})
+            </summary>
             <ul className="design-concept-list">
-              {items.map((c) => (
-                <li key={c.id}>
-                  <a href={`${base}concepts/${c.id}`}>{requireConcept(c.id).label}</a>
-                  {reasonByConceptId.get(c.id) && !CORE_CONCEPTS.includes(c.id) && (
-                    <div className="muted design-reason">{reasonByConceptId.get(c.id)}</div>
-                  )}
-                </li>
-              ))}
+              {group.items.map((c) => {
+                const category = getCategory(c.category);
+                return (
+                  <li key={c.id}>
+                    <span
+                      className="search-result-swatch"
+                      style={{ background: `light-dark(${category.colorLight}, ${category.colorDark})` }}
+                    />
+                    <a href={`${base}concepts/${c.id}`}>{c.label}</a>
+                    {group.showReasons && c.reasons.length > 0 && (
+                      <div className="muted design-reason">
+                        {c.reasons.map((r, i) => (
+                          <div key={i}>{r.explanation}</div>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
-          </section>
+          </details>
         ))}
 
         {excluded.length > 0 && (
