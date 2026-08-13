@@ -4,6 +4,8 @@ import type { ConceptualModel } from '../../data/program-model';
 interface Props {
   model: ConceptualModel;
   base: string;
+  selectedId: string | null;
+  onSelect: (id: string | null) => void;
 }
 
 function inclusionBadge(node: ConceptualModel['nodes'][number]): string {
@@ -17,7 +19,7 @@ function inclusionBadge(node: ConceptualModel['nodes'][number]): string {
  * generation.md). Grouped by category, each concept showing why it's
  * included and every relationship it participates in, textually.
  */
-export default function ConceptualModelList({ model, base }: Props) {
+export default function ConceptualModelList({ model, base, selectedId, onSelect }: Props) {
   const nodesById = new Map(model.nodes.map((n) => [n.id, n]));
   const relationshipEdges = model.edges.filter((e) => e.type === 'relationship');
   const specializationEdges = model.edges.filter((e) => e.type === 'specialization');
@@ -43,12 +45,24 @@ export default function ConceptualModelList({ model, base }: Props) {
                 const specializes = specializationEdges.filter((e) => e.source === node.id);
                 const specializedBy = specializationEdges.filter((e) => e.target === node.id);
 
+                const isSelected = node.id === selectedId;
                 return (
-                  <li key={node.id} className="conceptual-model-list-item">
+                  <li
+                    key={node.id}
+                    className={`conceptual-model-list-item${isSelected ? ' selected' : ''}`}
+                  >
                     <a href={`${base}concepts/${node.id}`} className="conceptual-model-list-item-label">
                       {node.label}
                     </a>
                     <span className="muted conceptual-model-list-item-badge">{inclusionBadge(node)}</span>
+                    <button
+                      type="button"
+                      className="link-button conceptual-model-list-item-inspect"
+                      aria-pressed={isSelected}
+                      onClick={() => onSelect(isSelected ? null : node.id)}
+                    >
+                      {isSelected ? 'Hide details' : 'Details'}
+                    </button>
 
                     {(specializes.length > 0 || specializedBy.length > 0 || outgoing.length > 0 || incoming.length > 0) && (
                       <ul className="conceptual-model-list-edges">

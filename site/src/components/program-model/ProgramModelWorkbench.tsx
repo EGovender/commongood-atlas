@@ -15,6 +15,7 @@ import {
 import ProgramModelSummary from './ProgramModelSummary';
 import ConceptualModelList from './ConceptualModelList';
 import ConceptualModelDiagram from './ConceptualModelDiagram';
+import ConceptualModelInspector from './ConceptualModelInspector';
 
 interface Props {
   base: string;
@@ -132,7 +133,7 @@ export default function ProgramModelWorkbench({ base }: Props) {
         )
       )}
 
-      <div className="program-model-workspace">
+      <div className={`program-model-workspace${selectedId ? ' has-inspector' : ''}`}>
         <aside className="program-model-sidebar">
           <ProgramModelSummary profile={profile} />
         </aside>
@@ -158,9 +159,14 @@ export default function ProgramModelWorkbench({ base }: Props) {
           {view === 'diagram' ? (
             <ConceptualModelDiagram model={model} selectedId={selectedId} onSelect={setSelectedId} />
           ) : (
-            <ConceptualModelList model={model} base={base} />
+            <ConceptualModelList model={model} base={base} selectedId={selectedId} onSelect={setSelectedId} />
           )}
         </div>
+        {selectedId && (
+          <aside className="program-model-inspector">
+            <ConceptualModelInspector profile={profile} model={model} selectedId={selectedId} base={base} />
+          </aside>
+        )}
       </div>
     </div>
   );
