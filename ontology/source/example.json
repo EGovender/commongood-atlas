@@ -116,6 +116,13 @@
       "narrative": "Coastal Watch submits its first combined narrative and financial Report on July 10, ahead of the July 15 deadline; the Fund accepts it."
     },
     {
+      "id": "coastal-watch-indirect-cost-rate",
+      "concept": "indirect-cost-rate",
+      "label": "Coastal Watch Alliance Negotiated Indirect Cost Rate",
+      "properties": { "rate": "15", "rateType": "negotiated" },
+      "narrative": "Coastal Watch charges overhead against the award at its negotiated 15% Indirect Cost Rate."
+    },
+    {
       "id": "coastal-watch-workshops-output",
       "concept": "output",
       "label": "12 Habitat Restoration Workshops Held",
@@ -480,6 +487,7 @@
     { "predicate": "attachesComplianceRequirement", "subject": "coastal-watch-grant-agreement", "object": "coastal-watch-reporting-requirement" },
     { "predicate": "includesReportingSchedule", "subject": "coastal-watch-reporting-requirement", "object": "coastal-watch-reporting-schedule" },
     { "predicate": "obligatesReport", "subject": "coastal-watch-reporting-schedule", "object": "coastal-watch-q2-report" },
+    { "predicate": "indirectCostRateAppliesToAward", "subject": "coastal-watch-indirect-cost-rate", "object": "coastal-watch-fy26-award" },
     { "predicate": "assessesOutput", "subject": "coastal-watch-year1-evaluation", "object": "coastal-watch-workshops-output" },
     { "predicate": "assessesOutcome", "subject": "coastal-watch-year1-evaluation", "object": "coastal-watch-habitat-outcome" },
     { "predicate": "reachesCloseout", "subject": "coastal-watch-fy26-award", "object": "coastal-watch-fy26-closeout" },

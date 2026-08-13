@@ -609,6 +609,25 @@
       }
     },
     {
+      "id": "ex:coastal-watch-indirect-cost-rate",
+      "type": [
+        "owl:NamedIndividual",
+        "npo:indirect-cost-rate"
+      ],
+      "label": "Coastal Watch Alliance Negotiated Indirect Cost Rate",
+      "npoprop:indirect-cost-rate-rate": {
+        "@value": "15",
+        "@type": "xsd:decimal"
+      },
+      "npoprop:indirect-cost-rate-rate-type": {
+        "@value": "negotiated",
+        "@type": "xsd:string"
+      },
+      "nporel:indirectCostRateAppliesToAward": {
+        "@id": "ex:coastal-watch-fy26-award"
+      }
+    },
+    {
       "id": "ex:coastal-watch-lobbying-restriction",
       "type": [
         "owl:NamedIndividual",

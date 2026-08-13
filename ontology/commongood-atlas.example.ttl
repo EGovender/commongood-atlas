@@ -31,6 +31,13 @@ ex:coastal-resilience-grant-to-kelp-forest a owl:NamedIndividual,
     nporel:fundedFrom ex:coastal-resilience-fund ;
     nporel:managedBy ex:tidewater-community-foundation .
 
+ex:coastal-watch-indirect-cost-rate a owl:NamedIndividual,
+        npo:indirect-cost-rate ;
+    rdfs:label "Coastal Watch Alliance Negotiated Indirect Cost Rate" ;
+    npoprop:indirect-cost-rate-rate 15.0 ;
+    npoprop:indirect-cost-rate-rate-type "negotiated"^^xsd:string ;
+    nporel:indirectCostRateAppliesToAward ex:coastal-watch-fy26-award .
+
 ex:coastal-watch-year1-evaluation a owl:NamedIndividual,
         npo:evaluation ;
     rdfs:label "Year 1 Outcomes Evaluation" ;

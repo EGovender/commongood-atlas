@@ -911,5 +911,14 @@
     "label": "has classification",
     "description": "A Population has one or more Classification Assignments (e.g. Candid PCS Populations) describing its characteristics. Multiple classifications are valid, since a population may have several characteristics at once; the Population resource itself represents the actual contextual group, not a combination of taxonomy terms.",
     "docRef": "docs/03-relationships.md#classification"
+  },
+  {
+    "id": "rel-indirect-cost-rate-applies-to-award",
+    "subject": "indirect-cost-rate",
+    "predicate": "indirectCostRateAppliesToAward",
+    "object": "award",
+    "label": "applies to",
+    "description": "An Indirect Cost Rate applies to a specific Award -- the rate itself may be negotiated at the organization level (independent of any one award), but this relationship tracks which Award's budget it is actually being charged against, mirroring why Compliance Requirement's own appliesToAward attaches to a specific Award rather than the Grantee in the abstract: the same organization can have a different applicable rate situation on one award than another. A distinct predicate from Compliance Requirement's own appliesToAward for the same reason every relationship predicate in this ontology is unique -- the generator requires one fixed declared subject per predicate.",
+    "docRef": "docs/03-relationships.md#the-grant-lifecycle-end-to-end"
   }
 ]
