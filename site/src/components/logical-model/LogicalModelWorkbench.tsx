@@ -5,18 +5,20 @@ import { buildLogicalModel, buildLogicalModelJson, buildLogicalModelMarkdown, bu
 import { buildProgramProfile, normalizeAnswers, parseAnswersFromSearchParams, writeAnswersToSearchParams } from '../../data/program-model';
 import LogicalModelSummary from './LogicalModelSummary';
 import LogicalModelList from './LogicalModelList';
+import LogicalModelDiagram from './LogicalModelDiagram';
 import LogicalModelInspector from './LogicalModelInspector';
 
 interface Props {
   base: string;
 }
 
+type LogicalModelView = 'diagram' | 'list';
+
 /**
  * The /design/logical-model/ workspace: reads the same answer query-string
  * DesignWizard/ProgramModelWorkbench write, regenerates the Program Profile
  * and its Logical Model projection from scratch, and renders it. Mirrors
- * ProgramModelWorkbench.tsx, but list-only for v1 -- no diagram view yet
- * (see docs/10-program-model-generation.md's Logical Model section).
+ * ProgramModelWorkbench.tsx, including its Diagram/List view toggle.
  */
 export default function LogicalModelWorkbench({ base }: Props) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -31,6 +33,7 @@ export default function LogicalModelWorkbench({ base }: Props) {
   const profile = useMemo(() => buildProgramProfile(answers), [answers]);
   const model = useMemo(() => buildLogicalModel(profile), [profile]);
 
+  const [view, setView] = useState<LogicalModelView>('diagram');
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -103,7 +106,31 @@ export default function LogicalModelWorkbench({ base }: Props) {
           <LogicalModelSummary model={model} />
         </aside>
         <div className="program-model-center">
-          <LogicalModelList model={model} selectedId={selectedId} onSelect={setSelectedId} />
+          <div className="program-model-center-toolbar">
+            <div className="program-model-view-toggle" role="group" aria-label="Model view">
+              <button
+                type="button"
+                className={`program-model-view-toggle-button${view === 'diagram' ? ' active' : ''}`}
+                aria-pressed={view === 'diagram'}
+                onClick={() => setView('diagram')}
+              >
+                Diagram
+              </button>
+              <button
+                type="button"
+                className={`program-model-view-toggle-button${view === 'list' ? ' active' : ''}`}
+                aria-pressed={view === 'list'}
+                onClick={() => setView('list')}
+              >
+                List
+              </button>
+            </div>
+          </div>
+          {view === 'diagram' ? (
+            <LogicalModelDiagram model={model} selectedId={selectedId} onSelect={setSelectedId} />
+          ) : (
+            <LogicalModelList model={model} selectedId={selectedId} onSelect={setSelectedId} />
+          )}
         </div>
         {selectedId && (
           <aside className="program-model-inspector">

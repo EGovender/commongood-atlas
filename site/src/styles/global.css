@@ -2622,6 +2622,126 @@ mark {
   }
 }
 
+/* Logical Model ER diagram -- reuses .conceptual-model-diagram-wrap/
+   -toolbar/-canvas for the outer chrome (LogicalModelDiagram.tsx applies
+   both class names), since that part is visually identical to the
+   Conceptual Model's own diagram; only the node/edge primitives below are
+   genuinely new -- a boxy, variable-height, multi-row entity node has no
+   equivalent in .conceptual-node/.graph-node. */
+
+.logical-entity-box {
+  fill: light-dark(#ffffff, #1c2129);
+  stroke: var(--border);
+  stroke-width: 1.4px;
+  cursor: pointer;
+}
+
+.logical-entity-box-abstract-entity {
+  stroke-dasharray: 5 3;
+}
+
+.logical-entity-box-reference-entity {
+  stroke: var(--brand-navy);
+}
+
+.logical-entity-header {
+  pointer-events: none;
+}
+
+.logical-entity-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #ffffff;
+  pointer-events: none;
+  user-select: none;
+}
+
+.logical-attribute-row {
+  font-size: 10px;
+  fill: var(--text-primary);
+  pointer-events: none;
+  user-select: none;
+}
+
+.logical-attribute-row-pk {
+  font-weight: 700;
+}
+
+.logical-attribute-row-inherited {
+  fill: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.logical-entity-node:focus-visible .logical-entity-box {
+  outline: none;
+  stroke: var(--link);
+  stroke-width: 3px;
+}
+
+.logical-entity-node.selected .logical-entity-box {
+  stroke: var(--text-primary);
+  stroke-width: 3px;
+}
+
+.logical-entity-node.connected {
+  opacity: 1;
+}
+
+.logical-entity-node.faded {
+  opacity: 0.15;
+}
+
+.logical-entity-node.faded .logical-entity-label,
+.logical-entity-node.faded .logical-attribute-row {
+  display: none;
+}
+
+.logical-association-edge {
+  stroke: #b7b9c2;
+  stroke-width: 1.4;
+  opacity: 0.85;
+}
+
+.logical-association-edge.specialization-edge {
+  stroke-dasharray: 4 3;
+  opacity: 0.5;
+}
+
+.logical-association-edge.connected {
+  opacity: 1;
+}
+
+.logical-association-edge.faded {
+  opacity: 0.12;
+}
+
+.logical-arrowhead {
+  fill: var(--gridline);
+}
+
+.logical-edge-label {
+  font-size: 10px;
+  fill: var(--text-secondary);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.logical-edge-label.visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logical-edge-label {
+    transition: none;
+  }
+}
+
 /* Medium desktop: three columns become too narrow for a useful inspector,
    so it drops to a full-width row below the sidebar+center instead --
    same reasoning as .graph-workspace.has-inspector. */
